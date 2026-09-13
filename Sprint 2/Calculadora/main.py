@@ -9,6 +9,7 @@ def painel_principal () :
   print("6 - Radiciação")
   print("7 - Resto da divisão")
   print("8 - Percentual")
+  print("9 - Divisão Inteira")
   print("0 - Sair do Programa")
 
   escolha = input("Digite o número da operação desejada: ")
@@ -35,6 +36,16 @@ def calcula_multiplicacao(a, b):
 
 def calcula_exponenciacao(a, b):
     return a ** b  
+
+def calcula_divisao(x,y):
+   if y==0:
+      return "Erro, divisão por 0."
+   return x/y
+
+def calcula_divisao_inteira(x,y):
+   if y==0:
+       return "Erro, divisão por 0."
+   return x//y
 
 escolha = painel_principal()
 
@@ -86,9 +97,18 @@ elif escolha == "8":
     resultado = calcula_percentual(x, y)
     print(f"O resultado do percentual é: {resultado}%")
 
+elif escolha == '9':
+    x = float(input("Digite o dividendo: "))
+    y = float(input("Digite o divisor: "))
+    resultado = calcula_divisao_inteira(x, y)
+    print(f"O resultado da divisão inteira é: {resultado}")
+
 elif escolha == "0":
     print("Saindo do programa...")
     exit()
+
+else:
+    print('Opção inválida.')
 
 
 
