@@ -1,7 +1,7 @@
 def painel_principal () :
 
-  print("Escolha a operação desejada:")
-  print("1 - Soma")
+  print("\nEscolha a operação desejada:")
+  print("\n1 - Soma")
   print("2 - Subtração")
   print("3 - Multiplicação")
   print("4 - Divisão")
@@ -11,7 +11,7 @@ def painel_principal () :
   print("8 - Percentual")
   print("0 - Sair do Programa")
 
-  escolha = input("Digite o número da operação desejada: ")
+  escolha = input("\nDigite o número da operação desejada: ")
   return escolha
 
 def calcula_soma(x, y):
@@ -38,59 +38,72 @@ def calcula_exponenciacao(a, b):
 
 escolha = painel_principal()
 
-if escolha == "1":
-    x = float(input("Digite o primeiro número: "))
-    y = float(input("Digite o segundo número: "))
-    resultado = calcula_soma(x, y)
-    print(f"O resultado da soma é: {resultado}")
+while escolha != "0":
+    if escolha == "1":
+        x = float(input("\nDigite o primeiro número: "))
+        y = float(input("\nDigite o segundo número: "))
+        resultado = calcula_soma(x, y)
+        print(f"\nO resultado da soma é: {resultado}")
+    
+    elif escolha == "2":
+        a = float(input("\nDigite o primeiro número: "))
+        b = float(input("\nDigite o segundo número: "))
+        resultado = calcula_subtracao(a, b)
+        print(f"\nO resultado da subtração é: {resultado}")
+    
+    elif escolha == "3":
+        a = float(input("\nDigite o primeiro número: "))
+        b = float(input("\nDigite o segundo número: "))
+        resultado = calcula_multiplicacao(a, b)
+        print(f"\nO resultado da multiplicação é: {resultado}")
+    
+    elif escolha == "4":
+        a = float(input("\nDigite o primeiro número: "))
+        b = float(input("\nDigite o segundo número: "))
+        if b != 0:
+            resultado = a / b
+            print(f"\nO resultado da divisão é: {resultado}")
+        else:
+            print("\nErro: Divisão por zero não é permitida.")
+    
+    elif escolha == "5":
+        a = float(input("\nDigite a base: "))
+        b = float(input("\nDigite o expoente: "))
+        resultado = calcula_exponenciacao(a, b)
+        print(f"\nO resultado da exponenciação é: {resultado}")
+    
+    elif escolha == "6":
+        a = float(input("\nDigite o radicando: "))
+        b = float(input("\nDigite o índice (raiz): "))
+        if b != 0:
+            resultado = calcula_radiciacao(a, b)
+            print(f"\nO resultado da radiciação é: {resultado}")
+        else:
+            print("\nErro: Índice de radiciação não pode ser zero.")
+    
+    elif escolha == "7":
+        x = float(input("\nDigite o dividendo: "))
+        y = float(input("\nDigite o divisor: "))
+        if y != 0:
+            resultado = calcula_resto(x, y)
+            print(f"\nO resto da divisão é: {resultado}")
+        else:
+            print("\nErro: Divisão por zero não é permitida.")
+    
+    elif escolha == "8":
+        x = float(input("\nDigite o valor parcial: "))
+        y = float(input("\nDigite o valor total: "))
+        if y != 0:
+            resultado = calcula_percentual(x, y)
+            print(f"\nO percentual é: {resultado}")
+        else:
+            print("\nErro: Divisão por zero não é permitida.")
 
-elif escolha == "2":
-    a = float(input("Digite o primeiro número: "))
-    b = float(input("Digite o segundo número: "))
-    resultado = calcula_subtracao(a, b)
-    print(f"O resultado da subtração é: {resultado}")
+    elif escolha == "0":
+        print("\nSaindo do programa...")
+        break 
 
-elif escolha == "3": 
-    a = float(input("Digite o primeiro número: "))
-    b = float(input("Digite o segundo número: "))
-    resultado = calcula_multiplicacao(a, b)
-    print(f"O resultado da multiplicação é: {resultado}")
-
-elif escolha == "4":
-    a = float(input("Digite o primeiro número: "))
-    b = float(input("Digite o segundo número: "))
-    resultado = calcula_divisao(a, b)
-    print(f"O resultado da divisão é: {resultado}")
-
-elif escolha == "5":
-    a = float(input("Digite o primeiro número: "))
-    b = float(input("Digite o segundo número: "))
-    resultado = calcula_exponenciacao(a, b)
-    print(f"O resultado da exponenciação é: {resultado}")   
-
-elif escolha == "6":
-    a = float(input("Digite o número: "))
-    b = float(input("Digite o índice da raiz: "))
-    resultado = calcula_radiciacao(a, b)
-    print(f"O resultado da radiciação é: {resultado}")
-
-elif escolha == "7":
-    x = float(input("Digite o dividendo: "))
-    y = float(input("Digite o divisor: "))
-    resultado = calcula_resto(x, y)
-    print(f"O resultado do resto da divisão é: {resultado}")
-
-elif escolha == "8":
-    x = float(input("Digite o valor: "))
-    y = float(input("Digite o total: "))
-    resultado = calcula_percentual(x, y)
-    print(f"O resultado do percentual é: {resultado}%")
-
-elif escolha == "0":
-    print("Saindo do programa...")
-    exit()
+    escolha = painel_principal()
 
 
-
- 
-
+   
