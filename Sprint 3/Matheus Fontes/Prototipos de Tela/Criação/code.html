@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'on-primary-fixed-variant': '#38466b', 'surface-container-high': '#ebe8e0', 'on-background': '#1c1c17', 'surface-container-low': '#f6f3eb', 'on-tertiary': '#ffffff', 'on-error': '#ffffff', 'surface-bright': '#fcf9f1', 'on-surface': '#1c1c17', 'tertiary-fixed-dim': '#93d3c3', 'secondary-fixed-dim': '#fabb4f', 'on-tertiary-fixed-variant': '#045045', 'on-secondary': '#ffffff', 'surface-dim': '#dcdad2', 'on-tertiary-container': '#609f91', 'primary-container': '#1d2b4f', 'on-tertiary-fixed': '#00201a', 'secondary-fixed': '#ffdead', 'on-surface-variant': '#45464e', 'background': '#fcf9f1', 'surface-variant': '#e5e2da', 'outline': '#75777f', 'primary-fixed': '#dae2ff', 'on-primary-fixed': '#0a1a3d', 'outline-variant': '#c5c6cf', 'secondary-container': '#febe51', 'secondary': '#7f5700', 'tertiary': '#001c17', 'on-primary': '#ffffff', 'surface-container': '#f1eee6', 'on-error-container': '#93000a', 'primary': '#061639', 'on-primary-container': '#8593bd', 'inverse-primary': '#b8c5f2', 'surface-container-lowest': '#ffffff', 'tertiary-fixed': '#aeefdf', 'error-container': '#ffdad6', 'inverse-on-surface': '#f3f1e9', 'on-secondary-fixed-variant': '#604100', 'on-secondary-fixed': '#281900', 'inverse-surface': '#31312b', 'tertiary-container': '#00332b', 'error': '#ba1a1a', 'surface': '#fcf9f1', 'surface-tint': '#505d84', 'primary-fixed-dim': '#b8c5f2', 'on-secondary-container': '#724d00', 'surface-container-highest': '#e5e2da' }, borderRadius: { 'DEFAULT': '0.125rem', 'lg': '0.25rem', 'xl': '0.5rem', 'full': '0.75rem' }, spacing: { 'space-md': '1rem', 'space-xs': '0.25rem', 'space-sm': '0.5rem', 'gutter': '1.5rem', 'space-lg': '1.5rem', 'margin': '3rem', 'margin-sm': '1.25rem', 'space-xl': '2.5rem', 'gutter-sm': '1rem' }, fontFamily: { 'display-lg': ['Newsreader'], 'body-md': ['IBM Plex Sans'], 'code-sm': ['IBM Plex Sans'], 'label-md': ['IBM Plex Sans'], 'display-lg-mobile': ['Newsreader'], 'body-lg': ['IBM Plex Sans'], 'headline-sm': ['Newsreader'], 'headline-lg': ['Newsreader'], 'title-md': ['IBM Plex Sans'], 'headline-md': ['Newsreader'], 'label-lg': ['IBM Plex Sans'], 'headline-lg-mobile': ['Newsreader'], 'body-sm': ['IBM Plex Sans'] }, fontSize: { 'display-lg': ['3.5rem', { lineHeight: '4rem', letterSpacing: '-0.02em', fontWeight: '600' }], 'body-md': ['1rem', { lineHeight: '1.5rem', fontWeight: '400' }], 'code-sm': ['0.8125rem', { lineHeight: '1.125rem', fontWeight: '500' }], 'label-md': ['0.75rem', { lineHeight: '1rem', letterSpacing: '0.04em', fontWeight: '600' }], 'display-lg-mobile': ['2.25rem', { lineHeight: '2.75rem', letterSpacing: '-0.015em', fontWeight: '600' }], 'body-lg': ['1.125rem', { lineHeight: '1.75rem', fontWeight: '400' }], 'headline-sm': ['1.25rem', { lineHeight: '1.75rem', letterSpacing: '0em', fontWeight: '500' }], 'headline-lg': ['2.25rem', { lineHeight: '2.75rem', letterSpacing: '-0.01em', fontWeight: '600' }], 'title-md': ['1.125rem', { lineHeight: '1.5rem', letterSpacing: '-0.005em', fontWeight: '600' }], 'headline-md': ['1.5rem', { lineHeight: '2rem', letterSpacing: '0em', fontWeight: '500' }], 'label-lg': ['0.875rem', { lineHeight: '1.25rem', letterSpacing: '0.01em', fontWeight: '600' }], 'headline-lg-mobile': ['1.75rem', { lineHeight: '2.25rem', letterSpacing: '-0.01em', fontWeight: '600' }], 'body-sm': ['0.875rem', { lineHeight: '1.25rem', fontWeight: '400' }] } } } }</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(29,43,79,0.05)]"><div class="h-16 px-gutter-sm flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center text-on-primary shrink-0 shadow-sm"><span class="material-symbols-outlined text-[20px]">school</span></div><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="inline-flex items-center px-1.5 py-0.5 rounded bg-secondary-container/20 text-on-secondary-container font-label-md text-label-md tracking-wider uppercase font-semibold">PORTAL ACADÊMICO</span></div><h1 class="font-headline-sm text-headline-sm text-primary tracking-tight truncate leading-tight">Student Profile</h1></div></div><div class="flex items-center gap-space-sm shrink-0"><button aria-label="Notificações" class="w-11 h-11 flex items-center justify-center rounded-lg text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span></button><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-sm ring-1 ring-primary/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9j_3uJ9jTDIWxFhAs97ERuOJDbz4ITZwZEwDXcIlcidAxPCruAT4Z9TTDOGDtQwcdeUBTMSodZsAyGIfdCYGwvsFT-1srRl7DqVqaaRqg0qWQsDONXGqnwsO2svizBXka6QSpO_UczYsI5zNccEn6LRBYFSh589kq8QVJtdYwcXPfCU7IpESTBNy4EIPJ1lX3iOquLniE8ZPCDD2HsuUtpjZH7t_t6acjtHmJ7aOPSYMJA7t7IRxEcQ"/></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 px-margin-sm bg-surface flex-grow"><div class="flex flex-col w-full pb-8">
+<!-- Interactive State Preview Switcher Bar -->
+<aside aria-label="Controles de protótipo" class="w-full mb-space-md bg-surface-container-high p-space-xs rounded-xl flex items-center justify-between gap-space-xs shadow-sm">
+<div class="flex items-center gap-1.5 pl-2">
+<span class="material-symbols-outlined text-[16px] text-primary">science</span>
+<span class="font-label-md text-label-md text-primary tracking-wide uppercase font-semibold">Protótipo:</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="px-2.5 py-1 rounded font-label-md text-label-md bg-primary text-on-primary transition-all shadow-xs" id="btn-state-default" onclick="setFormState('default')" type="button">
+        Inicial
+      </button>
+<button class="px-2.5 py-1 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container transition-all" id="btn-state-error" onclick="setFormState('error')" type="button">
+        Erro de Validação
+      </button>
+<button class="px-2.5 py-1 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container transition-all" id="btn-state-success" onclick="setFormState('success')" type="button">
+        Sucesso
+      </button>
+</div>
+</aside>
+<!-- Success Notification Banner -->
+<section class="hidden mb-space-lg w-full bg-tertiary-container text-on-tertiary p-space-md rounded-xl shadow-md transition-all animate-fade-in" id="banner-success">
+<div class="flex items-start gap-space-sm">
+<div class="w-9 h-9 rounded-full bg-tertiary-fixed-dim/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-tertiary-fixed text-[22px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-sm text-headline-sm text-tertiary-fixed font-semibold">Aula publicada com sucesso!</h2>
+<span class="font-label-md text-label-md px-2 py-0.5 rounded bg-tertiary-fixed/20 text-tertiary-fixed tracking-wider">ATIVO</span>
+</div>
+<p class="font-body-sm text-body-sm text-surface-container-low mt-1 leading-snug">
+          Os alunos já podem visualizar seu horário no catálogo de monitorias da semana.
+        </p>
+<div class="mt-space-sm p-space-sm rounded-lg bg-tertiary/40 flex flex-col gap-1 text-surface-container-low font-body-sm text-body-sm">
+<div class="flex items-center gap-1.5 font-medium text-tertiary-fixed">
+<span class="material-symbols-outlined text-[16px]">menu_book</span>
+<span id="preview-subject-name">Cálculo I - Exatas</span>
+</div>
+<div class="flex items-center gap-3 text-xs opacity-90">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span> Qui, 24 Out
+            </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 14:00 - 16:00
+            </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">payments</span> R$ 50,00
+            </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Editorial Page Title Header -->
+<header class="w-full mb-space-md">
+<div class="flex items-center gap-space-xs text-secondary mb-1">
+<span class="material-symbols-outlined text-[18px]">edit_calendar</span>
+<span class="font-label-md text-label-md tracking-wider uppercase font-semibold">Nova Atividade Acadêmica</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight font-semibold">
+      Criar uma aula
+    </h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+      Preencha as informações abaixo para publicar sua aula e auxiliar seus colegas no semestre.
+    </p>
+</header>
+<!-- Main Card Form -->
+<div class="w-full bg-surface-container-lowest rounded-xl shadow-md p-space-lg flex flex-col gap-space-lg">
+<form class="flex flex-col gap-space-lg" id="create-class-form" novalidate="" onsubmit="handleFormSubmit(event)">
+<!-- Subject Field with Autocomplete Dropdown -->
+<div class="flex flex-col gap-1.5 relative" id="group-subject">
+<div class="flex items-center justify-between">
+<label class="font-label-lg text-label-lg text-on-surface font-semibold flex items-center gap-1" for="input-subject">
+            Matéria <span class="text-error font-bold">*</span>
+</label>
+<span class="font-label-md text-label-md text-on-surface-variant">Código ou Nome</span>
+</div>
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input autocomplete="off" class="w-full h-11 pl-10 pr-9 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md shadow-xs transition-all focus:outline-none focus:bg-surface-container-lowest" id="input-subject" name="subject" onfocus="openSuggestions()" oninput="handleSubjectInput(this.value)" placeholder="Busque uma matéria (ex.: Cálculo I)" type="text"/>
+<button aria-label="Limpar campo de matéria" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-on-surface-variant hover:text-primary" id="clear-subject" onclick="clearSubjectInput()" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Subject Validation Error Message -->
+<div class="hidden flex items-center gap-1 text-error font-body-sm text-body-sm pt-1" id="error-subject">
+<span class="material-symbols-outlined text-[16px]">error</span>
+<span>Selecione uma matéria para continuar.</span>
+</div>
+<!-- Rich Autocomplete Suggestion Box -->
+<div class="hidden absolute top-[74px] left-0 right-0 z-30 bg-surface-container-lowest rounded-xl shadow-xl overflow-hidden flex flex-col transition-all animate-fade-in" id="suggestions-box">
+<div class="p-2 bg-surface-container-high/60 flex items-center justify-between text-on-surface-variant">
+<span class="font-label-md text-label-md uppercase tracking-wider font-semibold">Sugestões Frequentes</span>
+<span class="font-label-md text-label-md text-secondary-container">DEPARTAMENTO</span>
+</div>
+<ul class="flex flex-col max-h-56 overflow-y-auto" role="listbox">
+<li>
+<button class="w-full px-3 py-2.5 flex items-center justify-between text-left hover:bg-surface-container-low transition-colors group" onclick="selectSubject('Cálculo I - Exatas', 'MAT101')" type="button">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded bg-primary-container/10 text-primary flex items-center justify-center font-bold text-xs">
+                    CI
+                  </div>
+<div>
+<p class="font-body-md text-body-md font-medium text-on-surface group-hover:text-primary">Cálculo I</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Instituto de Ciências Exatas • MAT-101</p>
+</div>
+</div>
+<span class="font-label-md text-label-md px-2 py-0.5 rounded bg-surface-container text-on-surface-variant">Exatas</span>
+</button>
+</li>
+<li>
+<button class="w-full px-3 py-2.5 flex items-center justify-between text-left hover:bg-surface-container-low transition-colors group" onclick="selectSubject('Estrutura de Dados - Computação', 'DCC204')" type="button">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded bg-secondary-container/20 text-on-secondary-container flex items-center justify-center font-bold text-xs">
+                    ED
+                  </div>
+<div>
+<p class="font-body-md text-body-md font-medium text-on-surface group-hover:text-primary">Estrutura de Dados</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Depto. de Computação • DCC-204</p>
+</div>
+</div>
+<span class="font-label-md text-label-md px-2 py-0.5 rounded bg-surface-container text-on-surface-variant">Computação</span>
+</button>
+</li>
+<li>
+<button class="w-full px-3 py-2.5 flex items-center justify-between text-left hover:bg-surface-container-low transition-colors group" onclick="selectSubject('Física Teórica I - Exatas', 'FIS102')" type="button">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded bg-tertiary-fixed-dim/20 text-on-tertiary-fixed-variant flex items-center justify-center font-bold text-xs">
+                    FT
+                  </div>
+<div>
+<p class="font-body-md text-body-md font-medium text-on-surface group-hover:text-primary">Física Teórica I</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Instituto de Física • FIS-102</p>
+</div>
+</div>
+<span class="font-label-md text-label-md px-2 py-0.5 rounded bg-surface-container text-on-surface-variant">Exatas</span>
+</button>
+</li>
+<li>
+<button class="w-full px-3 py-2.5 flex items-center justify-between text-left hover:bg-surface-container-low transition-colors group" onclick="selectSubject('Econometria Aplicada - Sociais', 'ECO310')" type="button">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded bg-surface-container-high text-primary flex items-center justify-center font-bold text-xs">
+                    EA
+                  </div>
+<div>
+<p class="font-body-md text-body-md font-medium text-on-surface group-hover:text-primary">Econometria Aplicada</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Faculdade de Economia • ECO-310</p>
+</div>
+</div>
+<span class="font-label-md text-label-md px-2 py-0.5 rounded bg-surface-container text-on-surface-variant">Sociais</span>
+</button>
+</li>
+</ul>
+<!-- Create custom subject button -->
+<div class="p-2 bg-surface-container-low flex items-center">
+<button class="w-full py-2 px-2.5 rounded-lg flex items-center gap-2 text-primary font-label-md text-label-md hover:bg-surface-container font-semibold transition-colors" id="btn-create-custom-subject" onclick="createCustomSubject()" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">add_circle</span>
+<span id="custom-subject-label">Criar nova matéria personalizada...</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Description Field -->
+<div class="flex flex-col gap-1.5" id="group-description">
+<div class="flex items-center justify-between">
+<label class="font-label-lg text-label-lg text-on-surface font-semibold flex items-center gap-1" for="input-description">
+            Descrição <span class="text-error font-bold">*</span>
+</label>
+<span class="font-label-md text-label-md text-on-surface-variant" id="char-counter">0 / 400</span>
+</div>
+<textarea class="w-full p-3 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md shadow-xs transition-all focus:outline-none focus:bg-surface-container-lowest resize-none leading-relaxed" id="input-description" maxlength="400" name="description" oninput="handleDescriptionInput(this)" placeholder="Conte um pouco sobre a aula, os tópicos que pretende cobrir e como irá ajudar os alunos a sanar dúvidas." rows="4"></textarea>
+<!-- Description Validation Error Message -->
+<div class="hidden flex items-center gap-1 text-error font-body-sm text-body-sm pt-0.5" id="error-description">
+<span class="material-symbols-outlined text-[16px]">error</span>
+<span>Adicione uma descrição para sua aula.</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-secondary">lightbulb</span>
+          Dica: Aulas com plano de estudo detalhado recebem 3x mais inscrições.
+        </p>
+</div>
+<!-- Schedule Section: 2 Column Grid -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-primary">calendar_month</span>
+            Data &amp; Horário de Encontro
+          </span>
+<span class="font-label-md text-label-md text-on-surface-variant">Fuso Local (Brasília)</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<!-- Date Input -->
+<div class="flex flex-col gap-1" id="group-date">
+<label class="font-label-md text-label-md text-on-surface font-medium" for="input-date">Data</label>
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+</div>
+<input class="w-full h-11 pl-9 pr-3 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md shadow-xs transition-all focus:outline-none focus:bg-surface-container-lowest" id="input-date" name="date" placeholder="DD/MM/AAAA" type="text" value="24/10/2024"/>
+</div>
+</div>
+<!-- Time Input -->
+<div class="flex flex-col gap-1" id="group-time">
+<label class="font-label-md text-label-md text-on-surface font-medium flex items-center gap-1" for="input-time">
+              Horário <span class="text-error font-bold">*</span>
+</label>
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+</div>
+<input class="w-full h-11 pl-9 pr-3 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md shadow-xs transition-all focus:outline-none focus:bg-surface-container-lowest" id="input-time" name="time" placeholder="14:00" type="text"/>
+</div>
+</div>
+</div>
+<!-- Time Validation Error Message -->
+<div class="hidden flex items-center gap-1 text-error font-body-sm text-body-sm" id="error-time">
+<span class="material-symbols-outlined text-[16px]">error</span>
+<span>Informe pelo menos um horário disponível.</span>
+</div>
+<!-- Additional Slots Badge / Action -->
+<div class="flex items-center justify-between mt-1">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container text-primary font-label-md text-label-md hover:bg-surface-container-high transition-colors" onclick="addAnotherSlot()" type="button">
+<span class="material-symbols-outlined text-[16px] text-secondary">add</span>
+<span>+ Adicionar outro horário</span>
+</button>
+<span class="font-label-md text-label-md text-on-surface-variant">Sessões de 60 ou 120 min</span>
+</div>
+</div>
+<!-- Price & Capacity Section: 2 Column Grid -->
+<div class="grid grid-cols-2 gap-space-sm pt-1">
+<!-- Price Field -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="input-price">Preço</label>
+<span class="font-label-md text-label-md text-secondary">h/aula</span>
+</div>
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none font-label-lg text-label-lg font-semibold text-primary">
+              R$
+            </div>
+<input class="w-full h-11 pl-9 pr-3 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md shadow-xs transition-all focus:outline-none focus:bg-surface-container-lowest" id="input-price" name="price" placeholder="50,00" type="text" value="50,00"/>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant leading-tight mt-0.5">Por hora ou por aluno</span>
+</div>
+<!-- Max Capacity Field -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="input-capacity">Qtd. máxima</label>
+<span class="font-label-md text-label-md text-on-surface-variant">Vagas</span>
+</div>
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">group</span>
+</div>
+<input class="w-full h-11 pl-9 pr-3 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md shadow-xs transition-all focus:outline-none focus:bg-surface-container-lowest" id="input-capacity" max="30" min="1" name="capacity" placeholder="Ex.: 5" type="number" value="5"/>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant leading-tight mt-0.5">Recomendado: 3 a 6</span>
+</div>
+</div>
+<!-- Location Field -->
+<div class="flex flex-col gap-1.5 pt-1">
+<div class="flex items-center justify-between">
+<label class="font-label-lg text-label-lg text-on-surface font-semibold flex items-center gap-1" for="input-location">
+            Local do Encontro
+          </label>
+<span class="font-label-md text-label-md px-2 py-0.5 rounded bg-surface-container text-on-surface-variant">Presencial ou Online</span>
+</div>
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">room</span>
+</div>
+<input class="w-full h-11 pl-10 pr-3 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md shadow-xs transition-all focus:outline-none focus:bg-surface-container-lowest" id="input-location" name="location" placeholder="Ex.: Biblioteca Central - Sala 3B ou Link Google Meet" type="text" value="Biblioteca Central - Sala 3B"/>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-space-sm pt-space-sm">
+<!-- Primary Submit Button -->
+<button class="w-full h-12 rounded-lg bg-primary text-secondary-fixed-dim hover:bg-primary-container font-label-lg text-label-lg flex items-center justify-center gap-2 shadow-md transition-all active:scale-[0.99]" id="btn-submit" type="submit">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">send</span>
+<span class="tracking-wide">Publicar aula</span>
+</button>
+<!-- Secondary Cancel Button -->
+<button class="w-full h-10 rounded-lg bg-transparent text-primary hover:bg-surface-container/60 font-label-lg text-label-lg transition-colors flex items-center justify-center" onclick="handleCancel()" type="button">
+          Cancelar e descartar
+        </button>
+</div>
+</form>
+</div>
+<!-- Peer Monitor Notice Footer Card -->
+<aside class="w-full mt-space-md bg-surface-container p-space-md rounded-xl flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-secondary-container/30 flex items-center justify-center text-on-secondary-container shrink-0">
+<span class="material-symbols-outlined text-[20px]">verified_user</span>
+</div>
+<div class="flex flex-col min-w-0">
+<h3 class="font-title-md text-title-md text-primary font-semibold">Política de Monitoria Acadêmica</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 leading-snug">
+        As horas registradas na plataforma são computadas para seu certificado de atividades complementares (AAC) ao final do semestre letivo.
+      </p>
+</div>
+</aside>
+</div>
+<script>
+  // DOM Elements
+  const inputSubject = document.getElementById('input-subject');
+  const inputDescription = document.getElementById('input-description');
+  const inputTime = document.getElementById('input-time');
+  const suggestionsBox = document.getElementById('suggestions-box');
+  const clearSubjectBtn = document.getElementById('clear-subject');
+  const charCounter = document.getElementById('char-counter');
+  const customSubjectLabel = document.getElementById('custom-subject-label');
+  const bannerSuccess = document.getElementById('banner-success');
+
+  const errorSubject = document.getElementById('error-subject');
+  const errorDescription = document.getElementById('error-description');
+  const errorTime = document.getElementById('error-time');
+
+  const btnStateDefault = document.getElementById('btn-state-default');
+  const btnStateError = document.getElementById('btn-state-error');
+  const btnStateSuccess = document.getElementById('btn-state-success');
+
+  // Open & Close Suggestion Dropdown
+  function openSuggestions() {
+    suggestionsBox.classList.remove('hidden');
+  }
+
+  function closeSuggestions() {
+    setTimeout(() => {
+      suggestionsBox.classList.add('hidden');
+    }, 200);
+  }
+
+  // Handle Subject typing
+  function handleSubjectInput(val) {
+    if (val.trim().length > 0) {
+      clearSubjectBtn.classList.remove('hidden');
+      customSubjectLabel.textContent = '+ Criar nova matéria "' + val.trim() + '"';
+      suggestionsBox.classList.remove('hidden');
+    } else {
+      clearSubjectBtn.classList.add('hidden');
+      customSubjectLabel.textContent = 'Criar nova matéria personalizada...';
+    }
+    clearError(inputSubject, errorSubject);
+  }
+
+  function clearSubjectInput() {
+    inputSubject.value = '';
+    clearSubjectBtn.classList.add('hidden');
+    customSubjectLabel.textContent = 'Criar nova matéria personalizada...';
+    inputSubject.focus();
+  }
+
+  function selectSubject(name, code) {
+    inputSubject.value = name;
+    clearSubjectBtn.classList.remove('hidden');
+    suggestionsBox.classList.add('hidden');
+    clearError(inputSubject, errorSubject);
+  }
+
+  function createCustomSubject() {
+    const val = inputSubject.value.trim() || 'Tópicos Especiais';
+    inputSubject.value = val;
+    clearSubjectBtn.classList.remove('hidden');
+    suggestionsBox.classList.add('hidden');
+    clearError(inputSubject, errorSubject);
+  }
+
+  // Handle Description input and character counter
+  function handleDescriptionInput(el) {
+    const len = el.value.length;
+    charCounter.textContent = len + ' / 400';
+    if (len > 0) {
+      clearError(inputDescription, errorDescription);
+    }
+  }
+
+  // Add another time slot microinteraction
+  function addAnotherSlot() {
+    const current = inputTime.value;
+    if (!current) {
+      inputTime.value = '14:00 - 15:30';
+    } else {
+      inputTime.value = current + ' | 16:00 - 17:30';
+    }
+    clearError(inputTime, errorTime);
+  }
+
+  // Validation UI helpers
+  function applyError(inputEl, msgEl) {
+    inputEl.classList.add('bg-error-container/20', 'shadow-xs');
+    inputEl.style.outline = '1.5px solid #ba1a1a';
+    msgEl.classList.remove('hidden');
+  }
+
+  function clearError(inputEl, msgEl) {
+    inputEl.classList.remove('bg-error-container/20');
+    inputEl.style.outline = '';
+    msgEl.classList.add('hidden');
+  }
+
+  function clearAllErrors() {
+    clearError(inputSubject, errorSubject);
+    clearError(inputDescription, errorDescription);
+    clearError(inputTime, errorTime);
+  }
+
+  // State Switcher (Default, Error, Success)
+  function setFormState(state) {
+    // Reset switcher button styling
+    [btnStateDefault, btnStateError, btnStateSuccess].forEach(btn => {
+      btn.className = 'px-2.5 py-1 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-container transition-all';
+    });
+
+    if (state === 'default') {
+      btnStateDefault.className = 'px-2.5 py-1 rounded font-label-md text-label-md bg-primary text-on-primary transition-all shadow-xs';
+      bannerSuccess.classList.add('hidden');
+      clearAllErrors();
+      inputSubject.value = '';
+      clearSubjectBtn.classList.add('hidden');
+      inputDescription.value = '';
+      charCounter.textContent = '0 / 400';
+      inputTime.value = '';
+    } else if (state === 'error') {
+      btnStateError.className = 'px-2.5 py-1 rounded font-label-md text-label-md bg-error text-on-error transition-all shadow-xs';
+      bannerSuccess.classList.add('hidden');
+      inputSubject.value = '';
+      inputDescription.value = '';
+      inputTime.value = '';
+      clearSubjectBtn.classList.add('hidden');
+      charCounter.textContent = '0 / 400';
+      applyError(inputSubject, errorSubject);
+      applyError(inputDescription, errorDescription);
+      applyError(inputTime, errorTime);
+    } else if (state === 'success') {
+      btnStateSuccess.className = 'px-2.5 py-1 rounded font-label-md text-label-md bg-tertiary-container text-tertiary-fixed transition-all shadow-xs';
+      clearAllErrors();
+      inputSubject.value = 'Cálculo I - Exatas';
+      clearSubjectBtn.classList.remove('hidden');
+      inputDescription.value = 'Revisão intensiva focada em Derivadas Parciais, Regra da Cadeia e preparação prática para a Prova P2 com exercícios resolvidos.';
+      charCounter.textContent = inputDescription.value.length + ' / 400';
+      inputTime.value = '14:00 - 16:00';
+      bannerSuccess.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  // Handle Form Submit
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    let hasError = false;
+
+    if (!inputSubject.value.trim()) {
+      applyError(inputSubject, errorSubject);
+      hasError = true;
+    } else {
+      clearError(inputSubject, errorSubject);
+    }
+
+    if (!inputDescription.value.trim()) {
+      applyError(inputDescription, errorDescription);
+      hasError = true;
+    } else {
+      clearError(inputDescription, errorDescription);
+    }
+
+    if (!inputTime.value.trim()) {
+      applyError(inputTime, errorTime);
+      hasError = true;
+    } else {
+      clearError(inputTime, errorTime);
+    }
+
+    if (hasError) {
+      setFormState('error');
+    } else {
+      document.getElementById('preview-subject-name').textContent = inputSubject.value;
+      setFormState('success');
+    }
+  }
+
+  function handleCancel() {
+    if (confirm('Deseja descartar as alterações desta aula?')) {
+      setFormState('default');
+    }
+  }
+
+  // Close suggestions box when clicked outside
+  document.addEventListener('click', (e) => {
+    const group = document.getElementById('group-subject');
+    if (group && !group.contains(e.target)) {
+      suggestionsBox.classList.add('hidden');
+    }
+  });
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-2px_12px_rgba(29,43,79,0.06)]" data-active-classes="text-primary font-semibold"><div class="flex justify-around items-center h-16 px-gutter-sm max-w-lg mx-auto"><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] h-12 text-on-surface-variant transition-colors group" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[24px] group-hover:scale-105 transition-transform">dashboard</span><span class="font-label-md text-label-md">Início</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] h-12 text-on-surface-variant transition-colors group" data-path="tutors-directory" href="#"><span class="material-symbols-outlined text-[24px] group-hover:scale-105 transition-transform">search</span><span class="font-label-md text-label-md">Monitores</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] h-12 text-on-surface-variant transition-colors group" data-path="sessions-schedule" href="#"><span class="material-symbols-outlined text-[24px] group-hover:scale-105 transition-transform">calendar_month</span><span class="font-label-md text-label-md">Sessões</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] h-12 text-on-surface-variant transition-colors group" data-path="academic-resources" href="#"><span class="material-symbols-outlined text-[24px] group-hover:scale-105 transition-transform">auto_stories</span><span class="font-label-md text-label-md">Acervo</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] h-12 text-on-surface-variant transition-colors group" data-path="student-profile" href="#"><span class="material-symbols-outlined text-[24px] group-hover:scale-105 transition-transform">account_circle</span><span class="font-label-md text-label-md">Perfil</span></a></div></nav></body></html>
