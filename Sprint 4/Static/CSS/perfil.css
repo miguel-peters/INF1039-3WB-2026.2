@@ -1,0 +1,148 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 30px 60px;
+    background-color: #f6f3eb;
+    color: #1d2b4f;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+header p {
+    margin-bottom: 5px;
+}
+
+header h1 {
+    margin-top: 0;
+}
+
+.icones-header {
+    display: flex;
+    gap: 20px;
+    font-size: 22px;
+}
+
+.foto-perfil {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.foto-perfil img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.dados-foto h3 {
+    margin: 0 0 5px 0;
+}
+
+.dados-foto p {
+    margin: 0 0 10px 0;
+}
+
+.informacoes-pessoais {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.titulo-informacoes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.titulo-informacoes h2 {
+    margin-top: 0;
+}
+
+.nome-completo,
+.email,
+.senha {
+    margin-bottom: 20px;
+}
+.senha {
+    position: relative;
+}
+
+.senha button {
+    margin-top: 5px;
+}
+
+.titulo-materias {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.materias {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.materias span {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+.notificacoes {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.notificacoes h2 {
+    margin-top: 0;
+}
+
+.opcao-notificacao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-top: 1px solid #ddd;
+    padding: 15px 0;
+}
+
+.opcao-notificacao h3 {
+    margin: 0 0 5px 0;
+}
+
+.opcao-notificacao p {
+    margin: 0;
+}
+
+.acoes-perfil {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.acoes-perfil button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.salvar {
+    background-color: #1d2b4f;
+    color: white;
+}
+
