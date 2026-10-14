@@ -1,0 +1,120 @@
+body {
+    background-color: #f6f3eb;
+    color: #1d2b4f;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.logo {
+    font-family: Georgia, serif;
+    font-size: 40px;
+    margin-bottom: 45px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.mais {
+    font-size: 26px;
+}
+
+.formulario {
+    max-width: 558px;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 40px;
+    border-radius: 6px;
+    border-top: 4px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(to right, #1d2b4f, #e0a43a) border-box;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+h2 {
+    font-family: Georgia, serif;
+    font-size: 30px;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.formulario p {
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 17px;
+    line-height: 1.5;
+}
+
+.icone {
+    background-color: #f6f3eb;
+    width: 60px;
+    height: 60px;
+    border: 1px solid #e5e0d5;
+    border-radius: 8px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    font-size: 17px;
+    margin-bottom: 6px;
+}
+
+input {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+}
+
+.campo {
+    margin-bottom: 20px;
+}
+
+button {
+    width: 100%;
+    background-color: #1d2b4f;
+    color: white;
+    padding: 16px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.seta {
+    color: #e0a43a;
+    margin-left: 8px;
+}
+
+.voltar {
+    text-align: center;
+}
+
+.formulario .voltar {
+    margin-top: 30px;
+    margin-bottom: 0;
+}
+
+.voltar a {
+    font-weight: bold;
+    color: #1d2b4f;
+    text-decoration: none;
+}
+
+.formulario > p {
+    color: #6b7280;
+}
