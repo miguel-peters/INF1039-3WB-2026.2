@@ -137,3 +137,67 @@ header h1 {
 .texto-modo p {
     margin: 5px 0;
 }
+
+.barra-superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 15px 40px;
+    margin: -30px -60px 30px -60px;
+}
+
+.logo-site {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+    font-family: Georgia, serif;
+    font-weight: bold;
+}
+
+.links-navegacao {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.links-navegacao span {
+    text-decoration: none;
+    color: #1d2b4f;
+    font-size: 15px;
+}
+
+.pagina-ativa {
+    background-color: #f6f3eb;
+    padding: 12px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.links-navegacao .criar-aula {
+    background-color: #e2a63b;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.usuario {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    font-size: 20px;
+}
+
+.foto-usuario {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f6f3eb;
+    color: #1d2b4f;
+    text-decoration: none;
+    font-size: 15px;
+}
