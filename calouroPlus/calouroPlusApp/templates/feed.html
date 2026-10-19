@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 
 <html>
@@ -5,16 +6,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <title>Calouro+</title>
-    <link href="../Static/CSS/feed.css" rel="stylesheet" type="text/css">
+    <link href="{% static 'CSS/feed.css' %}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
     <div class="blue-line">
 
-        <img src="../imgs/nome_calouro.png" width="150">
+        <img src="{% static 'nome_calouro.png' %}" width="150">
 
         <div class="menu">
-            <a href="feed.html">Feed</a>
+            <a href="{% url 'feed' %}">Feed</a>
             <a href="chat.html">Conversas</a>
             <a href="minhas_aulas.html">Aulas</a>
             <a href="criar_aula.html" class="botao-amarelo">+ Criar aula</a>
@@ -22,7 +23,7 @@
 
         <div class="menu">
             <span>🔔</span>
-            <a href="perfil.html"><img src="../imgs/perfil.png" class="foto-perfil"></a>
+            <a href="perfil.html"><img src="{% static 'perfil.png' %}" class="foto-perfil"></a>
         </div>
 
     </div>
