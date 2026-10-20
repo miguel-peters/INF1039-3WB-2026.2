@@ -5,3 +5,12 @@ def login_view(request):
 
 def feed(request):
     return render(request, "feed.html")
+
+def esqueci_senha(request):
+    return render(request, 'esqueci-senha.html')
+
+def perfil(request):
+    return render(request, 'perfil.html')
+
+def completar_cadastro(request):
+    return render(request, 'completar_cadastro.html')

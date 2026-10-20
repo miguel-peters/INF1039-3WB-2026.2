@@ -22,4 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', views.login_view, name = 'login'),
     path('feed/', views.feed, name = 'feed'),
+    path('esqueci-senha/', views.esqueci_senha, name='esqueci_senha'),
+    path('perfil/', views.perfil, name='perfil'),
+    path('completar-cadastro/', views.completar_cadastro, name='completar_cadastro'),
 ]
