@@ -14,3 +14,6 @@ def perfil(request):
 
 def completar_cadastro(request):
     return render(request, 'completar_cadastro.html')
+
+def criar_aula(request):
+    return render(request, 'criar-aula.html')
