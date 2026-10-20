@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', views.login_view, name = 'login'),
     path('feed/', views.feed, name = 'feed'),
+    path('minhas-aulas/', views.minhas_aulas, name='minhas_aulas'),
 ]

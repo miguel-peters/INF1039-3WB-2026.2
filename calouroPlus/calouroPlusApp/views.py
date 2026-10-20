@@ -5,3 +5,8 @@ def login_view(request):
 
 def feed(request):
     return render(request, "feed.html")
+
+def minhas_aulas(request):
+    return render(request, "minhas_aulas.html")
+
+
