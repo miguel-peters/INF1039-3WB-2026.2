@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="{% static 'css/minhas_aulas.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/minhas_aulas.css' %}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
@@ -15,18 +15,14 @@
 <nav class="barra-superior">
 
     <div class="logo-site">
-        <i class="fa-solid fa-graduation-cap"></i>
-        <span>Calouro+</span>
+        <img src="{% static 'nome_calouro.png' %}" width="150">
     </div>
 
     <div class="links-navegacao">
-        <span>Feed</span>
-        <span>Conversas</span>
-        <span class="pagina-ativa">Aulas</span>
-        <span class="criar-aula">
-            <i class="fa-solid fa-plus"></i>
-            Criar aula
-        </span>
+        <a href="{% url 'feed' %}">Feed</a>
+        <a href="{% url 'chat' %}">Conversas</a>
+        <a href="{% url 'minhas_aulas' %}">Aulas</a>
+        <a href="{% url 'criar_aula' %}" class="botao-amarelo">+ Criar aula</a>
     </div>
 
     <div class="usuario">
@@ -91,7 +87,7 @@
     <div class="card-aula">
         <div class="perfil-duração">
             <div class="perfil">
-                <img src="../Sprint 4/imgs/rogeria.jpg" alt="Rogeria">
+                <img src="{% static 'rogeria.jpg' %}" alt="Rogeria">
                 <p class="nome">{{ aula.tutor.nome }}</p>
                 <strong>Próxima</strong>
                 <p>

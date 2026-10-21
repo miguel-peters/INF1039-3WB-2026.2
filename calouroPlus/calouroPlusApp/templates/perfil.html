@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="/static/CSS/perfil.css">
+    <link rel="stylesheet" href="{% static 'CSS/perfil.css' %}">
     
     <title>Perfil</title>
 </head>
@@ -28,7 +29,7 @@
 
     <div class="foto-perfil">
 
-    <img src="/static/gabriel.jpg" alt="Foto de perfil">
+    <img src="{% static 'gabriel.jpg' %}" alt="Foto de perfil">
 
     <div class="dados-foto">
         <h3>Foto de perfil</h3>
@@ -110,7 +111,7 @@
 
     <div class="acoes-perfil">
     <button class="salvar">✓ Salvar alterações</button>
-    <a href="feed.html" class="voltar">← Voltar ao início</a>
+    <a href="{% url 'feed' %}" class="voltar">← Voltar ao início</a>
     </div>
 </body>
 </html>

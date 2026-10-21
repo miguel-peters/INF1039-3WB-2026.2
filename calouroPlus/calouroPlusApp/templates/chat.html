@@ -1,27 +1,32 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../Static/CSS/chat.css">
+    <link rel="stylesheet" href="{% static 'CSS/chat.css' %}">
 
     <title>Conversas</title>
 </head>
 <body>
     <header>
-        <div class="logo">🎓 Calouro+</div>
+        <div class="logo"><img src="{% static 'nome_calouro.png' %}" width="150"></div>
 
         <nav>
-            <a href="feed.html">Feed</a>
-            <a href="chat.html" class="ativo">Conversas</a>
-            <a href="minhas_aulas.html">Aulas</a>
+            <a href="{% url 'feed' %}">Feed</a>
+            <a href="{% url 'chat' %}" class="ativo">Conversas</a>
+            <a href="{% url 'minhas_aulas' %}">Aulas</a>
         </nav>
 
         <div class="acoes">
-            <button type="button" class="criar-aula">+ Criar aula</button>
+            <button type="button" class="criar-aula">
+                <nav>
+                    <a href="{% url 'criar_aula' %}" width = "100">+ Criar Aula</a>
+                </nav>
+            </button>
             <span>🔔</span>
-            <a href = "perfil.html"><img src="../Static/gabriel.jpg" alt="Foto de perfil"></a>
+            <a href = "{% url 'perfil' %}"><img src="{% static 'gabriel.jpg' %}" alt="Foto de perfil"></a>
         </div>
     </header>
 

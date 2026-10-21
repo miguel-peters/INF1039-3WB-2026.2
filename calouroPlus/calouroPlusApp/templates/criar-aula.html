@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <title>Calouro+</title>
-    <link href="/static/CSS/criar-aula.css" rel="stylesheet" type="text/css">
+    <link href="{% static 'CSS/cadastro.css' %}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -16,14 +16,14 @@
 
         <div class="menu">
             <a href="{% url 'feed' %}">Feed</a>
-            <a href="chat.html">Conversas</a>
-            <a href="minhas_aulas.html">Aulas</a>
-            <a href="criar_aula.html" class="botao-amarelo">+ Criar aula</a>
+            <a href="{% url 'chat' %}">Conversas</a>
+            <a href="{% url 'minhas_aulas' %}">Aulas</a>
+            <a href="{% url 'criar_aula' %}"" class="botao-amarelo">+ Criar aula</a>
         </div>
 
         <div class="menu">
             <span>🔔</span>
-            <a href="perfil.html"><img src="{% static 'perfil.png' %}" class="foto-perfil"></a>
+            <a href="{% url 'perfil' %}"><img src="{% static 'perfil.png' %}" class="foto-perfil"></a>
         </div>
 
     </div>
