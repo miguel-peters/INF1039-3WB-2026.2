@@ -77,3 +77,93 @@ h1 {
     border-radius: 10px;
     text-align: center;
 }
+
+.aula-card {
+    background: #FFFFFF;
+    border: 1px solid #DDD6C7;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+}
+
+.aula-topo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.aula-avatar {
+    width: 54px;
+    height: 54px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #EDE8DC;
+    border: 1px solid #DDD6C7;
+    color: #1D2B4F;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.aula-titulo {
+    margin: 0;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1D2B4F;
+}
+
+.aula-tutor {
+    margin: 4px 0 0;
+    font-size: 16px;
+    color: #6B6558;
+}
+
+.aula-desc {
+    margin: 0 0 16px;
+    color: #22252A;
+}
+
+.aula-data {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 24px;
+    color: #6B6558;
+}
+
+.aula-icone {
+    color: #2F6F62;
+}
+
+.aula-rodape {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.aula-rodape form {
+    margin: 0;
+}
+
+.aula-preco {
+    margin: 0;
+    color: #1D2B4F;
+}
+
+.aula-preco strong {
+    font-size: 18px;
+}
+
+.aula-preco span {
+    font-size: 14px;
+    color: #6B6558;
+}
+
+.aula-status {
+    font-weight: 600;
+    color: #6B6558;
+}
