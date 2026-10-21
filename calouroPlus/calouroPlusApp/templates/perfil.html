@@ -47,12 +47,12 @@
 
     <div class="nome-completo">
         <p>Nome completo</p>
-        <p>Helena Soares</p>
+        <p>{{ usuario.nome }}</p>
     </div>
 
     <div class="email">
         <p>E-mail institucional</p>
-        <p>helena.soares@universidade.edu.br</p>
+        <p>{{ usuario.email }}</p>
     </div>
 
     <div class="senha">
@@ -67,15 +67,17 @@
 
     <div class="titulo-materias">
         <p>Matérias de interesse</p>
-        <p>4 selecionadas</p>
+        <p>{{ usuario.disciplinas.count }} selecionadas</p>
     </div>
 
     <div class="materias">
-        <span>Cálculo I ×</span>
-        <span>Física Teórica ×</span>
-        <span>Estrutura de Dados ×</span>
-        <span>Bioquímica ×</span>
-        <button>+ Adicionar matéria</button>
+    {% for disciplina in usuario.disciplinas.all %}
+        <span>{{ disciplina.nome }} ✕</span>
+    {% empty %}
+        <p>Nenhuma matéria selecionada.</p>
+    {% endfor %}
+
+    <button>+ Adicionar matéria</button>
     </div>
 
     </div>

@@ -20,26 +20,27 @@
         <div class="card-cadastro">
             <h2>Quase lá</h2>
             <p>Conte um pouco sobre você para começar a usar o Calouro+.</p>
-            <form>
+            <form method="POST">
+            {% csrf_token %}
                 <label for="nome">Nome completo</label>
-                <input type="text" id="nome" placeholder="Como você se chama?">
+                <input type="text" id="nome" name="nome" placeholder="Como você se chama?" required>
                 <label for="curso">Curso</label>
 
-                <select id="curso" name="curso">
+                <select id="curso" name="curso" required>
                     <option value="" disabled selected>Selecione seu curso</option>
-                    <option value="computacao">Ciência da Computação</option>
-                    <option value="engenharia">Engenharia</option>
-                    <option value="direito">Direito</option>
-                    <option value="administracao">Administração</option>
+                    {% for curso in cursos %}
+                    <option value="{{ curso.id }}">{{ curso.nome }}</option>
+                    {% endfor %}
                 </select>
                 <label for="materias">MATÉRIAS DE INTERESSE</label>
-                <input
-                    type="text"
-                    id="materias"
-                    name="materias"
-                    placeholder="Buscar ou adicionar matéria"
-                >
-                <button type="button">Concluir e ver o feed</button>
+                <select id="materias" name="materias" multiple>
+                    {% for disciplina in disciplinas %}
+                    <option value="{{ disciplina.id }}">
+                    {{ disciplina.nome }}
+                    </option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Concluir e ver o feed</button>
             </form>
         </div>
     </main>
