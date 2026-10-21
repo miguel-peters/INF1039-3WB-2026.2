@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas listas</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h1>Minhas listas</h1>
+
+    <h2>Meus livros favoritos</h2>
+    <ol>
+        {% for livro in livros %}
+            <li>{{ livro.title }}</li>
+        {% endfor %}
+    </ol>
+
+    <h2>Lugares que quero conhecer</h2>
+    <ul>
+        {% for lugar in lugares %}
+            <li>{{ lugar.title }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
