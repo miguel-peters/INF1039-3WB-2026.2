@@ -27,10 +27,9 @@
 
                 <select id="curso" name="curso">
                     <option value="" disabled selected>Selecione seu curso</option>
-                    <option value="computacao">Ciência da Computação</option>
-                    <option value="engenharia">Engenharia</option>
-                    <option value="direito">Direito</option>
-                    <option value="administracao">Administração</option>
+                    {% for curso in cursos %}
+                        <option value="{{ curso.nome }}">{{ curso.nome }}</option>
+                    {% endfor %}
                 </select>
                 <label for="materias">MATÉRIAS DE INTERESSE</label>
                 <input

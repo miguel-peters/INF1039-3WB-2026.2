@@ -35,12 +35,12 @@
             <button type="button">Como tutor</button>
         </div>
 
-        <div class="vazio">
-            <span class="icone">📖</span>
-            <h2>Nenhuma conversa ainda</h2>
-            <p>Encontre uma aula no Feed para começar uma conversa.</p>
-            <a href="feed.html" class="ver-feed">Ver o Feed</a>
-        </div>
+        {% for mensagem in mensagens %}
+            <div>
+                <p><strong>{{ mensagem.usuario_from }}</strong> para {{ mensagem.usuario_to }}</p>
+                <p>{{ mensagem.mensagem }}</p>
+            </div>
+        {% endfor %}
     </div>
 </body>
 </html>

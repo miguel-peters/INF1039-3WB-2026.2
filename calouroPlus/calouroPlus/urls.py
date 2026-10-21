@@ -26,4 +26,6 @@ urlpatterns = [
     path('perfil/', views.perfil, name='perfil'),
     path('completar-cadastro/', views.completar_cadastro, name='completar_cadastro'),
     path('criar-aula/', views.criar_aula, name='criar_aula'),
+    path('cadastro/', views.cadastro),
+    path('chat/', views.chat),
 ]

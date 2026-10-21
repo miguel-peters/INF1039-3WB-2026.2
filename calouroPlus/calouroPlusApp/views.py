@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 from .forms import LoginForm
-from .models import Aula, Usuario
+from .models import Aula, Usuario, Chat, Curso
 
 
 def login_view(request):
@@ -36,8 +36,16 @@ def esqueci_senha(request):
 def perfil(request):
     return render(request, 'perfil.html')
 
+def cadastro(request):
+    return render(request, 'cadastro.html')
+
 def completar_cadastro(request):
-    return render(request, 'completar_cadastro.html')
+    cursos = Curso.objects.all()
+    return render(request, 'completar_cadastro.html', {"cursos": cursos})
+
+def chat(request):
+    mensagens = Chat.objects.all()
+    return render(request, 'chat.html', {"mensagens": mensagens})
 
 def criar_aula(request):
     return render(request, 'criar-aula.html')
