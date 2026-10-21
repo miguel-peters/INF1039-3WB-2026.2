@@ -45,3 +45,17 @@ def completar_cadastro(request):
     }
 
     return render(request, "completar_cadastro.html", contexto)
+
+
+
+
+@login_required
+def perfil(request):
+    usuario = request.user
+
+    contexto = {
+        "usuario": usuario
+    }
+
+    return render(request, "perfil.html", contexto)
+
