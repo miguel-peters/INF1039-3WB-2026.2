@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 from .forms import LoginForm
-from .models import Aula, Usuario, Chat, Curso
+from .models import Aula, Usuario, Chat, Papel
 
 
 def login_view(request):
@@ -37,11 +37,11 @@ def perfil(request):
     return render(request, 'perfil.html')
 
 def cadastro(request):
-    return render(request, 'cadastro.html')
+    papeis = Papel.objects.all()
+    return render(request, 'cadastro.html', {"papeis": papeis})
 
 def completar_cadastro(request):
-    cursos = Curso.objects.all()
-    return render(request, 'completar_cadastro.html', {"cursos": cursos})
+    return render(request, 'completar_cadastro.html')
 
 def chat(request):
     mensagens = Chat.objects.all()
