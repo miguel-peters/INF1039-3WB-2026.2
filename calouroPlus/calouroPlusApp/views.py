@@ -1,6 +1,9 @@
 from django.shortcuts import render
 
-from .models import Aula
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
+
+from .models import Aula, Curso, Disciplina
 
 def login_view(request):
     return render(request, "login.html")
@@ -17,4 +20,28 @@ def minhas_aulas(request):
 
     return render(request, "minhas_aulas.html", contexto)
 
+@login_required
+def completar_cadastro(request):
+    cursos = Curso.objects.all()
+    disciplinas = Disciplina.objects.all()
 
+    if request.method == "POST":
+        usuario = request.user
+
+        usuario.nome = request.POST.get("nome")
+        usuario.curso = Curso.objects.get(
+            id=request.POST.get("curso")
+        )
+        usuario.save()
+
+        materias = request.POST.getlist("materias")
+        usuario.disciplinas.set(materias)
+
+        return redirect("feed")
+
+    contexto = {
+        "cursos": cursos,
+        "disciplinas": disciplinas
+    }
+
+    return render(request, "completar_cadastro.html", contexto)
