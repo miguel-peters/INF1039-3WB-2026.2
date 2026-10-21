@@ -1,0 +1,191 @@
+html {
+    background-color: #EDE8D0;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: navy;
+}
+
+a {
+    color: navy;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.blue-line {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+    padding: 10px;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.botao-amarelo {
+    background-color: goldenrod;
+    padding: 10px;
+    border-radius: 5px;
+    color: navy;
+    font-weight: bold;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+}
+
+.centro {
+    text-align: center;
+}
+
+.centro p {
+    margin-top: 30px;
+}
+
+.foto-perfil {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.conteudo {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.blue-line-even {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.verde {
+    color: green;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.amarelo {
+    color: goldenrod;
+    font-weight: bold;
+    margin-bottom: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cinza {
+    color: gray;
+    font-weight: bold;
+    margin-bottom: 0;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}
+
+.preto {
+    color: black;
+    font-weight: bold;
+    margin-bottom: 0;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}
+
+.vermelho {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 0;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}
+
+.rotulo {
+    display: block;
+    font-weight: bold;
+    color: navy;
+    margin-bottom: 8px;
+}
+
+.obrigatorio {
+    color: crimson;
+}
+
+.campo {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+    box-sizing: border-box;
+    margin-bottom: 24px;
+}
+
+textarea.campo {
+    font-family: inherit;
+    resize: vertical;
+}
+
+.fim {
+    float: right;
+}
+
+.publicar {
+    width: 100%;
+    padding: 14px;
+    background-color: navy;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.cancelar {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: navy;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.campo:focus {
+    outline: none;
+    border-color: goldenrod;
+}
+
+.azul_grande {
+    color: navy;
+    font-weight: bold;
+    margin-bottom: 0;
+    font-size: 44px;
+}
+
+h1 {
+    margin-top: 5px;
+}
+
+.botao {
+    display: inline-block;
+    background-color: navy;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+}
+
+.caixa {
+    background-color: white;
+    margin-top: 30px;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: left;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}

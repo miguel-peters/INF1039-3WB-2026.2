@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Calouro+</title>
+    <link href="/static/CSS/criar-aula.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div class="blue-line">
+
+        <img src="{% static 'nome_calouro.png' %}" width="150">
+
+        <div class="menu">
+            <a href="{% url 'feed' %}">Feed</a>
+            <a href="chat.html">Conversas</a>
+            <a href="minhas_aulas.html">Aulas</a>
+            <a href="criar_aula.html" class="botao-amarelo">+ Criar aula</a>
+        </div>
+
+        <div class="menu">
+            <span>🔔</span>
+            <a href="perfil.html"><img src="{% static 'perfil.png' %}" class="foto-perfil"></a>
+        </div>
+
+    </div>
+
+    <div class="conteudo">
+        <p class="amarelo">🗓️ Nova atividade acadêmica</p>
+        <h1 class="azul_grande">Criar uma aula</h1>
+        
+        <p class="cinza">Preencha as informações para publicar sua aula e ajudar outros alunos.</p>
+
+        <div class="caixa">
+            <h1 class="preto">Matéria <span class="vermelho">*</span></h1>
+
+            <p><input type="text" id="materia" class="campo" list="lista-materias" placeholder="Buscar matéria"></p>
+
+            <datalist id="lista-materias">
+                <option value="Álgebra Linear">
+                <option value="Bioquímica">
+                <option value="Cálculo 1">
+                <option value="Cálculo 2">
+                <option value="Estrutura de Dados">
+                <option value="Física 1">
+                <option value="Programação 1">
+            </datalist>
+
+            <p class="preto">Descrição <span class="vermelho">*</span> <span class="fim">max 400 caracteres</span></p>
+            <textarea id="descricao" class="campo" rows="6" maxlength="400" placeholder="Conte os tópicos que pretende cobrir e como a aula vai ajudar."></textarea>
+
+            <p class="preto">Horários <span class="vermelho">*</span> <span class="fim">max 400 caracteres</span></p>
+            <textarea id="horarios" class="campo" rows="6" maxlength="400" placeholder="Conte os horários disponíveis para a aula. Como 'Segunda 14:00 - 15:00' ou 'Dias da semana das 14:00 até as 19:00'"></textarea>
+
+            <p class="preto">Preço em R$</p>
+            <input type="number" id="preco" class="campo" placeholder="Ex.: 50,00" step="0.01" min="0">
+
+            <p class="preto">Qtd. máxima de alunos</p>
+            <input type="number" id="qtd" class="campo" placeholder="Ex.: 5" min="1">
+
+            <p class="preto">Modalidade</p>
+            <select id="modalidade" class="campo">
+                <option>Não informar</option>
+                <option>Presencial</option>
+                <option>Online</option>
+            </select>
+
+            <p class="preto">Selo</p>
+            <select id="selo" class="campo">
+                <option>Sem selo</option>
+                <option>Monitor</option>
+                <option>Destaque</option>
+            </select>
+
+            <p class="preto">Local</p>
+            <input type="text" id="local" class="campo" placeholder="Ex.: Biblioteca Central">
+
+                        <p class="preto">Local</p>
+            <input type="text" id="local" class="campo" placeholder="Ex.: Biblioteca Central">
+
+            <div class="centro">
+                <button class="botao-amarelo">Publicar aula</button>
+                <p><a href="{% url 'feed' %}">Cancelar e descartar</a></p>
+            </div>
+            
+
+        </div>
+
+    </div>
+</body>
+
+</html>
