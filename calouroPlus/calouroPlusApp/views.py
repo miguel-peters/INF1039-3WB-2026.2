@@ -1,7 +1,7 @@
-
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordResetForm
 
 from .forms import LoginForm
 from .models import Aula, Usuario, Chat, Papel, Curso, Disciplina
@@ -85,7 +85,25 @@ def perfil(request):
 
 
 def esqueci_senha(request):
-    return render(request, 'esqueci-senha.html')
+    mensagem = None
+
+    if request.method == 'POST':
+        form = PasswordResetForm(request.POST)
+
+        if form.is_valid():
+            form.save(
+                request=request,
+                use_https=request.is_secure(),
+                email_template_name='password_reset_email.html',
+            )
+            mensagem = (
+                'Se houver uma conta com esse e-mail, '
+                'você receberá as instruções para redefinir a senha.'
+            )
+        else:
+            mensagem = 'Digite um e-mail válido.'
+
+    return render(request, 'esqueci-senha.html', {'mensagem': mensagem})
 
 
 def cadastro(request):
