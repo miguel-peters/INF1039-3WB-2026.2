@@ -38,6 +38,26 @@
             <a href="{% url 'criar_aula' %}" class="botao">Criar aula</a>
         </div>
 
+                            <form method="get" action="{% url 'feed' %}" class="filtro">
+                        <div class="campo">
+                            {{ form.busca.label_tag }}
+                            {{ form.busca }}
+                        </div>
+                        <div class="campo">
+                            {{ form.disciplina.label_tag }}
+                            {{ form.disciplina }}
+                        </div>
+                        <div class="campo">
+                            {{ form.modo.label_tag }}
+                            {{ form.modo }}
+                        </div>
+                        <label class="campo-check">
+                            {{ form.so_preferencias }} {{ form.so_preferencias.label }}
+                        </label>
+                        <button type="submit" class="botao">Buscar</button>
+                        <a href="{% url 'feed' %}" class="botao">Limpar</a>
+                    </form>
+
         <button class="botao">Todas</button>
 
             {% for aula in aulas %}
@@ -61,21 +81,33 @@
                         <rect x="3" y="5" width="18" height="16" rx="2"/>
                         <path d="M3 10h18M8 3v4M16 3v4"/>
                     </svg>
-                    {{ aula.horario|date:"D., j \d\e M., H:i" }}
+                    {{ aula.horario|date:"D., j \d\e M., H:i" }} · {{ aula.get_modo_display }}
                 </p>
 
                 <div class="aula-rodape">
                     <p class="aula-preco">
                         <strong>{% if aula.preco == 0 %}Grátis{% else %}R$ {{ aula.preco|floatformat:2 }}{% endif %}</strong>
-                        <span>/ hora</span>
+                        <span>/ hora · {{ aula.vagas_restantes }} vagas</span>
                     </p>
+                    {% if aula.tutor == user %}
+                        <span class="aula-status">Sua aula</span>
+                    {% elif user in aula.alunos.all %}
+                        <span class="aula-status">Inscrito</span>
+                    {% elif aula.vagas_restantes <= 0 %}
+                        <span class="aula-status">Lotada</span>
+                    {% else %}
+                        <form method="post" action="{% url 'inscrever' aula.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-inscrever">Inscrever-se</button>
+                        </form>
+                    {% endif %}
                 </div>
             </article>
             {% empty %}
             <div class="caixa">
-                <h2>Ainda não tem aulas por aqui.</h2>
-                <p>Que tal criar a primeira?</p>
-                <a href="criar_aula.html" class="botao">Criar aula</a>
+                <h2>Nenhuma aula encontrada.</h2>
+                <p>Tente mudar os filtros ou crie a primeira aula.</p>
+                <a href="{% url 'criar_aula' %}" class="botao">Criar aula</a>
             </div>
             {% endfor %}
     </div>
