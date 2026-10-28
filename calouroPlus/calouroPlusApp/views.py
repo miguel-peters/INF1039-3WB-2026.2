@@ -54,13 +54,45 @@ def completar_cadastro(request):
     if request.method == "POST":
         usuario = request.user
 
-        usuario.nome = request.POST.get("nome")
-        usuario.curso = Curso.objects.get(
-            id=request.POST.get("curso")
-        )
+        if not usuario.is_authenticated:
+            return redirect("login")
+
+        usuario.nome = request.POST.get("nome", "").strip()
+
+        nome_curso = request.POST.get("curso", "").strip()
+
+        if nome_curso:
+            curso = Curso.objects.filter(
+                nome__iexact=nome_curso
+            ).first()
+
+            if curso is None:
+                curso = Curso.objects.create(nome=nome_curso)
+
+            usuario.curso = curso
+
         usuario.save()
 
-        materias = request.POST.getlist("materias")
+        materias_texto = request.POST.get("materias", "")
+
+        nomes_materias = [
+            nome.strip()
+            for nome in materias_texto.split(",")
+            if nome.strip()
+        ]
+
+        materias = []
+
+        for nome in nomes_materias:
+            disciplina = Disciplina.objects.filter(
+                nome__iexact=nome
+            ).first()
+
+            if disciplina is None:
+                disciplina = Disciplina.objects.create(nome=nome)
+
+            materias.append(disciplina)
+
         usuario.disciplinas.set(materias)
 
         return redirect("feed")
@@ -71,7 +103,6 @@ def completar_cadastro(request):
     }
 
     return render(request, "completar_cadastro.html", contexto)
-
 
 @login_required
 def perfil(request):
@@ -106,10 +137,49 @@ def esqueci_senha(request):
     return render(request, 'esqueci-senha.html', {'mensagem': mensagem})
 
 
+
 def cadastro(request):
     papeis = Papel.objects.all()
-    return render(request, 'cadastro.html', {"papeis": papeis})
 
+    if request.method == "POST":
+        email = request.POST.get("email", "").strip()
+        senha = request.POST.get("senha", "")
+        confirmar_senha = request.POST.get("confirmar_senha", "")
+        nome_papel = request.POST.get("papel", "")
+
+        if not email or not senha:
+            erro = "Preencha o e-mail e a senha."
+
+        elif Usuario.objects.filter(email__iexact=email).exists():
+            erro = "Este e-mail já está cadastrado."
+
+        elif senha != confirmar_senha:
+            erro = "As senhas não coincidem."
+
+        elif len(senha) < 8:
+            erro = "A senha deve ter pelo menos 8 caracteres."
+
+        else:
+            papel = Papel.objects.filter(nome=nome_papel).first()
+
+            usuario = Usuario.objects.create_user(
+                username=email,
+                email=email,
+                password=senha,
+                papel=papel
+            )
+
+            login(request, usuario)
+            return redirect("completar_cadastro")
+
+        return render(request, "cadastro.html", {
+            "papeis": papeis,
+            "erro": erro
+        })
+
+    return render(request, "cadastro.html", {
+        "papeis": papeis
+    })
 
 def chat(request):
     mensagens = Chat.objects.all()
