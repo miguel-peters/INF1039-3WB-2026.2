@@ -67,6 +67,14 @@ class Aula(models.Model):
 
 
 class Chat(models.Model):
+
+    aula = models.ForeignKey(
+    Aula,
+    on_delete=models.SET_NULL,
+    null=True,
+    blank=True,
+    related_name="mensagens"
+)
    
     usuario_from = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='mensagens_enviadas')
     usuario_to = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='mensagens_recebidas')

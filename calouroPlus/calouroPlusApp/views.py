@@ -214,9 +214,75 @@ def cadastro(request):
         "papeis": papeis
     })
 
+
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+
+@login_required
+
+@login_required
 def chat(request):
-    mensagens = Chat.objects.all()
-    return render(request, 'chat.html', {"mensagens": mensagens})
+    usuario = request.user
+    papel = request.GET.get("papel", "aluno")
+    if papel not in ("aluno", "tutor"):
+        papel = "aluno"
+
+    busca = request.GET.get("busca", "").strip()
+
+    mensagens = Chat.objects.filter(
+        Q(usuario_from=usuario) | Q(usuario_to=usuario),
+        aula__isnull=False
+    ).select_related(
+        "usuario_from", "usuario_to", "aula__disciplina"
+    )
+
+    if papel == "tutor":
+        mensagens = mensagens.filter(aula__tutor=usuario)
+    else:
+        mensagens = mensagens.filter(aula__alunos=usuario)
+
+    if busca:
+        mensagens = mensagens.filter(
+            Q(usuario_from__nome__icontains=busca) |
+            Q(usuario_to__nome__icontains=busca) |
+            Q(usuario_from__username__icontains=busca) |
+            Q(usuario_to__username__icontains=busca) |
+            Q(aula__disciplina__nome__icontains=busca)
+        )
+
+    mensagens = mensagens.order_by("-horario")
+
+    conversas = []
+    conversas_vistas = set()
+
+    for mensagem in mensagens:
+        outro_usuario = (
+            mensagem.usuario_to
+            if mensagem.usuario_from_id == usuario.id
+            else mensagem.usuario_from
+        )
+
+        chave = (mensagem.aula_id, outro_usuario.id)
+
+        if chave in conversas_vistas:
+            continue
+
+        conversas_vistas.add(chave)
+
+        conversas.append({
+            "usuario": outro_usuario,
+            "disciplina": mensagem.aula.disciplina.nome,
+            "ultima_mensagem": mensagem.mensagem,
+            "horario": mensagem.horario,
+        })
+
+    return render(request, "chat.html", {
+        "conversas": conversas,
+        "papel_ativo": papel,
+        "busca": busca
+    })
+
+
 
 
 def criar_aula(request):
