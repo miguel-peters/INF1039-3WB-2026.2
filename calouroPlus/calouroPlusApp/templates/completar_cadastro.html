@@ -24,26 +24,99 @@
             {% csrf_token %}
                 <label for="nome">Nome completo</label>
                 <input type="text" id="nome" name="nome" placeholder="Como você se chama?" required>
-                <label for="curso">Curso</label>
 
-                <select id="curso" name="curso" required>
-                    <option value="" disabled selected>Selecione seu curso</option>
-                    {% for curso in cursos %}
-                    <option value="{{ curso.id }}">{{ curso.nome }}</option>
-                    {% endfor %}
-                </select>
-                <label for="materias">MATÉRIAS DE INTERESSE</label>
-                <select id="materias" name="materias" multiple>
-                    {% for disciplina in disciplinas %}
-                    <option value="{{ disciplina.id }}">
-                    {{ disciplina.nome }}
-                    </option>
-                    {% endfor %}
-                </select>
+                <label for="curso">Curso</label>
+                    <input
+                        type="text"
+                        id="curso"
+                        name="curso"
+                        list="lista-cursos"
+                        placeholder="Digite seu curso"
+                        maxlength="50"
+                        required
+                    >
+
+                    <datalist id="lista-cursos">
+                        {% for curso in cursos %}
+                        <option value="{{ curso.nome }}">
+                        {% endfor %}
+                    </datalist>
+
+                <label for="materia-input">MATÉRIAS DE INTERESSE</label>
+
+<div id="materias-selecionadas"></div>
+
+<input
+    type="text"
+    id="materia-input"
+    list="lista-materias"
+    placeholder="Digite uma matéria e pressione Enter"
+    autocomplete="off"
+>
+
+<datalist id="lista-materias">
+    {% for disciplina in disciplinas %}
+        <option value="{{ disciplina.nome }}">
+    {% endfor %}
+</datalist>
+
+<input type="hidden" id="materias" name="materias">
+
                 <button type="submit">Concluir e ver o feed</button>
             </form>
         </div>
     </main>
+<script>
+const campo = document.getElementById("materia-input");
+const selecionadas = document.getElementById("materias-selecionadas");
+const oculto = document.getElementById("materias");
 
+let materias = [];
+
+function atualizarMaterias() {
+    oculto.value = materias.join(",");
+    selecionadas.innerHTML = "";
+
+    materias.forEach((materia, indice) => {
+        const tag = document.createElement("span");
+        tag.textContent = materia + " × ";
+        tag.style.cssText = "display:inline-block;padding:8px;margin:4px;background:#eee;border-radius:6px;cursor:pointer";
+
+        tag.onclick = () => {
+            materias.splice(indice, 1);
+            atualizarMaterias();
+        };
+
+        selecionadas.appendChild(tag);
+    });
+}
+
+function adicionarMateria() {
+    const nome = campo.value.trim();
+
+    if (nome && !nome.includes(",") &&
+        !materias.some(m => m.toLowerCase() === nome.toLowerCase())) {
+        materias.push(nome);
+        atualizarMaterias();
+    }
+
+    campo.value = "";
+}
+
+campo.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        adicionarMateria();
+    }
+});
+
+campo.addEventListener("change", adicionarMateria);
+
+document.querySelector(".card-cadastro form").addEventListener("submit", () => {
+    if (campo.value.trim()) {
+        adicionarMateria();
+    }
+});
+</script>
 </body>
 </html>
