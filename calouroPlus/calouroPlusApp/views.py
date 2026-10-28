@@ -1,14 +1,19 @@
-from django.shortcuts import render, redirect
+
+import unicodedata
+
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordResetForm
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
 from django.views.decorators.http import require_POST
-import unicodedata
 
 from .forms import LoginForm, FiltroAulaForm
 from .models import Aula, Usuario, Chat, Papel, Curso, Disciplina
 
+
+# LOGIN
 
 def login_view(request):
     form = LoginForm(request.POST or None)
@@ -18,6 +23,7 @@ def login_view(request):
         senha = form.cleaned_data['senha']
 
         usuario = Usuario.objects.filter(email__iexact=email).first()
+
         user = authenticate(
             request,
             username=usuario.username,
@@ -32,14 +38,28 @@ def login_view(request):
 
     return render(request, 'login.html', {'form': form})
 
+
+# NORMALIZAÇÃO DE TEXTO
+
 def normalizar(texto):
     decomposto = unicodedata.normalize('NFD', texto)
-    sem_acento = ''.join(c for c in decomposto if unicodedata.category(c) != 'Mn')
+
+    sem_acento = ''.join(
+        c for c in decomposto
+        if unicodedata.category(c) != 'Mn'
+    )
+
     return sem_acento.casefold().strip()
+
+
+# FEED
 
 @login_required
 def feed(request):
-    aulas = Aula.objects.select_related('tutor', 'disciplina').order_by('horario')
+    aulas = Aula.objects.select_related(
+        'tutor', 'disciplina'
+    ).order_by('horario')
+
     form = FiltroAulaForm(request.GET or None)
 
     if form.is_valid():
@@ -49,35 +69,122 @@ def feed(request):
 
         if disciplina:
             aulas = aulas.filter(disciplina=disciplina)
+
         if modo:
             aulas = aulas.filter(modo=modo)
+
         if form.cleaned_data['so_preferencias']:
-            aulas = aulas.filter(disciplina__in=request.user.disciplinas.all())
+            aulas = aulas.filter(
+                disciplina__in=request.user.disciplinas.all()
+            )
+
         if busca:
             termo = normalizar(busca)
-            ids = [d.id for d in Disciplina.objects.all() if termo in normalizar(d.nome)]
+
+            ids = [
+                d.id
+                for d in Disciplina.objects.all()
+                if termo in normalizar(d.nome)
+            ]
+
             aulas = aulas.filter(disciplina_id__in=ids)
 
-    return render(request, 'feed.html', {'aulas': aulas, 'form': form})
+    return render(request, 'feed.html', {
+        'aulas': aulas,
+        'form': form
+    })
+
+
+# INSCRIÇÃO EM AULAS
 
 @login_required
 @require_POST
 def inscrever(request, id):
     aula = get_object_or_404(Aula, id=id)
+
     if aula.tutor != request.user and aula.vagas_restantes > 0:
         aula.alunos.add(request.user)
+
     return redirect('feed')
 
 
+# MINHAS AULAS - FILTRO
+
+@login_required
 def minhas_aulas(request):
-    aulas = Aula.objects.all()
+    agora = timezone.now()
+
+    aulas = Aula.objects.filter(
+        alunos=request.user
+    ).select_related(
+        'tutor', 'disciplina'
+    ).order_by('horario')
+
+    total_proximas = aulas.filter(
+        horario__gte=agora
+    ).count()
+
+    total_passadas = aulas.filter(
+        horario__lt=agora
+    ).count()
+
+    filtro = request.GET.get('filtro', 'todas')
+
+    if filtro == 'proximas':
+        aulas = aulas.filter(horario__gte=agora)
+
+    elif filtro == 'passadas':
+        aulas = aulas.filter(horario__lt=agora)
+
+    else:
+        filtro = 'todas'
 
     contexto = {
-        "aulas": aulas
+        'aulas': aulas,
+        'filtro': filtro,
+        'total_proximas': total_proximas,
+        'total_passadas': total_passadas
     }
 
-    return render(request, "minhas_aulas.html", contexto)
+    return render(request, 'minhas_aulas.html', contexto)
 
+
+# DETALHES DA AULA
+
+@login_required
+def detalhes_aula(request, aula_id):
+    aula = get_object_or_404(
+        Aula.objects.select_related(
+            'tutor', 'disciplina'
+        ),
+        id=aula_id,
+        alunos=request.user
+    )
+
+    contexto = {
+        'aula': aula
+    }
+
+    return render(request, 'detalhes_aula.html', contexto)
+
+
+# DESINSCREVER-SE DE UMA AULA
+
+@login_required
+@require_POST
+def desinscrever_aula(request, aula_id):
+    aula = get_object_or_404(
+        Aula,
+        id=aula_id,
+        alunos=request.user
+    )
+
+    aula.alunos.remove(request.user)
+
+    return redirect('minhas_aulas')
+
+
+# COMPLETAR CADASTRO
 
 @login_required
 def completar_cadastro(request):
@@ -135,7 +242,14 @@ def completar_cadastro(request):
         "disciplinas": disciplinas
     }
 
-    return render(request, "completar_cadastro.html", contexto)
+    return render(
+        request,
+        "completar_cadastro.html",
+        contexto
+    )
+
+
+# PERFIL
 
 @login_required
 def perfil(request):
@@ -147,6 +261,8 @@ def perfil(request):
 
     return render(request, "perfil.html", contexto)
 
+
+# RECUPERAÇÃO DE SENHA
 
 def esqueci_senha(request):
     mensagem = None
@@ -160,16 +276,21 @@ def esqueci_senha(request):
                 use_https=request.is_secure(),
                 email_template_name='password_reset_email.html',
             )
+
             mensagem = (
                 'Se houver uma conta com esse e-mail, '
                 'você receberá as instruções para redefinir a senha.'
             )
+
         else:
             mensagem = 'Digite um e-mail válido.'
 
-    return render(request, 'esqueci-senha.html', {'mensagem': mensagem})
+    return render(request, 'esqueci-senha.html', {
+        'mensagem': mensagem
+    })
 
 
+# CADASTRO
 
 def cadastro(request):
     papeis = Papel.objects.all()
@@ -215,15 +336,14 @@ def cadastro(request):
     })
 
 
-from django.contrib.auth.decorators import login_required
-from django.db.models import Q
-
-@login_required
+# CHAT
 
 @login_required
 def chat(request):
     usuario = request.user
+
     papel = request.GET.get("papel", "aluno")
+
     if papel not in ("aluno", "tutor"):
         papel = "aluno"
 
@@ -233,11 +353,14 @@ def chat(request):
         Q(usuario_from=usuario) | Q(usuario_to=usuario),
         aula__isnull=False
     ).select_related(
-        "usuario_from", "usuario_to", "aula__disciplina"
+        "usuario_from",
+        "usuario_to",
+        "aula__disciplina"
     )
 
     if papel == "tutor":
         mensagens = mensagens.filter(aula__tutor=usuario)
+
     else:
         mensagens = mensagens.filter(aula__alunos=usuario)
 
@@ -283,7 +406,7 @@ def chat(request):
     })
 
 
-
+# CRIAR AULA
 
 def criar_aula(request):
     return render(request, 'criar-aula.html')

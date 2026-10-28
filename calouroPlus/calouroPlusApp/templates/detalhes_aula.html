@@ -1,0 +1,127 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Detalhes da Aula | Calouro+</title>
+
+    <link rel="stylesheet"
+          href="{% static 'CSS/minhas_aulas.css' %}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <nav class="barra-superior">
+
+        <div class="logo-site">
+            <img src="{% static 'nome_calouro.png' %}"
+                 width="150" alt="Calouro+">
+        </div>
+
+        <div class="links-navegacao">
+            <a href="{% url 'feed' %}">Feed</a>
+            <a href="{% url 'chat' %}">Conversas</a>
+            <a href="{% url 'minhas_aulas' %}">Aulas</a>
+            <a href="{% url 'criar_aula' %}"
+               class="botao-amarelo">+ Criar aula</a>
+        </div>
+
+        <div class="usuario">
+            <i class="fa-regular fa-bell"></i>
+            <span class="foto-usuario">M</span>
+        </div>
+
+    </nav>
+
+    <header>
+        <div class="titulo-header">
+            <p>PUC-Rio • Calouro+</p>
+            <h1>Detalhes da Aula</h1>
+        </div>
+    </header>
+
+    <main class="detalhes-container">
+
+        <div class="card-aula">
+
+            <h2>{{ aula.disciplina.nome }}</h2>
+
+            <div class="informacoes-aula">
+
+                <p>
+                    <strong>Tutor:</strong>
+                    {{ aula.tutor.nome }}
+                </p>
+
+                <p>
+                    <strong>Disciplina:</strong>
+                    {{ aula.disciplina.nome }}
+                </p>
+
+                <p>
+                    <strong>Data:</strong>
+                    {{ aula.horario|date:"d/m/Y" }}
+                </p>
+
+                <p>
+                    <strong>Horário:</strong>
+                    {{ aula.horario|date:"H:i" }}
+                </p>
+
+                <p>
+                    <strong>Local:</strong>
+                    {{ aula.local|default:"Não informado" }}
+                </p>
+
+                <p>
+                    <strong>Modalidade:</strong>
+                    {{ aula.get_modo_display }}
+                </p>
+
+                <p>
+                    <strong>Preço:</strong>
+                    R$ {{ aula.preco|floatformat:2 }}
+                </p>
+
+                <p>
+                    <strong>Vagas restantes:</strong>
+                    {{ aula.vagas_restantes }}
+                </p>
+
+            </div>
+
+            <div class="acoes-aula">
+
+                <a href="{% url 'minhas_aulas' %}"
+                   class="botao-voltar">
+                    Voltar para Minhas Aulas
+                </a>
+
+                <form method="POST"
+                      action="{% url 'desinscrever_aula' aula.id %}">
+
+                    {% csrf_token %}
+
+                    <button type="submit"
+                            class="botao-desinscrever">
+                        Desinscrever-se
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
