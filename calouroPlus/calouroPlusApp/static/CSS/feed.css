@@ -167,3 +167,25 @@ h1 {
     font-weight: 600;
     color: #6B6558;
 }
+
+.btn-inscrever {
+    background: #1D2B4F;
+    color: #F6F3EB;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-inscrever:hover {
+    background: #33436E;
+}
+
+.campo-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

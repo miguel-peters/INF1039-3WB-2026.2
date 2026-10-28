@@ -40,4 +40,5 @@ urlpatterns = [
     path('criar-aula/', views.criar_aula, name='criar_aula'),
     path('cadastro/', views.cadastro, name = 'cadastro'),
     path('chat/', views.chat, name = 'chat'),
+    path('aula/<int:id>/inscrever/', views.inscrever, name='inscrever'),
 ]

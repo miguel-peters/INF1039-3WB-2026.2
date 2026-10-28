@@ -2,8 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordResetForm
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.http import require_POST
+import unicodedata
 
-from .forms import LoginForm
+from .forms import LoginForm, FiltroAulaForm
 from .models import Aula, Usuario, Chat, Papel, Curso, Disciplina
 
 
@@ -29,11 +32,41 @@ def login_view(request):
 
     return render(request, 'login.html', {'form': form})
 
+def normalizar(texto):
+    decomposto = unicodedata.normalize('NFD', texto)
+    sem_acento = ''.join(c for c in decomposto if unicodedata.category(c) != 'Mn')
+    return sem_acento.casefold().strip()
 
 @login_required
 def feed(request):
-    aulas = Aula.objects.all()
-    return render(request, 'feed.html', {'aulas': aulas})
+    aulas = Aula.objects.select_related('tutor', 'disciplina').order_by('horario')
+    form = FiltroAulaForm(request.GET or None)
+
+    if form.is_valid():
+        busca = form.cleaned_data['busca']
+        disciplina = form.cleaned_data['disciplina']
+        modo = form.cleaned_data['modo']
+
+        if disciplina:
+            aulas = aulas.filter(disciplina=disciplina)
+        if modo:
+            aulas = aulas.filter(modo=modo)
+        if form.cleaned_data['so_preferencias']:
+            aulas = aulas.filter(disciplina__in=request.user.disciplinas.all())
+        if busca:
+            termo = normalizar(busca)
+            ids = [d.id for d in Disciplina.objects.all() if termo in normalizar(d.nome)]
+            aulas = aulas.filter(disciplina_id__in=ids)
+
+    return render(request, 'feed.html', {'aulas': aulas, 'form': form})
+
+@login_required
+@require_POST
+def inscrever(request, id):
+    aula = get_object_or_404(Aula, id=id)
+    if aula.tutor != request.user and aula.vagas_restantes > 0:
+        aula.alunos.add(request.user)
+    return redirect('feed')
 
 
 def minhas_aulas(request):
