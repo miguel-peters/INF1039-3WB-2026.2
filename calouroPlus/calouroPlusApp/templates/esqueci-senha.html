@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="{% static 'CSS/esqueci-senha.css' %}">
 
-    <title>Esqueceu sua senha? | Calouro+</title>
+    <title>Recuperar senha | Calouro+</title>
 </head>
 <body>
     <div class="logo">
@@ -20,27 +20,90 @@
     </div>
 
     <div class="formulario">
-        <h2>Esqueceu sua senha?</h2>
-        <p>Digite o e-mail cadastrado na sua conta. Enviaremos um link para você criar uma nova senha.</p>
 
-        <div class="icone">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d2b4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h8"/>
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-                <path d="m16 19 2 2 4-4"/>
-            </svg>
-        </div>
+        {% if redefinindo %}
 
-        <form action="{% url 'login' %}" method="get">
-            <div class="campo">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" placeholder="Digite seu e-mail">
+            {% if validlink %}
+                <h2>Crie uma nova senha</h2>
+                <p>Digite sua nova senha e confirme-a abaixo.</p>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    {% if form.errors %}
+                        <p>Confira os erros abaixo e tente novamente.</p>
+                    {% endif %}
+
+                    <div class="campo">
+                        <label for="{{ form.new_password1.id_for_label }}">
+                            Nova senha
+                        </label>
+                        {{ form.new_password1 }}
+                        {{ form.new_password1.errors }}
+                        {{ form.new_password1.help_text }}
+                    </div>
+
+                    <div class="campo">
+                        <label for="{{ form.new_password2.id_for_label }}">
+                            Confirmar nova senha
+                        </label>
+                        {{ form.new_password2 }}
+                        {{ form.new_password2.errors }}
+                    </div>
+
+                    <button type="submit">
+                        Alterar senha <span class="seta">→</span>
+                    </button>
+                </form>
+
+            {% else %}
+                <h2>Link inválido ou expirado</h2>
+                <p>Solicite um novo link para redefinir sua senha.</p>
+
+                <a href="{% url 'esqueci_senha' %}">
+                    Solicitar novo link
+                </a>
+            {% endif %}
+
+        {% else %}
+
+            <h2>Esqueceu sua senha?</h2>
+            <p>
+                Digite o e-mail cadastrado na sua conta. Enviaremos um link
+                para você criar uma nova senha.
+            </p>
+
+            <div class="icone">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d2b4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h8"/>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                    <path d="m16 19 2 2 4-4"/>
+                </svg>
             </div>
 
-            <button type="submit">Enviar link de redefinição <span class="seta">→</span></button>
-        </form>
+            <form method="post">
+                {% csrf_token %}
 
-        <p class="voltar"><a href="{% url 'login' %}">← Voltar para o login</a></p>
+                <div class="campo">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email"
+                           placeholder="Digite seu e-mail" required>
+                </div>
+
+                <button type="submit">
+                    Enviar link de redefinição <span class="seta">→</span>
+                </button>
+            </form>
+
+            {% if mensagem %}
+                <p>{{ mensagem }}</p>
+            {% endif %}
+
+        {% endif %}
+
+        <p class="voltar">
+            <a href="{% url 'login' %}">← Voltar para o login</a>
+        </p>
     </div>
 </body>
 </html>

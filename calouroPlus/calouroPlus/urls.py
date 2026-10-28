@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from calouroPlusApp import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +27,15 @@ urlpatterns = [
     path('completar-cadastro/', views.completar_cadastro, name='completar_cadastro'),
     path('perfil/', views.perfil, name='perfil'),
     path('esqueci-senha/', views.esqueci_senha, name='esqueci_senha'),
+    path(
+    'redefinir-senha/<uidb64>/<token>/',
+    auth_views.PasswordResetConfirmView.as_view(
+        template_name='esqueci-senha.html',
+        success_url='/login/',
+        extra_context={'redefinindo': True},
+    ),
+    name='password_reset_confirm',
+    ),
     path('perfil/', views.perfil, name='perfil'),
     path('criar-aula/', views.criar_aula, name='criar_aula'),
     path('cadastro/', views.cadastro, name = 'cadastro'),
