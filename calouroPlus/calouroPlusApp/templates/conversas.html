@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Calouro+</title>
+    <link href="{% static 'CSS/conversas.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div class="blue-line">
+        <img src="{% static 'nome_calouro.png' %}" width="150">
+
+        <div class="menu">
+            <a href="{% url 'feed' %}">Feed</a>
+            <a href="{% url 'chat' %}">Conversas</a>
+            <a href="{% url 'minhas_aulas' %}">Aulas</a>
+            <a href="{% url 'criar_aula' %}" class="botao-amarelo">+ Criar aula</a>
+        </div>
+
+        <div class="menu">
+            <span>🔔</span>
+            <a href="{% url 'perfil' %}"><img src="{% static 'perfil.png' %}" class="foto-perfil"></a>
+        </div>
+    </div>
+
+    <div class="conteudo">
+        <div class="chat-container">
+            <div class="chat-header">
+                Professor Bicalho Jogos
+            </div>
+            <div class="chat-messages">
+                <div class="message sent-message">
+                    <div class="message-text">Eai. tem aula de bica's coding?</div>
+                    <div class="message-time"> 12:30 PM </div>
+                </div>
+                <div class="message received-message">
+                    <div class="message-text">Sim magnata, temos aula para voce</div>
+                    <div class="message-time"> 12:31 PM </div>
+                </div>
+                <div class="message sent-message">
+                    <div class="message-text">Fechado irmao, ate amanha simone joisa ivan</div>
+                    <div class="message-time"> 12:32 PM </div>
+                </div>
+                <div class="message received-message">
+                    <div class="message-text">Sim simone joisa walkman bicalho kkkkk</div>
+                    <div class="message-time"> 12:33 PM </div>
+                </div>
+            </div>
+            <div class="message-input">
+                <input type="text" class="input-field" placeholder="Digite sua mensagem...">
+                <button class="send-button">Enviar</button>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
