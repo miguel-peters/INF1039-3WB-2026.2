@@ -410,3 +410,7 @@ def chat(request):
 
 def criar_aula(request):
     return render(request, 'criar-aula.html')
+
+
+def conversas(request):
+    return render(request, 'conversas.html')
