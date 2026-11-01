@@ -1,7 +1,10 @@
 
+# BIBLIOTECAS DO PYTHON
 import unicodedata
 
-from django.contrib.auth import authenticate, login
+
+# BIBLIOTECAS DO DJANGO
+from django.contrib.auth import authenticate, get_user_model, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordResetForm
 from django.db.models import Q
@@ -9,9 +12,10 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.views.decorators.http import require_POST
 
+
+# ARQUIVOS DO PROJETO
 from .forms import LoginForm, FiltroAulaForm
 from .models import Aula, Usuario, Chat, Papel, Curso, Disciplina
-
 
 # LOGIN
 
@@ -188,8 +192,8 @@ def desinscrever_aula(request, aula_id):
 
 @login_required
 def completar_cadastro(request):
-    cursos = Curso.objects.all()
-    disciplinas = Disciplina.objects.all()
+    cursos = list(Curso.objects.values("nome"))
+    disciplinas = list(Disciplina.objects.values("nome"))
 
     if request.method == "POST":
         usuario = request.user
@@ -261,7 +265,6 @@ def perfil(request):
 
     return render(request, "perfil.html", contexto)
 
-
 # RECUPERAÇÃO DE SENHA
 
 def esqueci_senha(request):
@@ -271,16 +274,30 @@ def esqueci_senha(request):
         form = PasswordResetForm(request.POST)
 
         if form.is_valid():
-            form.save(
-                request=request,
-                use_https=request.is_secure(),
-                email_template_name='password_reset_email.html',
-            )
+            email = form.cleaned_data['email']
+            Usuario = get_user_model()
 
-            mensagem = (
-                'Se houver uma conta com esse e-mail, '
-                'você receberá as instruções para redefinir a senha.'
-            )
+            usuario = Usuario.objects.filter(
+                email__iexact=email
+            ).first()
+
+            if usuario:
+                form.save(
+                    request=request,
+                    use_https=request.is_secure(),
+                    email_template_name='password_reset_email.html',
+                )
+
+                mensagem = (
+                    f'E-mail cadastrado! Se a conta estiver habilitada '
+                    f'para recuperação, o link será enviado para {email}.'
+                )
+
+            else:
+                mensagem = (
+                    'Não encontramos nenhuma conta cadastrada '
+                    'com esse e-mail.'
+                )
 
         else:
             mensagem = 'Digite um e-mail válido.'
@@ -288,7 +305,6 @@ def esqueci_senha(request):
     return render(request, 'esqueci-senha.html', {
         'mensagem': mensagem
     })
-
 
 # CADASTRO
 
