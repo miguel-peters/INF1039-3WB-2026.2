@@ -72,6 +72,8 @@ header h1 {
 
 .nome-completo,
 .email,
+.curso,
+.papel,
 .senha {
     margin-bottom: 20px;
 }
