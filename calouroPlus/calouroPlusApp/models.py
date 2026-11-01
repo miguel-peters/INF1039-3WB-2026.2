@@ -49,7 +49,8 @@ class Aula(models.Model):
    
     tutor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='aulas_criadas')
     disciplina = models.ForeignKey(Disciplina, on_delete=models.PROTECT, related_name='aulas')
-
+    descricao = models.TextField(max_length=400, blank=True)
+    
     alunos = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='aulas_inscritas')
     data_lancamento = models.DateTimeField(auto_now_add=True)
     preco = models.DecimalField(max_digits=7, decimal_places=2, default=0)

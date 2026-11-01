@@ -433,5 +433,84 @@ def chat(request):
 
 # CRIAR AULA
 
+
+# CRIAR AULA
+
+@login_required
 def criar_aula(request):
-    return render(request, 'criar-aula.html')
+    disciplinas = Disciplina.objects.all().order_by('nome')
+
+    contexto = {
+        'disciplinas': disciplinas
+    }
+
+    if request.method == 'POST':
+        contexto['valores'] = request.POST
+
+        materia = request.POST.get('materia', '').strip()
+        descricao = request.POST.get('descricao', '').strip()
+        horario = request.POST.get('horario', '')
+        preco = request.POST.get('preco', '')
+        qtd = request.POST.get('qtd', '')
+        modalidade = request.POST.get('modalidade', '')
+        local = request.POST.get('local', '').strip()
+
+        disciplina = Disciplina.objects.filter(
+            nome__iexact=materia
+        ).first()
+
+        if not disciplina:
+            contexto['erro'] = 'Selecione uma matéria válida.'
+
+        elif not descricao or len(descricao) > 400:
+            contexto['erro'] = 'Informe uma descrição de até 400 caracteres.'
+
+        elif modalidade not in ['presencial', 'online']:
+            contexto['erro'] = 'Selecione uma modalidade válida.'
+
+        else:
+            from decimal import Decimal, InvalidOperation
+            from datetime import datetime
+            from django.utils import timezone
+
+            try:
+                data_hora = datetime.fromisoformat(horario)
+
+                if timezone.is_naive(data_hora):
+                    data_hora = timezone.make_aware(data_hora)
+
+                valor = Decimal(preco)
+                quantidade = int(qtd)
+
+                if data_hora <= timezone.now():
+                    raise ValueError('A data deve ser futura.')
+
+                if not valor.is_finite() or valor < 0 or valor > Decimal('99999.99'):
+                    raise ValueError('Preço inválido.')
+
+                if quantidade < 1 or quantidade > 32767:
+                    raise ValueError('Quantidade inválida.')
+
+                if len(local) > 200:
+                    raise ValueError('Local muito longo.')
+
+                Aula.objects.create(
+                    tutor=request.user,
+                    disciplina=disciplina,
+                    descricao=descricao,
+                    horario=data_hora,
+                    preco=valor,
+                    quantidade_alunos=quantidade,
+                    modo=modalidade,
+                    local=local
+                )
+
+                return redirect('minhas_aulas')
+
+            except (ValueError, InvalidOperation, OverflowError):
+                contexto['erro'] = 'Verifique a data, o preço e a quantidade de alunos.'
+
+    return render(request, 'criar-aula.html', contexto)
+
+
+

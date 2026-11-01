@@ -1,11 +1,11 @@
+
 {% load static %}
 <!DOCTYPE html>
-
-<html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Calouro+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Aula | Calouro+</title>
     <link href="{% static 'CSS/cadastro.css' %}" rel="stylesheet" type="text/css">
 </head>
 
@@ -18,75 +18,157 @@
             <a href="{% url 'feed' %}">Feed</a>
             <a href="{% url 'chat' %}">Conversas</a>
             <a href="{% url 'minhas_aulas' %}">Aulas</a>
-            <a href="{% url 'criar_aula' %}"" class="botao-amarelo">+ Criar aula</a>
+            <a href="{% url 'criar_aula' %}" class="botao-amarelo">+ Criar aula</a>
         </div>
 
         <div class="menu">
             <span>🔔</span>
-            <a href="{% url 'perfil' %}"><img src="{% static 'perfil.png' %}" class="foto-perfil"></a>
+            <a href="{% url 'perfil' %}">
+                <img src="{% static 'perfil.png' %}" class="foto-perfil">
+            </a>
         </div>
-
+        
     </div>
 
     <div class="conteudo">
         <p class="amarelo">🗓️ Nova atividade acadêmica</p>
         <h1 class="azul_grande">Criar uma aula</h1>
-        
-        <p class="cinza">Preencha as informações para publicar sua aula e ajudar outros alunos.</p>
+
+        <p class="cinza">
+            Preencha as informações para publicar sua aula e ajudar outros alunos.
+        </p>
 
         <div class="caixa">
-            <h1 class="preto">Matéria <span class="vermelho">*</span></h1>
+            <form method="POST">
+                {% csrf_token %}
 
-            <p><input type="text" id="materia" class="campo" list="lista-materias" placeholder="Buscar matéria"></p>
+                {% if erro %}
+                    <p class="vermelho">{{ erro }}</p>
+                {% endif %}
 
-            <datalist id="lista-materias">
-                <option value="Álgebra Linear">
-                <option value="Bioquímica">
-                <option value="Cálculo 1">
-                <option value="Cálculo 2">
-                <option value="Estrutura de Dados">
-                <option value="Física 1">
-                <option value="Programação 1">
-            </datalist>
+                <h1 class="preto">
+                    Matéria <span class="vermelho">*</span>
+                </h1>
 
-            <p class="preto">Descrição <span class="vermelho">*</span> <span class="fim">max 400 caracteres</span></p>
-            <textarea id="descricao" class="campo" rows="6" maxlength="400" placeholder="Conte os tópicos que pretende cobrir e como a aula vai ajudar."></textarea>
+                <p>
+                    <input
+                        type="text"
+                        id="materia"
+                        name="materia"
+                        class="campo"
+                        list="lista-materias"
+                        placeholder="Buscar matéria"
+                        value="{{ valores.materia|default:'' }}"
+                        required
+                    >
+                </p>
 
-            <p class="preto">Horários <span class="vermelho">*</span> <span class="fim">max 400 caracteres</span></p>
-            <textarea id="horarios" class="campo" rows="6" maxlength="400" placeholder="Conte os horários disponíveis para a aula. Como 'Segunda 14:00 - 15:00' ou 'Dias da semana das 14:00 até as 19:00'"></textarea>
+                <datalist id="lista-materias">
+                    {% for disciplina in disciplinas %}
+                        <option value="{{ disciplina.nome }}"></option>
+                    {% endfor %}
+                </datalist>
 
-            <p class="preto">Preço em R$</p>
-            <input type="number" id="preco" class="campo" placeholder="Ex.: 50,00" step="0.01" min="0">
+                <p class="preto">
+                    Descrição <span class="vermelho">*</span>
+                    <span class="fim">max 400 caracteres</span>
+                </p>
 
-            <p class="preto">Qtd. máxima de alunos</p>
-            <input type="number" id="qtd" class="campo" placeholder="Ex.: 5" min="1">
+                <textarea
+                    id="descricao"
+                    name="descricao"
+                    class="campo"
+                    rows="6"
+                    maxlength="400"
+                    placeholder="Conte os tópicos que pretende cobrir e como a aula vai ajudar."
+                    required
+                >{{ valores.descricao|default:'' }}</textarea>
 
-            <p class="preto">Modalidade</p>
-            <select id="modalidade" class="campo">
-                <option>Não informar</option>
-                <option>Presencial</option>
-                <option>Online</option>
-            </select>
+                <p class="preto">
+                    Data e horário <span class="vermelho">*</span>
+                </p>
 
-            <p class="preto">Selo</p>
-            <select id="selo" class="campo">
-                <option>Sem selo</option>
-                <option>Monitor</option>
-                <option>Destaque</option>
-            </select>
+                <input
+                    type="datetime-local"
+                    id="horario"
+                    name="horario"
+                    class="campo"
+                    value="{{ valores.horario|default:'' }}"
+                    required
+                >
 
-            <p class="preto">Local</p>
-            <input type="text" id="local" class="campo" placeholder="Ex.: Biblioteca Central">
+                <p class="preto">
+                    Preço em R$ <span class="vermelho">*</span>
+                </p>
 
-                        <p class="preto">Local</p>
-            <input type="text" id="local" class="campo" placeholder="Ex.: Biblioteca Central">
+                <input
+                    type="number"
+                    id="preco"
+                    name="preco"
+                    class="campo"
+                    placeholder="Ex.: 50,00"
+                    step="0.01"
+                    min="0"
+                    max="99999.99"
+                    value="{{ valores.preco|default:'' }}"
+                    required
+                >
 
-            <div class="centro">
-                <button class="botao-amarelo">Publicar aula</button>
-                <p><a href="{% url 'feed' %}">Cancelar e descartar</a></p>
-            </div>
-            
+                <p class="preto">
+                    Qtd. máxima de alunos <span class="vermelho">*</span>
+                </p>
 
+                <input
+                    type="number"
+                    id="qtd"
+                    name="qtd"
+                    class="campo"
+                    placeholder="Ex.: 5"
+                    min="1"
+                    max="32767"
+                    value="{{ valores.qtd|default:'' }}"
+                    required
+                >
+
+                <p class="preto">
+                    Modalidade <span class="vermelho">*</span>
+                </p>
+
+                <select id="modalidade" name="modalidade" class="campo" required>
+                    <option value="">Selecione uma modalidade</option>
+                    <option value="presencial" {% if valores.modalidade == 'presencial' %}selected{% endif %}>
+                        Presencial
+                    </option>
+                    <option value="online" {% if valores.modalidade == 'online' %}selected{% endif %}>
+                        Online
+                    </option>
+                </select>
+
+                <p class="preto">Local</p>
+
+                <input
+                    type="text"
+                    id="local"
+                    name="local"
+                    class="campo"
+                    placeholder="Ex.: Biblioteca Central ou link da reunião"
+                    maxlength="200"
+                    value="{{ valores.local|default:'' }}"
+                >
+
+                <div class="centro">
+                    <button type="submit" class="botao-amarelo">
+                        Publicar aula
+                    </button>
+
+                    <p>
+                        <a href="{% url 'feed' %}">
+                            Cancelar e descartar
+                        </a>
+                    </p>
+                </div>
+
+            </form>
         </div>
 
     </div>
