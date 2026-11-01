@@ -56,7 +56,7 @@ form label {
 form button {
     width: 100%;
     padding: 15px;
-    background-color: #4f211d;
+    background-color: #1d2b4f;
     color: white;
     border: none;
     border-radius: 6px;
@@ -67,7 +67,7 @@ form button {
 }
 
 form button:hover {
-    background-color: #2f416c;
+    background-color: #2b4073;
 }
 
 .card-cadastro h2 {
@@ -100,5 +100,66 @@ form button:hover {
     background-color: #e2a63b;
 }
 
+.botao-concluir {
+    background-color: #1d2b4f;
+    color: white;
+}
+
+.botao-concluir:hover {
+    background-color: #2b4073;
+}
 
 
+/* AUTOCOMPLETE DAS MATÉRIAS */
+
+.campo-autocomplete {
+    position: relative;
+    width: 100%;
+}
+
+.lista-sugestoes {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: white;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.opcao-sugestao {
+    padding: 12px 15px;
+    color: #1d2b4f;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.opcao-sugestao:hover {
+    background-color: #f6f3eb;
+}
+
+#materias-selecionadas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.materia-tag {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #e8edf5;
+    color: #1d2b4f;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.materia-tag:hover {
+    background-color: #d1dbea;
+}

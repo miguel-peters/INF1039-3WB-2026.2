@@ -1,3 +1,4 @@
+
 body {
     background-color: #f6f3eb;
     color: #1d2b4f;
@@ -51,6 +52,11 @@ nav a {
     border-radius: 6px;
 }
 
+.criar-aula a {
+    color: inherit;
+    text-decoration: none;
+}
+
 .acoes img {
     width: 40px;
     height: 40px;
@@ -68,6 +74,12 @@ h1 {
     font-size: 36px;
 }
 
+.form-busca {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .busca {
     width: 100%;
     padding: 12px;
@@ -79,6 +91,27 @@ h1 {
     font-size: 14px;
 }
 
+.form-busca .busca {
+    flex: 1;
+    min-width: 0;
+}
+
+.botao-buscar {
+    padding: 12px 20px;
+    background-color: #1d2b4f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.botao-buscar:hover {
+    background-color: #304575;
+}
+
+/* Abas Aluno e Tutor */
+
 .abas {
     display: flex;
     background-color: #eae6db;
@@ -88,20 +121,109 @@ h1 {
     margin-bottom: 20px;
 }
 
-.abas button {
+.abas a {
     flex: 1;
-    border: none;
-    background-color: transparent;
     padding: 10px;
     border-radius: 4px;
     color: #1d2b4f;
     font-size: 14px;
+    text-align: center;
+    text-decoration: none;
 }
 
-.abas .ativa {
+.abas a.ativa {
     background-color: white;
     font-weight: bold;
 }
+
+/* Lista de conversas */
+
+.lista-conversas {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* Card de cada conversa */
+
+.caixa-conversa {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    background-color: #eae6dc;
+    border: 1px solid #e3ded3;
+    border-radius: 12px;
+    padding: 18px 20px;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease,
+                border-color 0.2s ease;
+}
+
+.caixa-conversa:hover {
+    background-color: #e0dbd0;
+    border-color: #c9c2b4;
+}
+
+/* Avatar */
+
+.avatar-conversa {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #1d2b4f;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+/* Informações da conversa */
+
+.info-conversa {
+    flex: 1;
+    min-width: 0;
+}
+
+.info-conversa h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+    color: #1d2b4f;
+}
+
+.info-conversa p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.info-conversa .disciplina-conversa {
+    font-size: 13px;
+    color: #2f6f62;
+    font-weight: 600;
+    margin: 3px 0 5px;
+}
+
+/* Horário da mensagem */
+
+.horario-conversa {
+    font-size: 12px;
+    color: #777;
+    white-space: nowrap;
+    align-self: center;
+}
+
+/* Estado vazio */
 
 .vazio {
     background-color: white;
@@ -134,114 +256,31 @@ h1 {
     display: inline-block;
 }
 
+/* Ajustes para telas menores */
 
-/* Lista de conversas */
-.lista-conversas {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 20px;
-}
-s
-.caixa-conversa {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 18px;
-    cursor: pointer;
-    transition: 0.2s;
+@media (max-width: 1100px) {
+    header {
+        padding: 15px 30px;
+    }
 }
 
-.caixa-conversa:hover {
-    border-color: #1d2b4f;
-    background-color: #faf9f5;
-}
+@media (max-width: 720px) {
+    header {
+        padding: 15px;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
 
-.avatar-conversa {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background-color: #1d2b4f;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    flex-shrink: 0;
-}
+    .conteudo {
+        margin: 25px 16px;
+    }
 
-.info-conversa {
-    flex: 1;
-    min-width: 0;
-}
+    .caixa-conversa {
+        padding: 15px;
+        gap: 12px;
+    }
 
-.info-conversa h3 {
-    margin: 0 0 6px;
-    font-size: 16px;
-}
-
-.info-conversa p {
-    margin: 0;
-    font-size: 14px;
-    color: #666;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.horario-conversa {
-    font-size: 12px;
-    color: #888;
-}
-
-
-.abas a {
-    flex: 1;
-    padding: 10px;
-    border-radius: 4px;
-    color: #1d2b4f;
-    font-size: 14px;
-    text-align: center;
-    text-decoration: none;
-}
-
-.abas a.ativa {
-    background-color: white;
-    font-weight: bold;
-}
-
-
-.form-busca {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.form-busca .busca {
-    flex: 1;
-    min-width: 0;
-}
-
-.botao-buscar {
-    padding: 12px 20px;
-    background-color: #1d2b4f;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-.botao-buscar:hover {
-    background-color: #304575;
-}
-
-.disciplina-conversa {
-    font-size: 13px;
-    color: #2f6f62;
-    font-weight: 600;
-    margin: 3px 0;
+    .horario-conversa {
+        font-size: 11px;
+    }
 }
