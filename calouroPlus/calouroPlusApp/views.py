@@ -379,15 +379,7 @@ def chat(request):
 
     else:
         mensagens = mensagens.filter(aula__alunos=usuario)
-
-    if busca:
-        mensagens = mensagens.filter(
-            Q(usuario_from__nome__icontains=busca) |
-            Q(usuario_to__nome__icontains=busca) |
-            Q(usuario_from__username__icontains=busca) |
-            Q(usuario_to__username__icontains=busca) |
-            Q(aula__disciplina__nome__icontains=busca)
-        )
+        
 
     mensagens = mensagens.order_by("-horario")
 
@@ -408,9 +400,27 @@ def chat(request):
 
         conversas_vistas.add(chave)
 
+        nome_usuario = (
+            outro_usuario.nome or outro_usuario.username
+        )
+
+        disciplina = mensagem.aula.disciplina.nome
+
+        if busca:
+            termo = normalizar(busca)
+
+            corresponde = (
+                termo in normalizar(nome_usuario) or
+                termo in normalizar(outro_usuario.username) or
+                termo in normalizar(disciplina)
+            )
+
+            if not corresponde:
+                continue
+
         conversas.append({
             "usuario": outro_usuario,
-            "disciplina": mensagem.aula.disciplina.nome,
+            "disciplina": disciplina,
             "ultima_mensagem": mensagem.mensagem,
             "horario": mensagem.horario,
         })
@@ -420,7 +430,6 @@ def chat(request):
         "papel_ativo": papel,
         "busca": busca
     })
-
 
 # CRIAR AULA
 
