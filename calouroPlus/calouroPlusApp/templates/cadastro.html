@@ -7,15 +7,22 @@
 
     <link rel="stylesheet" href="{% static 'CSS/cadastro.css' %}">
 
-    <title>Cadastro</title>
+    <title>Cadastre-se | Calouro+</title>
 </head>
 <body>
-    <div class="logo"><img src="{% static 'nome_calouro.png' %}" width="200"></div>
+    <div class="logo">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1d2b4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
+            <path d="M22 10v6"/>
+            <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
+        </svg>
+        Calouro<span class="mais">+</span>
+    </div>
 
     <div class="formulario">
         <h2>Cadastre-se</h2>
         {% if erro %}
-            <p style="color: red;">{{ erro }}</p>
+            <p class="erro">{{ erro }}</p>
         {% endif %}
         <p>Crie sua conta para achar aulas ou dar as suas.</p>
 

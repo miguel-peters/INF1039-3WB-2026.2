@@ -1,48 +1,51 @@
 {% load static %}
 <!DOCTYPE html>
-
-<html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Calouro+</title>
-    <link href="{% static 'CSS/login.css' %}" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'CSS/login.css' %}">
+
+    <title>Entrar | Calouro+</title>
 </head>
-
 <body>
-    <div class="blue-center">
+    <div class="logo">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1d2b4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
+            <path d="M22 10v6"/>
+            <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
+        </svg>
+        Calouro<span class="mais">+</span>
+    </div>
 
-        <img src="{% static 'nome_calouro.png' %}" width="200">
+    <div class="formulario">
+        <h2>Entrar</h2>
+        <p>Que bom te ver de novo. Acesse para continuar.</p>
 
-        <div class="caixa">
-            <h1>Entrar</h1>
-            <p>Bem-vindo <strong>Calouro!</strong> Por favor, faça login para continuar.</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
 
-            <form method="post">
-                {% csrf_token %}
-                {{ form.non_field_errors }}
-
-                <div class="campo">
-                    {{ form.email.label_tag }}
-                    {{ form.email }}
-                    {{ form.email.errors }}
-                </div>
-
-                <div class="campo">
-                    {{ form.senha.label_tag }}
-                    {{ form.senha }}
-                    {{ form.senha.errors }}
-                </div>
-
-                <input type="submit" value="Login">
-            </form>
-            <div class="links">
-                <p><a href="{% url 'esqueci_senha' %}">Esqueci minha senha</a></p>
-                <p>Ainda não tem conta? <a href="{% url 'cadastro' %}">Cadastre-se</a></p>
+            <div class="campo">
+                <label for="{{ form.email.id_for_label }}">E-mail</label>
+                {{ form.email }}
+                {{ form.email.errors }}
             </div>
-        </div>
 
+            <div class="campo">
+                <label for="{{ form.senha.id_for_label }}">Senha</label>
+                {{ form.senha }}
+                {{ form.senha.errors }}
+            </div>
+
+            <button type="submit">Entrar</button>
+        </form>
+
+        <div class="links">
+            <p><a href="{% url 'esqueci_senha' %}">Esqueci minha senha</a></p>
+            <p>Ainda não tem conta? <a href="{% url 'cadastro' %}">Cadastre-se</a></p>
+        </div>
     </div>
 </body>
-
 </html>

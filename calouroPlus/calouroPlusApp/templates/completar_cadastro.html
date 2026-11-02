@@ -11,85 +11,81 @@
 </head>
 <body>
 
-    <header>
-        <div class="logo">
-            <img src="{% static 'nome_calouro.png' %}"
-                 width="200" alt="Calouro+">
-        </div>
-    </header>
+    <div class="logo">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1d2b4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
+            <path d="M22 10v6"/>
+            <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
+        </svg>
+        Calouro<span class="mais">+</span>
+    </div>
 
-    <main>
-        <div class="card-cadastro">
-            <h2>Quase lá</h2>
-            <p>Conte um pouco sobre você para começar a usar o Calouro+.</p>
+    <div class="formulario">
+        <h2>Quase lá</h2>
+        <p>Conte um pouco sobre você para começar a usar o Calouro+.</p>
 
-            <form method="POST" id="form-cadastro">
-                {% csrf_token %}
+        <form method="POST" id="form-cadastro">
+            {% csrf_token %}
 
-                <label for="nome">Nome completo</label>
+            <label for="nome">Nome completo</label>
+            <input
+                type="text"
+                id="nome"
+                name="nome"
+                placeholder="Como você se chama?"
+                required
+            >
+
+            <label for="curso">Curso</label>
+
+            <div class="campo-autocomplete">
                 <input
                     type="text"
-                    id="nome"
-                    name="nome"
-                    placeholder="Como você se chama?"
+                    id="curso"
+                    name="curso"
+                    placeholder="Digite seu curso"
+                    maxlength="50"
+                    autocomplete="off"
                     required
                 >
 
-                <label for="curso">Curso</label>
+                <div
+                    id="sugestoes-cursos"
+                    class="lista-sugestoes"
+                ></div>
+            </div>
 
-                <div class="campo-autocomplete">
-                    <input
-                        type="text"
-                        id="curso"
-                        name="curso"
-                        placeholder="Digite seu curso"
-                        maxlength="50"
-                        autocomplete="off"
-                        required
-                    >
+            <label for="materia-input">
+                Matérias de interesse
+            </label>
 
-                    <div
-                        id="sugestoes-cursos"
-                        class="lista-sugestoes"
-                    ></div>
-                </div>
+            <div id="materias-selecionadas" class="materias-selecionadas"></div>
 
-                <label for="materia-input">
-                    MATÉRIAS DE INTERESSE
-                </label>
-
-                <div id="materias-selecionadas"></div>
-
-                <div class="campo-autocomplete">
-                    <input
-                        type="text"
-                        id="materia-input"
-                        placeholder="Digite uma matéria"
-                        autocomplete="off"
-                    >
-
-                    <div
-                        id="sugestoes-materias"
-                        class="lista-sugestoes"
-                    ></div>
-                </div>
-
+            <div class="campo-autocomplete">
                 <input
-                    type="hidden"
-                    id="materias"
-                    name="materias"
+                    type="text"
+                    id="materia-input"
+                    placeholder="Digite uma matéria"
+                    autocomplete="off"
                 >
 
-                <button
-                    type="submit"
-                    class="botao-concluir"
-                    style="background-color:#1d2b4f;color:white;"
-                >
-                    Concluir e ver o feed
-                </button>
-            </form>
-        </div>
-    </main>
+                <div
+                    id="sugestoes-materias"
+                    class="lista-sugestoes"
+                ></div>
+            </div>
+
+            <input
+                type="hidden"
+                id="materias"
+                name="materias"
+            >
+
+            <button type="submit">
+                Concluir e ver o feed
+            </button>
+        </form>
+    </div>
 
     {{ cursos|json_script:"dados-cursos" }}
     {{ disciplinas|json_script:"dados-disciplinas" }}
