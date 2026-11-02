@@ -1,4 +1,3 @@
-
 body {
     background-color: #f6f3eb;
     color: #1d2b4f;
@@ -46,15 +45,11 @@ nav a {
 .criar-aula {
     background-color: #d4a72c;
     color: #1d2b4f;
+    text-decoration: none;
     border: none;
     font-weight: bold;
     padding: 12px 18px;
     border-radius: 6px;
-}
-
-.criar-aula a {
-    color: inherit;
-    text-decoration: none;
 }
 
 .acoes img {
@@ -76,7 +71,6 @@ h1 {
 
 .form-busca {
     display: flex;
-    align-items: center;
     gap: 10px;
 }
 
@@ -91,26 +85,15 @@ h1 {
     font-size: 14px;
 }
 
-.form-busca .busca {
-    flex: 1;
-    min-width: 0;
-}
-
 .botao-buscar {
-    padding: 12px 20px;
     background-color: #1d2b4f;
     color: white;
     border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
+    font-weight: bold;
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-size: 14px;
 }
-
-.botao-buscar:hover {
-    background-color: #304575;
-}
-
-/* Abas Aluno e Tutor */
 
 .abas {
     display: flex;
@@ -123,107 +106,65 @@ h1 {
 
 .abas a {
     flex: 1;
+    text-align: center;
+    text-decoration: none;
     padding: 10px;
     border-radius: 4px;
     color: #1d2b4f;
     font-size: 14px;
-    text-align: center;
-    text-decoration: none;
 }
 
-.abas a.ativa {
+.abas .ativa {
     background-color: white;
     font-weight: bold;
 }
 
-/* Lista de conversas */
-
-.lista-conversas {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 20px;
-}
-
-/* Card de cada conversa */
-
 .caixa-conversa {
     display: flex;
     align-items: center;
-    gap: 16px;
-
-    background-color: #eae6dc;
-    border: 1px solid #e3ded3;
-    border-radius: 12px;
-    padding: 18px 20px;
-
-    cursor: pointer;
-    transition: background-color 0.2s ease,
-                border-color 0.2s ease;
+    gap: 15px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 10px;
 }
-
-.caixa-conversa:hover {
-    background-color: #e0dbd0;
-    border-color: #c9c2b4;
-}
-
-/* Avatar */
 
 .avatar-conversa {
-    width: 48px;
-    height: 48px;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
-    background-color: #1d2b4f;
-    color: white;
-
+    background-color: #eae6db;
+    font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    font-weight: bold;
-    font-size: 18px;
-    flex-shrink: 0;
 }
-
-/* Informações da conversa */
 
 .info-conversa {
     flex: 1;
-    min-width: 0;
-}
-
-.info-conversa h3 {
-    margin: 0 0 6px;
-    font-size: 16px;
-    color: #1d2b4f;
 }
 
 .info-conversa p {
-    margin: 0;
+    margin: 0 0 4px;
     font-size: 14px;
-    color: #666;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+}
+
+.info-conversa .nome-conversa {
+    font-family: Georgia, serif;
+    font-size: 17px;
+    font-weight: bold;
 }
 
 .info-conversa .disciplina-conversa {
-    font-size: 13px;
     color: #2f6f62;
-    font-weight: 600;
-    margin: 3px 0 5px;
+    font-weight: bold;
 }
-
-/* Horário da mensagem */
 
 .horario-conversa {
-    font-size: 12px;
-    color: #777;
-    white-space: nowrap;
-    align-self: center;
+    font-size: 13px;
+    color: #6b7280;
 }
-
-/* Estado vazio */
 
 .vazio {
     background-color: white;
@@ -254,33 +195,4 @@ h1 {
     padding: 12px 16px;
     border-radius: 4px;
     display: inline-block;
-}
-
-/* Ajustes para telas menores */
-
-@media (max-width: 1100px) {
-    header {
-        padding: 15px 30px;
-    }
-}
-
-@media (max-width: 720px) {
-    header {
-        padding: 15px;
-        flex-wrap: wrap;
-        gap: 12px;
-    }
-
-    .conteudo {
-        margin: 25px 16px;
-    }
-
-    .caixa-conversa {
-        padding: 15px;
-        gap: 12px;
-    }
-
-    .horario-conversa {
-        font-size: 11px;
-    }
 }

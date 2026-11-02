@@ -1,59 +1,32 @@
-
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Detalhes da Aula | Calouro+</title>
-
     <link rel="stylesheet" href="{% static 'CSS/minhas_aulas.css' %}">
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Detalhes da Aula | Calouro+</title>
 </head>
-
 <body>
-
-    <!-- CABEÇALHO PADRONIZADO -->
-
-    <header class="cabecalho-site">
-
-        <div class="logo">
-            <img src="{% static 'nome_calouro.png' %}"
-                 width="150" alt="Calouro+">
-        </div>
+    <header>
+        <div class="logo">🎓 Calouro+</div>
 
         <nav>
             <a href="{% url 'feed' %}">Feed</a>
             <a href="{% url 'chat' %}">Conversas</a>
-            <a href="{% url 'minhas_aulas' %}" class="ativo">
-                Aulas
-            </a>
+            <a href="{% url 'minhas_aulas' %}" class="ativo">Aulas</a>
         </nav>
 
         <div class="acoes">
-
-            <a href="{% url 'criar_aula' %}" class="criar-aula">
-                + Criar Aula
-            </a>
-
-            <i class="fa-regular fa-bell"></i>
-
-            <a href="{% url 'perfil' %}">
-                <img src="{% static 'gabriel.jpg' %}"
-                     alt="Foto de perfil">
-            </a>
-
+            <a href="{% url 'criar_aula' %}" class="criar-aula">+ Criar aula</a>
+            <span>🔔</span>
+            <a href="{% url 'perfil' %}"><img src="{% static 'gabriel.jpg' %}" alt="Foto de perfil"></a>
         </div>
-
     </header>
 
-    <!-- CONTEÚDO PRINCIPAL -->
-
-    <main class="conteudo">
+    <div class="conteudo">
 
         <div class="titulo-pagina">
             <div>
@@ -61,138 +34,102 @@
                 <h1>Detalhes da Aula</h1>
             </div>
 
-            <div class="icones-header">
-                <i class="fa-regular fa-calendar-days"></i>
-            </div>
+            <span class="icones-header">📅</span>
         </div>
 
         <!-- CARD DE DETALHES -->
 
-        <div class="card-aula card-detalhes">
+        <div class="caixa">
 
             <div class="cabecalho-detalhes">
-
                 <div>
-                    <p class="subtitulo-detalhes">
-                        Informações da aula
-                    </p>
-
+                    <p class="semestre">Informações da aula</p>
                     <h2>{{ aula.disciplina.nome }}</h2>
                 </div>
 
-                <span class="modalidade-detalhes">
-                    {{ aula.get_modo_display }}
-                </span>
-
+                <span class="etiqueta">{{ aula.get_modo_display }}</span>
             </div>
 
             <!-- INFORMAÇÕES DO DJANGO ADMIN -->
 
-            <div class="informacoes-aula">
-
-                <div class="item-detalhe">
-                    <i class="fa-regular fa-user"></i>
-
-                    <div>
-                        <strong>Tutor</strong>
-                        <p>
-                            {{ aula.tutor.nome|default:aula.tutor.username }}
-                        </p>
-                    </div>
+            <div class="item-detalhe">
+                <span class="icone-item">👤</span>
+                <div>
+                    <p class="rotulo">Tutor</p>
+                    <p>{{ aula.tutor.nome|default:aula.tutor.username }}</p>
                 </div>
+            </div>
 
-                <div class="item-detalhe">
-                    <i class="fa-solid fa-book-open"></i>
-
-                    <div>
-                        <strong>Disciplina</strong>
-                        <p>{{ aula.disciplina.nome }}</p>
-                    </div>
+            <div class="item-detalhe">
+                <span class="icone-item">📚</span>
+                <div>
+                    <p class="rotulo">Disciplina</p>
+                    <p>{{ aula.disciplina.nome }}</p>
                 </div>
+            </div>
 
-                <div class="item-detalhe">
-                    <i class="fa-regular fa-calendar"></i>
-
-                    <div>
-                        <strong>Data</strong>
-                        <p>{{ aula.horario|date:"d/m/Y" }}</p>
-                    </div>
+            <div class="item-detalhe">
+                <span class="icone-item">📅</span>
+                <div>
+                    <p class="rotulo">Data</p>
+                    <p>{{ aula.horario|date:"d/m/Y" }}</p>
                 </div>
+            </div>
 
-                <div class="item-detalhe">
-                    <i class="fa-regular fa-clock"></i>
-
-                    <div>
-                        <strong>Horário</strong>
-                        <p>{{ aula.horario|date:"H:i" }}</p>
-                    </div>
+            <div class="item-detalhe">
+                <span class="icone-item">🕐</span>
+                <div>
+                    <p class="rotulo">Horário</p>
+                    <p>{{ aula.horario|date:"H:i" }}</p>
                 </div>
+            </div>
 
-                <div class="item-detalhe">
-                    <i class="fa-solid fa-location-dot"></i>
-
-                    <div>
-                        <strong>Local</strong>
-                        <p>{{ aula.local|default:"Não informado" }}</p>
-                    </div>
+            <div class="item-detalhe">
+                <span class="icone-item">📍</span>
+                <div>
+                    <p class="rotulo">Local</p>
+                    <p>{{ aula.local|default:"Não informado" }}</p>
                 </div>
+            </div>
 
-                <div class="item-detalhe">
-                    <i class="fa-solid fa-laptop"></i>
-
-                    <div>
-                        <strong>Modalidade</strong>
-                        <p>{{ aula.get_modo_display }}</p>
-                    </div>
+            <div class="item-detalhe">
+                <span class="icone-item">💻</span>
+                <div>
+                    <p class="rotulo">Modalidade</p>
+                    <p>{{ aula.get_modo_display }}</p>
                 </div>
+            </div>
 
-                <div class="item-detalhe">
-                    <i class="fa-solid fa-dollar-sign"></i>
-
-                    <div>
-                        <strong>Preço</strong>
-                        <p>R$ {{ aula.preco|floatformat:2 }}</p>
-                    </div>
+            <div class="item-detalhe">
+                <span class="icone-item">💲</span>
+                <div>
+                    <p class="rotulo">Preço</p>
+                    <p>R$ {{ aula.preco|floatformat:2 }}</p>
                 </div>
+            </div>
 
-                <div class="item-detalhe">
-                    <i class="fa-solid fa-users"></i>
-
-                    <div>
-                        <strong>Vagas restantes</strong>
-                        <p>{{ aula.vagas_restantes }}</p>
-                    </div>
+            <div class="item-detalhe">
+                <span class="icone-item">👥</span>
+                <div>
+                    <p class="rotulo">Vagas restantes</p>
+                    <p>{{ aula.vagas_restantes }}</p>
                 </div>
-
             </div>
 
             <!-- BOTÕES -->
 
             <div class="acoes-aula">
+                <a href="{% url 'minhas_aulas' %}" class="botao-claro">← Voltar para Minhas Aulas</a>
 
-                <a href="{% url 'minhas_aulas' %}"
-                   class="botao-voltar">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    Voltar para Minhas Aulas
-                </a>
-
-                <form method="POST"
-                      action="{% url 'desinscrever_aula' aula.id %}">
-
+                <form method="POST" action="{% url 'desinscrever_aula' aula.id %}">
                     {% csrf_token %}
 
-                    <button type="submit"
-                            class="botao-desinscrever">
-                        Desinscrever-se
-                    </button>
-
+                    <button type="submit" class="botao-desinscrever">Desinscrever-se</button>
                 </form>
-
             </div>
 
         </div>
 
-    </main>
-
+    </div>
 </body>
 </html>
