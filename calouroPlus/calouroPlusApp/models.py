@@ -86,3 +86,28 @@ class Chat(models.Model):
 
     def __str__(self):
         return f'{self.usuario_from} → {self.usuario_to}: {self.mensagem[:30]}'
+
+
+class Mensagem(models.Model):
+
+    aula = models.ForeignKey(
+        Aula,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="mensagens_conversa",
+        verbose_name="Aula"
+    )
+
+    usuario_from = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='conversa_enviadas', verbose_name="Remetente")
+    usuario_to = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='conversa_recebidas', verbose_name="Destinatário")
+    mensagem = models.TextField(verbose_name="Mensagem")
+    horario = models.DateTimeField(auto_now_add=True, verbose_name="Horário")
+
+    class Meta:
+        ordering = ['horario']
+        verbose_name = "Mensagem"
+        verbose_name_plural = "Mensagens"
+
+    def __str__(self):
+        return f'{self.usuario_from} → {self.usuario_to}: {self.mensagem[:30]}'

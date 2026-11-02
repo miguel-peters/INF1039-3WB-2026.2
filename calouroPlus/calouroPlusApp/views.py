@@ -10,7 +10,7 @@ from django.utils import timezone
 from django.views.decorators.http import require_POST
 
 from .forms import LoginForm, FiltroAulaForm
-from .models import Aula, Usuario, Chat, Papel, Curso, Disciplina
+from .models import Aula, Usuario, Chat, Papel, Curso, Disciplina, Mensagem
 
 
 # LOGIN
@@ -413,4 +413,6 @@ def criar_aula(request):
 
 
 def conversas(request):
-    return render(request, 'conversas.html')
+    mensagem = Mensagem.objects.all()
+    
+    return render(request, 'conversas.html', context={'mensagem': mensagem})

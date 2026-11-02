@@ -28,26 +28,24 @@
     <div class="conteudo">
         <div class="chat-container">
             <div class="chat-header">
-                Professor Bicalho Jogos
+                {% with primeira=mensagem.0 %}
+                    {% if primeira.usuario_from == user %}
+                        {{ primeira.usuario_to }}
+                    {% else %}
+                        {{ primeira.usuario_from }}
+                    {% endif %}
+                {% endwith %}
             </div>
+
             <div class="chat-messages">
-                <div class="message sent-message">
-                    <div class="message-text">Eai. tem aula de bica's coding?</div>
-                    <div class="message-time"> 12:30 PM </div>
-                </div>
-                <div class="message received-message">
-                    <div class="message-text">Sim magnata, temos aula para voce</div>
-                    <div class="message-time"> 12:31 PM </div>
-                </div>
-                <div class="message sent-message">
-                    <div class="message-text">Fechado irmao, ate amanha simone joisa ivan</div>
-                    <div class="message-time"> 12:32 PM </div>
-                </div>
-                <div class="message received-message">
-                    <div class="message-text">Sim simone joisa walkman bicalho kkkkk</div>
-                    <div class="message-time"> 12:33 PM </div>
-                </div>
+                {% for msg in mensagem %}
+                    <div class="message {% if msg.usuario_from == user %}sent-message{% else %}received-message{% endif %}">
+                        <div class="message-text">{{ msg.mensagem }}</div>
+                        <div class="message-time">{{ msg.horario|date:"H:i" }}</div>
+                    </div>
+                {% endfor %}
             </div>
+
             <div class="message-input">
                 <input type="text" class="input-field" placeholder="Digite sua mensagem...">
                 <button class="send-button">Enviar</button>
