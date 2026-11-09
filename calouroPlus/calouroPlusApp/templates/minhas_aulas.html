@@ -1,6 +1,4 @@
-
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -8,52 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="{% static 'CSS/minhas_aulas.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <title>Minhas Aulas | Calouro+</title>
 </head>
-
 <body>
+    <header>
+        <div class="logo">🎓 Calouro+</div>
 
-    <nav class="barra-superior">
-
-        <div class="logo-site">
-            <img src="{% static 'nome_calouro.png' %}" width="150" alt="Calouro+">
-        </div>
-
-        <div class="links-navegacao">
+        <nav>
             <a href="{% url 'feed' %}">Feed</a>
             <a href="{% url 'chat' %}">Conversas</a>
-            <a href="{% url 'minhas_aulas' %}">Aulas</a>
-            <a href="{% url 'criar_aula' %}" class="botao-amarelo">+ Criar aula</a>
+            <a href="{% url 'minhas_aulas' %}" class="ativo">Aulas</a>
+        </nav>
+
+        <div class="acoes">
+            <a href="{% url 'criar_aula' %}" class="criar-aula">+ Criar aula</a>
+            <span>🔔</span>
+            <a href="{% url 'perfil' %}"><img src="{% static 'gabriel.jpg' %}" alt="Foto de perfil"></a>
         </div>
-
-        <div class="usuario">
-            <i class="fa-regular fa-bell"></i>
-            <span class="foto-usuario">M</span>
-        </div>
-
-    </nav>
-
-    <header>
-
-        <div class="titulo-header">
-            <p>2026.1 • PUC-Rio</p>
-            <h1>Minhas aulas</h1>
-        </div>
-
-        <div class="icones-header">
-            <i class="fa-regular fa-calendar-days"></i>
-            <i class="fa-solid fa-list-check"></i>
-        </div>
-
     </header>
 
-    <!-- FILTRO DE AULAS -->
+    <div class="conteudo">
 
-    <div class="filtro-aulas">
+        <!-- TÍTULO -->
 
-        <form method="GET" action="{% url 'minhas_aulas' %}">
+        <div class="titulo-pagina">
+            <div>
+                <p class="semestre">2026.1 • PUC-Rio</p>
+                <h1>Minhas aulas</h1>
+            </div>
+
+            <span class="icones-header">📅</span>
+        </div>
+
+        <!-- FILTRO DE AULAS -->
+
+        <form method="GET" action="{% url 'minhas_aulas' %}" class="filtro-aulas">
 
             <label for="filtro">Filtrar aulas:</label>
 
@@ -74,150 +62,108 @@
                 </option>
             </select>
 
-            <button type="submit">Filtrar</button>
-
+            <button type="submit" class="botao">Filtrar</button>
         </form>
 
-    </div>
+        <!-- RESUMO DAS AULAS -->
 
-    <!-- RESUMO DAS AULAS -->
+        <div class="resumo-aulas">
+            <div class="caixa-resumo">
+                <p>Próximas aulas</p>
+                <span class="numero">{{ total_proximas|default:"0" }}</span>
+            </div>
 
-    <div class="resumo-aulas">
-
-        <div class="proximas-aulas">
-            <p>Próximas aulas {{ total_proximas|default:"0" }}</p>
+            <div class="caixa-resumo">
+                <p>Aulas passadas</p>
+                <span class="numero">{{ total_passadas|default:"0" }}</span>
+            </div>
         </div>
 
-        <div class="aulas-passadas">
-            <p>Aulas passadas {{ total_passadas|default:"0" }}</p>
+        <div class="caixa resumo-agendadas">
+            <div>
+                <h2>{{ total_proximas|default:"0" }} aulas agendadas</h2>
+                <p class="cinza">Confira suas próximas sessões.</p>
+            </div>
+
+            <span class="etiqueta">Minhas aulas</span>
         </div>
 
-    </div>
+        <!-- MODO SINCRONIZADO -->
 
-    <div class="resumo-aulas-agendadas">
+        <div class="caixa modo-sincronizado">
+            <span class="icone">📅</span>
 
-        <div class="aulas-agendadas">
-            <p>{{ total_proximas|default:"0" }} aulas agendadas</p>
-            <p>Confira suas próximas sessões.</p>
+            <div class="texto-modo">
+                <p class="titulo-modo">MODO SINCRONIZADO</p>
+                <p class="cinza">Wireframe de aulas</p>
+                <p class="cinza">Sessões individuais confirmadas</p>
+            </div>
+
+            <span class="icone">⚙️</span>
         </div>
 
-        <div class="data">
-            <p>Minhas aulas</p>
-        </div>
+        <!-- LISTA DE AULAS -->
 
-    </div>
+        {% for aula in aulas %}
 
-    <!-- MODO SINCRONIZADO -->
+            <div class="caixa card-aula">
 
-    <div class="modo-sincronizado">
+                <div class="perfil-duracao">
 
-        <span class="icone-modo">
-            <i class="fa-regular fa-calendar-days"></i>
-        </span>
+                    <div class="perfil">
+                        <img src="{% static 'rogeria.jpg' %}" alt="Foto do tutor">
 
-        <div class="texto-modo">
-            <h2>MODO SINCRONIZADO</h2>
-            <p>Wireframe de aulas</p>
-            <p>Sessões individuais confirmadas</p>
-        </div>
+                        <div>
+                            <p class="nome">{{ aula.tutor.nome|default:aula.tutor.username }}</p>
+                            <p class="agendada">Aula agendada</p>
+                            <p class="cinza">📅 {{ aula.horario|date:"d/m" }} • {{ aula.horario|date:"H:i" }}</p>
+                        </div>
+                    </div>
 
-        <span class="config">⚙</span>
+                    <span class="etiqueta">60 min</span>
 
-    </div>
+                </div>
 
-    <!-- CARDS DAS AULAS -->
+                <div class="materia-local-tipo">
 
-    {% for aula in aulas %}
+                    <div>
+                        <h2>{{ aula.disciplina.nome }}</h2>
+                        <p class="cinza">{{ aula.local }}</p>
+                    </div>
 
-    <div class="card-aula">
+                    <span class="etiqueta">{{ aula.get_modo_display }}</span>
 
-        <div class="perfil-duração">
+                </div>
 
-            <div class="perfil">
+                <!-- CONVERSAR E DETALHES -->
 
-                <img src="{% static 'rogeria.jpg' %}" alt="Tutor">
+                <div class="conversar-detalhes">
+                    <span class="conversar">💬 Conversar</span>
 
-                <p class="nome">{{ aula.tutor.nome }}</p>
+                    <a href="{% url 'detalhes_aula' aula.id %}" class="botao">Ver detalhes</a>
+                </div>
 
-                <strong>Aula agendada</strong>
+                <!-- DESINSCREVER-SE -->
 
-                <p>
-                    <span class="icone">
-                        <i class="fa-regular fa-calendar"></i>
-                    </span>
+                <form method="POST" action="{% url 'desinscrever_aula' aula.id %}">
+                    {% csrf_token %}
 
-                    {{ aula.horario|date:"d/m" }} •
-                    {{ aula.horario|date:"H:i" }}
-                </p>
+                    <button type="submit" class="botao-desinscrever">Desinscrever-se</button>
+                </form>
 
             </div>
 
-            <div class="duração">
-                <p>60 min</p>
+        {% empty %}
+
+            <div class="vazio">
+                <span class="icone">📖</span>
+                <h2>Nenhuma aula encontrada.</h2>
+                <p>Se inscreva em uma aula no Feed para ela aparecer aqui.</p>
+                <a href="{% url 'feed' %}" class="botao">Ver o Feed</a>
             </div>
 
-        </div>
-
-        <div class="materia-local-tipo">
-
-            <div class="materia-local">
-                <h3>{{ aula.disciplina.nome }}</h3>
-                <p>{{ aula.local }}</p>
-            </div>
-
-            <div class="tipo">
-                <p>{{ aula.get_modo_display }}</p>
-            </div>
-
-        </div>
-
-        <!-- CONVERSAR E DETALHES -->
-
-        <div class="conversar-detalhes">
-
-            <div class="conversar">
-                <p>
-                    <span class="icone">
-                        <i class="fa-regular fa-comment-dots"></i>
-                    </span>
-                    Conversar
-                </p>
-            </div>
-
-            <div class="detalhes">
-
-                <a href="{% url 'detalhes_aula' aula.id %}">
-                    Ver Detalhes &gt;
-                </a>
-
-            </div>
-
-        </div>
-
-        <!-- DESINSCREVER-SE -->
-
-        <div class="area-desinscricao">
-
-            <form method="POST"
-                  action="{% url 'desinscrever_aula' aula.id %}">
-
-                {% csrf_token %}
-
-                <button type="submit" class="botao-desinscrever">
-                    Desinscrever-se
-                </button>
-
-            </form>
-
-        </div>
+        {% endfor %}
 
     </div>
-
-    {% empty %}
-
-        <p>Nenhuma aula encontrada.</p>
-
-    {% endfor %}
-
 </body>
 </html>

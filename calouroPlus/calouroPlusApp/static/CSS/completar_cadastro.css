@@ -1,104 +1,138 @@
 body {
-    margin: 0;
-    padding: 0;
     background-color: #f6f3eb;
     color: #1d2b4f;
     font-family: Arial, sans-serif;
-}
-
-header {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    margin-top: 30px;
+    min-height: 100vh;
+    margin: 0;
 }
 
 .logo {
+    font-family: Georgia, serif;
+    font-size: 40px;
+    margin-bottom: 45px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
-.card-cadastro {
-    background-color: white;
-    width: 480px;
+.mais {
+    font-size: 26px;
+}
+
+.formulario {
+    max-width: 558px;
+    box-sizing: border-box;
+    width: 100%;
     padding: 40px;
-    border-radius: 10px;
-    margin: 30px auto;
+    border-radius: 6px;
+    border-top: 4px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(to right, #1d2b4f, #e0a43a) border-box;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+h2 {
+    font-family: Georgia, serif;
+    font-size: 30px;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.formulario p {
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 17px;
+    line-height: 1.5;
+}
+
+
+label {
+    display: block;
+    font-weight: bold;
+    font-size: 17px;
+    margin-bottom: 6px;
+}
+
+input {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+}
+
+.campo {
+    margin-bottom: 20px;
+}
+
+button {
+    width: 100%;
+    background-color: #1d2b4f;
+    color: white;
+    padding: 16px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+
+
+
+
+.formulario > p {
+    color: #6b7280;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-}
-
-input, select {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid #d1d5db;
-    border-radius: 5px;
-    font-size: 16px;
-    color: #1d2b4f;
-    background-color: white;
-    box-sizing: border-box;
-}
-
-input::placeholder {
-    color: #64748b;
+    gap: 6px;
 }
 
 form label {
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 25px;
+    margin-top: 14px;
 }
 
 form button {
-    width: 100%;
-    padding: 15px;
-    background-color: #4f211d;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
     margin-top: 25px;
-    cursor: pointer;
 }
 
-form button:hover {
-    background-color: #2f416c;
+.campo-autocomplete {
+    width: 100%;
 }
 
-.card-cadastro h2 {
-    font-size: 28px;
-    color: #1d2b4f;
-    margin-top: 0;
-    margin-bottom: 10px;
+.lista-sugestoes {
+    display: none;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 4px;
 }
 
-.card-cadastro p {
+.opcao-sugestao {
+    padding: 12px 16px;
     font-size: 15px;
-    color: #64748b;
-    margin-top: 0;
-    margin-bottom: 25px;
+    border-bottom: 1px solid #ddd;
 }
 
-.card-cadastro {
-    position: relative;
-    overflow: hidden;
-    border-top: 5px solid #1d2b4f;
+.materias-selecionadas {
+    margin-bottom: 4px;
 }
 
-.card-cadastro::before {
-    content: "";
-    position: absolute;
-    top: -5px;
-    left: 0;
-    width: 80px;
-    height: 5px;
-    background-color: #e2a63b;
+.materia-tag {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 8px 8px 0;
+    background-color: #eae6db;
+    color: #1d2b4f;
+    border-radius: 4px;
+    font-size: 14px;
 }
-
-
-

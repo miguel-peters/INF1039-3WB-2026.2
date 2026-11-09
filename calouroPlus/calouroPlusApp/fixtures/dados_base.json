@@ -1,0 +1,555 @@
+[
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 1,
+  "fields": {
+    "nome": "Ciência da Computação"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 2,
+  "fields": {
+    "nome": "Direito"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 3,
+  "fields": {
+    "nome": "Economia"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 4,
+  "fields": {
+    "nome": "Engenharia da Computação"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 5,
+  "fields": {
+    "nome": "Administração"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 6,
+  "fields": {
+    "nome": "Arquitetura e Urbanismo"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 7,
+  "fields": {
+    "nome": "Ciências Biológicas"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 8,
+  "fields": {
+    "nome": "Sociologia"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 9,
+  "fields": {
+    "nome": "Comunicação"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 10,
+  "fields": {
+    "nome": "Design"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 11,
+  "fields": {
+    "nome": "Engenharia Ambiental"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 12,
+  "fields": {
+    "nome": "Engenharia Civil"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 13,
+  "fields": {
+    "nome": "Engenharia do Controle e Automação"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 14,
+  "fields": {
+    "nome": "Engenharia Elétrica"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 15,
+  "fields": {
+    "nome": "Engenharia de Materiais e Nanotecnologia"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 16,
+  "fields": {
+    "nome": "Engenharia Mecânica"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 17,
+  "fields": {
+    "nome": "Engenharia de Produção"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 18,
+  "fields": {
+    "nome": "Engenharia Química"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 19,
+  "fields": {
+    "nome": "Estudos de Mídia"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 20,
+  "fields": {
+    "nome": "Farmácia"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 21,
+  "fields": {
+    "nome": "Filosofia"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 22,
+  "fields": {
+    "nome": "Física"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 23,
+  "fields": {
+    "nome": "Geografia"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 24,
+  "fields": {
+    "nome": "História"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 25,
+  "fields": {
+    "nome": "Inteligência Artificial"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 26,
+  "fields": {
+    "nome": "Jornalismo"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 27,
+  "fields": {
+    "nome": "Letras"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 28,
+  "fields": {
+    "nome": "Matemática"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 29,
+  "fields": {
+    "nome": "Matemática Aplicada e Computacional"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 30,
+  "fields": {
+    "nome": "Neurociências"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 31,
+  "fields": {
+    "nome": "Nutrição"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 32,
+  "fields": {
+    "nome": "Pedagogia"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 33,
+  "fields": {
+    "nome": "Psicologia"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 34,
+  "fields": {
+    "nome": "Química"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 35,
+  "fields": {
+    "nome": "Relações Internacionais"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 36,
+  "fields": {
+    "nome": "Serviço Social"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 37,
+  "fields": {
+    "nome": "Sistemas de Informação"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 38,
+  "fields": {
+    "nome": "Sustentabilidade"
+  }
+},
+{
+  "model": "calouroPlusApp.curso",
+  "pk": 39,
+  "fields": {
+    "nome": "Teologia"
+  }
+},
+{
+  "model": "calouroPlusApp.papel",
+  "pk": 1,
+  "fields": {
+    "nome": "Tutor"
+  }
+},
+{
+  "model": "calouroPlusApp.papel",
+  "pk": 2,
+  "fields": {
+    "nome": "Aluno"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 1,
+  "fields": {
+    "nome": "Cálculo a Uma Variável"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 2,
+  "fields": {
+    "nome": "Cálculo a Mais de Uma Variável"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 3,
+  "fields": {
+    "nome": "Álgebra Linear 1"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 4,
+  "fields": {
+    "nome": "Programação em C"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 5,
+  "fields": {
+    "nome": "Modelagem e Programação"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 6,
+  "fields": {
+    "nome": "Interação Humano Computador"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 7,
+  "fields": {
+    "nome": "Projetos: Aplica Interativa"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 8,
+  "fields": {
+    "nome": "Lógica para Computação"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 9,
+  "fields": {
+    "nome": "Modelagem de Dados"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 10,
+  "fields": {
+    "nome": "Compreensão Prod Texto Técnico"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 11,
+  "fields": {
+    "nome": "Nivelamento de Matemática 1"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 12,
+  "fields": {
+    "nome": "O Humano e O Fenônemo Religioso"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 13,
+  "fields": {
+    "nome": "Estruturas de Dados Avançadas"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 14,
+  "fields": {
+    "nome": "Software Básico"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 15,
+  "fields": {
+    "nome": "Proj Prog Modular"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 16,
+  "fields": {
+    "nome": "Bancos de Dados"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 17,
+  "fields": {
+    "nome": "Teste e Medição de Software"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 18,
+  "fields": {
+    "nome": "Introdução a Ciência dos Dados"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 19,
+  "fields": {
+    "nome": "Engenhara de Software"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 20,
+  "fields": {
+    "nome": "Sistemas Operacionais"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 21,
+  "fields": {
+    "nome": "Programação Orientada Objetos"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 22,
+  "fields": {
+    "nome": "Introdução a Matemática Discreta"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 23,
+  "fields": {
+    "nome": "Álgebra Linear 2"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 24,
+  "fields": {
+    "nome": "Ética Cristã"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 25,
+  "fields": {
+    "nome": "Análise Lexicos e Sintáticos"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 26,
+  "fields": {
+    "nome": "Arquitetura de Computadores"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 27,
+  "fields": {
+    "nome": "Estruturas Discretas"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 28,
+  "fields": {
+    "nome": "Redes de Comunicação de Dados"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 29,
+  "fields": {
+    "nome": "Inteligência Artificial"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 30,
+  "fields": {
+    "nome": "Ética Socioambiental e Direitos Humanos"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 31,
+  "fields": {
+    "nome": "Seminários"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 32,
+  "fields": {
+    "nome": "Projeto e Construção de Sistemas"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 33,
+  "fields": {
+    "nome": "Segurança da Informação"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 34,
+  "fields": {
+    "nome": "Análise de Algoritmos"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 35,
+  "fields": {
+    "nome": "Estágio Supervisionado"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 36,
+  "fields": {
+    "nome": "Computabilidade"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 37,
+  "fields": {
+    "nome": "Projeto Final 1"
+  }
+},
+{
+  "model": "calouroPlusApp.disciplina",
+  "pk": 38,
+  "fields": {
+    "nome": "Projeto Final 2"
+  }
+}
+]

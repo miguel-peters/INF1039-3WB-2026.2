@@ -12,47 +12,62 @@ body {
 
 .logo {
     font-family: Georgia, serif;
-    font-size: 32px;
-    margin-bottom: 25px;
+    font-size: 40px;
+    margin-bottom: 45px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.mais {
+    font-size: 26px;
 }
 
 .formulario {
-    background-color: white;
-    max-width: 445px;
+    max-width: 558px;
     box-sizing: border-box;
     width: 100%;
-    padding: 30px;
+    padding: 40px;
     border-radius: 6px;
-    border-top: 4px solid #1d2b4f;
+    border-top: 4px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(to right, #1d2b4f, #e0a43a) border-box;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 h2 {
     font-family: Georgia, serif;
-    font-size: 28px;
+    font-size: 30px;
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .formulario p {
-    margin-bottom: 25px;
-    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 17px;
+    line-height: 1.5;
 }
+
 
 label {
     display: block;
     font-weight: bold;
-    margin-bottom: 8px;
+    font-size: 17px;
+    margin-bottom: 6px;
 }
 
-input {
+input, select {
     display: block;
     width: 100%;
-    padding: 12px;
+    padding: 16px;
     box-sizing: border-box;
     border: 1px solid #ddd;
-    border-radius: 6px;
+    border-radius: 4px;
     font-family: Arial, sans-serif;
-    font-size: 14px;
+    font-size: 17px;
+    color: #1d2b4f;
+    background-color: white;
 }
 
 .campo {
@@ -63,23 +78,34 @@ button {
     width: 100%;
     background-color: #1d2b4f;
     color: white;
-    padding: 14px;
+    padding: 16px;
     border: none;
-    border-radius: 6px;
+    border-radius: 4px;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 17px;
 }
 
-.entrar {
+
+
+
+
+.formulario > p {
+    color: #6b7280;
+}
+
+.formulario .erro {
+    color: #a83f32;
+    margin-bottom: 15px;
+}
+
+.formulario .entrar {
     text-align: center;
+    margin-top: 30px;
+    margin-bottom: 0;
 }
 
 .entrar a {
     font-weight: bold;
     color: #1d2b4f;
     text-decoration: none;
-}
-
-.formulario > p {
-    color: #6b7280;
 }

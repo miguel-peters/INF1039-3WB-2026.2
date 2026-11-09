@@ -1,29 +1,30 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Calouro+</title>
-    <link href="{% static 'CSS/conversas.css' %}" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'CSS/conversas.css' %}">
+
+    <title>Conversa | Calouro+</title>
 </head>
-
 <body>
-    <div class="blue-line">
-        <img src="{% static 'nome_calouro.png' %}" width="150">
+    <header>
+        <div class="logo">🎓 Calouro+</div>
 
-        <div class="menu">
+        <nav>
             <a href="{% url 'feed' %}">Feed</a>
-            <a href="{% url 'chat' %}">Conversas</a>
+            <a href="{% url 'chat' %}" class="ativo">Conversas</a>
             <a href="{% url 'minhas_aulas' %}">Aulas</a>
-            <a href="{% url 'criar_aula' %}" class="botao-amarelo">+ Criar aula</a>
-        </div>
+        </nav>
 
-        <div class="menu">
+        <div class="acoes">
+            <a href="{% url 'criar_aula' %}" class="criar-aula">+ Criar aula</a>
             <span>🔔</span>
-            <a href="{% url 'perfil' %}"><img src="{% static 'perfil.png' %}" class="foto-perfil"></a>
+            <a href="{% url 'perfil' %}"><img src="{% static 'gabriel.jpg' %}" alt="Foto de perfil"></a>
         </div>
-    </div>
+    </header>
 
     <div class="conteudo">
         <div class="chat-container">
@@ -44,14 +45,29 @@
                         <div class="message-time">{{ msg.horario|date:"H:i" }}</div>
                     </div>
                 {% endfor %}
+                <div class="message sent-message">
+                    <p class="message-text">Eai. tem aula de bica's coding?</p>
+                    <p class="message-time">12:30 PM</p>
+                </div>
+                <div class="message received-message">
+                    <p class="message-text">Sim magnata, temos aula para voce</p>
+                    <p class="message-time">12:31 PM</p>
+                </div>
+                <div class="message sent-message">
+                    <p class="message-text">Fechado irmao, ate amanha simone joisa ivan</p>
+                    <p class="message-time">12:32 PM</p>
+                </div>
+                <div class="message received-message">
+                    <p class="message-text">Sim simone joisa walkman bicalho kkkkk</p>
+                    <p class="message-time">12:33 PM</p>
+                </div>
             </div>
 
             <div class="message-input">
                 <input type="text" class="input-field" placeholder="Digite sua mensagem...">
-                <button class="send-button">Enviar</button>
+                <button type="button" class="send-button">Enviar</button>
             </div>
         </div>
-        
     </div>
 </body>
 </html>

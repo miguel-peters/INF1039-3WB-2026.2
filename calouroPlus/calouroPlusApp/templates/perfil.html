@@ -1,117 +1,115 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="{% static 'CSS/perfil.css' %}">
-    
-    <title>Perfil</title>
+
+    <title>Perfil | Calouro+</title>
 </head>
 <body>
     <header>
-        <div class="titulo-header">
-            <p>2026.1 • PUC-Rio</p>
-            <h1>Meu perfil</h1>
-        </div>
+        <div class="logo">🎓 Calouro+</div>
 
-        <div class="icones-header">
-            <span>▣</span>
-            <span>☷</span>
+        <nav>
+            <a href="{% url 'feed' %}">Feed</a>
+            <a href="{% url 'chat' %}">Conversas</a>
+            <a href="{% url 'minhas_aulas' %}">Aulas</a>
+        </nav>
+
+        <div class="acoes">
+            <a href="{% url 'criar_aula' %}" class="criar-aula">+ Criar aula</a>
+            <span>🔔</span>
+            <a href="{% url 'perfil' %}"><img src="{% static 'gabriel.jpg' %}" alt="Foto de perfil"></a>
         </div>
     </header>
 
-    <div class="introducao">
-        <h2>Meu perfil</h2>
-        <p>Gerencie suas informações acadêmicas e preferências de contato.</p>
-    </div>
+    <div class="conteudo">
+        <h1>Meu perfil</h1>
+        <p class="subtitulo">Gerencie suas informações acadêmicas e preferências de contato.</p>
 
-    <div class="foto-perfil">
-
-    <img src="{% static 'gabriel.jpg' %}" alt="Foto de perfil">
-
-    <div class="dados-foto">
-        <h3>Foto de perfil</h3>
-        <p>Formatos aceitos: JPG, PNG até 5MB</p>
-        <button>Alterar foto</button>
-    </div>
-
-    </div>
-
-    <div class="informacoes-pessoais">
-
-    <div class="titulo-informacoes">
-        <h2>Informações Pessoais</h2>
-        <button>Editar perfil</button>
-    </div>
-
-    <div class="nome-completo">
-        <p>Nome completo</p>
-        <p>{{ usuario.nome }}</p>
-    </div>
-
-    <div class="email">
-        <p>E-mail institucional</p>
-        <p>{{ usuario.email }}</p>
-    </div>
-
-    <div class="senha">
-        <p>Senha de acesso</p>
-        <p>••••••••••••</p>
-        <button>Alterar senha</button>
-    </div>
-
-    </div>
-
-    <div class="materias-interesse">
-
-    <div class="titulo-materias">
-        <p>Matérias de interesse</p>
-        <p>{{ usuario.disciplinas.count }} selecionadas</p>
-    </div>
-
-    <div class="materias">
-    {% for disciplina in usuario.disciplinas.all %}
-        <span>{{ disciplina.nome }} ✕</span>
-    {% empty %}
-        <p>Nenhuma matéria selecionada.</p>
-    {% endfor %}
-
-    <button>+ Adicionar matéria</button>
-    </div>
-
-    </div>
-
-    <div class="notificacoes">
-
-    <h2>Notificações</h2>
-
-    <p>Escolha como deseja receber as atualizações sobre suas aulas e mensagens.</p>
-
-    <div class="opcao-notificacao">
-        <div>
-            <h3>Resumo semanal por e-mail</h3>
-            <p>Relatório de horas estudadas e agendamentos futuros.</p>
+        <div class="caixa foto-perfil">
+            <img src="{% static 'gabriel.jpg' %}" alt="Foto de perfil">
+            <p class="titulo-foto">Foto de perfil</p>
+            <p class="cinza">Formatos aceitos: JPG, PNG até 5MB</p>
+            <button type="button" class="botao-claro">Alterar foto</button>
         </div>
 
-        <button>Ativado</button>
-    </div>
+        <div class="caixa">
+            <div class="titulo-caixa">
+                <h2>Informações pessoais</h2>
+                <button type="button" class="botao-claro">Editar perfil</button>
+            </div>
 
-    <div class="opcao-notificacao">
-        <div>
-            <h3>Nova mensagem no chat por e-mail</h3>
-            <p>Alertas imediatos quando um monitor responder a você.</p>
+            <div class="dado">
+                <p class="rotulo">Nome completo</p>
+                <p>{{ usuario.nome }}</p>
+            </div>
+
+            <div class="dado">
+                <p class="rotulo">E-mail institucional</p>
+                <p>{{ usuario.email }}</p>
+            </div>
+
+            <div class="dado">
+                <p class="rotulo">Curso</p>
+                <p>{{ usuario.curso }}</p>
+            </div>
+
+            <div class="dado">
+                <p class="rotulo">Você é</p>
+                <p>{{ usuario.papel }}</p>
+            </div>
+
+            <div class="dado">
+                <p class="rotulo">Senha de acesso</p>
+                <p>••••••••••••</p>
+                <button type="button" class="botao-claro">Alterar senha</button>
+            </div>
         </div>
 
-        <button>Ativado</button>
-    </div>
+        <div class="caixa">
+            <div class="titulo-caixa">
+                <p class="rotulo">Matérias de interesse</p>
+                <p class="cinza">{{ usuario.disciplinas.count }} selecionadas</p>
+            </div>
 
-    </div>
+            <div class="materias">
+                {% for disciplina in usuario.disciplinas.all %}
+                    <span>{{ disciplina.nome }} ✕</span>
+                {% empty %}
+                    <p>Nenhuma matéria selecionada.</p>
+                {% endfor %}
 
-    <div class="acoes-perfil">
-    <button class="salvar">✓ Salvar alterações</button>
-    <a href="{% url 'feed' %}" class="voltar">← Voltar ao início</a>
+                <button type="button" class="botao-claro">+ Adicionar matéria</button>
+            </div>
+        </div>
+
+        <div class="caixa">
+            <h2>Notificações</h2>
+            <p class="cinza">Escolha como deseja receber as atualizações sobre suas aulas e mensagens.</p>
+
+            <div class="opcao">
+                <div>
+                    <p class="titulo-opcao">Resumo semanal por e-mail</p>
+                    <p class="cinza">Relatório de horas estudadas e agendamentos futuros.</p>
+                </div>
+                <button type="button" class="botao-verde">Ativado</button>
+            </div>
+
+            <div class="opcao">
+                <div>
+                    <p class="titulo-opcao">Nova mensagem no chat por e-mail</p>
+                    <p class="cinza">Alertas imediatos quando um monitor responder a você.</p>
+                </div>
+                <button type="button" class="botao-verde">Ativado</button>
+            </div>
+        </div>
+
+        <button type="button" class="salvar">✓ Salvar alterações</button>
+        <p class="voltar"><a href="{% url 'feed' %}">← Voltar ao início</a></p>
     </div>
 </body>
 </html>

@@ -1,3 +1,4 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -5,118 +6,298 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Completar cadastro | Calouro+</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <link rel="stylesheet" href="{% static 'CSS/completar_cadastro.css' %}">
 </head>
 <body>
 
-    <header>
-        <div class="logo">
-            <img src="{% static 'nome_calouro.png' %}" width="200">
-        </div>
-    </header>
+    <div class="logo">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1d2b4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
+            <path d="M22 10v6"/>
+            <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
+        </svg>
+        Calouro<span class="mais">+</span>
+    </div>
 
-    <main>
-        <div class="card-cadastro">
-            <h2>Quase lá</h2>
-            <p>Conte um pouco sobre você para começar a usar o Calouro+.</p>
-            <form method="POST">
+    <div class="formulario">
+        <h2>Quase lá</h2>
+        <p>Conte um pouco sobre você para começar a usar o Calouro+.</p>
+
+        <form method="POST" id="form-cadastro">
             {% csrf_token %}
-                <label for="nome">Nome completo</label>
-                <input type="text" id="nome" name="nome" placeholder="Como você se chama?" required>
 
-                <label for="curso">Curso</label>
-                    <input
-                        type="text"
-                        id="curso"
-                        name="curso"
-                        list="lista-cursos"
-                        placeholder="Digite seu curso"
-                        maxlength="50"
-                        required
-                    >
+            <label for="nome">Nome completo</label>
+            <input
+                type="text"
+                id="nome"
+                name="nome"
+                placeholder="Como você se chama?"
+                required
+            >
 
-                    <datalist id="lista-cursos">
-                        {% for curso in cursos %}
-                        <option value="{{ curso.nome }}">
-                        {% endfor %}
-                    </datalist>
+            <label for="curso">Curso</label>
 
-                <label for="materia-input">MATÉRIAS DE INTERESSE</label>
+            <div class="campo-autocomplete">
+                <input
+                    type="text"
+                    id="curso"
+                    name="curso"
+                    placeholder="Digite seu curso"
+                    maxlength="50"
+                    autocomplete="off"
+                    required
+                >
 
-<div id="materias-selecionadas"></div>
+                <div
+                    id="sugestoes-cursos"
+                    class="lista-sugestoes"
+                ></div>
+            </div>
 
-<input
-    type="text"
-    id="materia-input"
-    list="lista-materias"
-    placeholder="Digite uma matéria e pressione Enter"
-    autocomplete="off"
->
+            <label for="materia-input">
+                Matérias de interesse
+            </label>
 
-<datalist id="lista-materias">
-    {% for disciplina in disciplinas %}
-        <option value="{{ disciplina.nome }}">
-    {% endfor %}
-</datalist>
+            <div id="materias-selecionadas" class="materias-selecionadas"></div>
 
-<input type="hidden" id="materias" name="materias">
+            <div class="campo-autocomplete">
+                <input
+                    type="text"
+                    id="materia-input"
+                    placeholder="Digite uma matéria"
+                    autocomplete="off"
+                >
 
-                <button type="submit">Concluir e ver o feed</button>
-            </form>
-        </div>
-    </main>
-<script>
-const campo = document.getElementById("materia-input");
-const selecionadas = document.getElementById("materias-selecionadas");
-const oculto = document.getElementById("materias");
+                <div
+                    id="sugestoes-materias"
+                    class="lista-sugestoes"
+                ></div>
+            </div>
 
-let materias = [];
+            <input
+                type="hidden"
+                id="materias"
+                name="materias"
+            >
 
-function atualizarMaterias() {
-    oculto.value = materias.join(",");
-    selecionadas.innerHTML = "";
+            <button type="submit">
+                Concluir e ver o feed
+            </button>
+        </form>
+    </div>
 
-    materias.forEach((materia, indice) => {
-        const tag = document.createElement("span");
-        tag.textContent = materia + " × ";
-        tag.style.cssText = "display:inline-block;padding:8px;margin:4px;background:#eee;border-radius:6px;cursor:pointer";
+    {{ cursos|json_script:"dados-cursos" }}
+    {{ disciplinas|json_script:"dados-disciplinas" }}
 
-        tag.onclick = () => {
-            materias.splice(indice, 1);
-            atualizarMaterias();
-        };
+    <script>
+        // DADOS RECEBIDOS DO DJANGO
 
-        selecionadas.appendChild(tag);
-    });
-}
+        const cursosAdmin = JSON.parse(
+            document.getElementById("dados-cursos").textContent
+        );
 
-function adicionarMateria() {
-    const nome = campo.value.trim();
+        const nomesCursos = cursosAdmin.map(
+            curso => curso.nome
+        );
 
-    if (nome && !nome.includes(",") &&
-        !materias.some(m => m.toLowerCase() === nome.toLowerCase())) {
-        materias.push(nome);
-        atualizarMaterias();
-    }
+        const disciplinasAdmin = JSON.parse(
+            document.getElementById("dados-disciplinas").textContent
+        );
 
-    campo.value = "";
-}
+        const nomesDisciplinas = disciplinasAdmin.map(
+            disciplina => disciplina.nome
+        );
 
-campo.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        adicionarMateria();
-    }
-});
 
-campo.addEventListener("change", adicionarMateria);
+        // ELEMENTOS DO FORMULÁRIO
 
-document.querySelector(".card-cadastro form").addEventListener("submit", () => {
-    if (campo.value.trim()) {
-        adicionarMateria();
-    }
-});
-</script>
+        const campoCurso = document.getElementById("curso");
+        const sugestoesCursos = document.getElementById("sugestoes-cursos");
+
+        const campo = document.getElementById("materia-input");
+        const sugestoes = document.getElementById("sugestoes-materias");
+        const selecionadas = document.getElementById("materias-selecionadas");
+        const oculto = document.getElementById("materias");
+        const formulario = document.getElementById("form-cadastro");
+
+        let materias = [];
+
+
+        // IGNORAR ACENTOS E MAIÚSCULAS
+
+        function normalizar(texto) {
+            return texto
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .toLowerCase()
+                .trim();
+        }
+
+
+        // AUTOCOMPLETE DOS CURSOS
+
+        function mostrarSugestoesCursos() {
+            const busca = normalizar(campoCurso.value);
+
+            sugestoesCursos.innerHTML = "";
+
+            if (!busca) {
+                sugestoesCursos.style.display = "none";
+                return;
+            }
+
+            const resultados = nomesCursos.filter(nome =>
+                normalizar(nome).includes(busca)
+            );
+
+            if (resultados.length === 0) {
+                sugestoesCursos.style.display = "none";
+                return;
+            }
+
+            resultados.forEach(nome => {
+                const opcao = document.createElement("div");
+
+                opcao.className = "opcao-sugestao";
+                opcao.textContent = nome;
+
+                opcao.addEventListener("click", () => {
+                    campoCurso.value = nome;
+                    sugestoesCursos.innerHTML = "";
+                    sugestoesCursos.style.display = "none";
+                });
+
+                sugestoesCursos.appendChild(opcao);
+            });
+
+            sugestoesCursos.style.display = "block";
+        }
+
+        campoCurso.addEventListener(
+            "input",
+            mostrarSugestoesCursos
+        );
+
+
+        // MATÉRIAS SELECIONADAS
+
+        function atualizarMaterias() {
+            oculto.value = materias.join(",");
+            selecionadas.innerHTML = "";
+
+            materias.forEach((materia, indice) => {
+                const tag = document.createElement("span");
+
+                tag.className = "materia-tag";
+                tag.textContent = materia + " ×";
+
+                tag.addEventListener("click", () => {
+                    materias.splice(indice, 1);
+                    atualizarMaterias();
+                    mostrarSugestoes();
+                });
+
+                selecionadas.appendChild(tag);
+            });
+        }
+
+
+        // ADICIONAR MATÉRIA
+
+        function adicionarMateria(nome) {
+            nome = nome.trim();
+
+            if (
+                nome &&
+                !nome.includes(",") &&
+                !materias.some(
+                    materia => normalizar(materia) === normalizar(nome)
+                )
+            ) {
+                materias.push(nome);
+                atualizarMaterias();
+            }
+
+            campo.value = "";
+            sugestoes.innerHTML = "";
+            sugestoes.style.display = "none";
+        }
+
+
+        // AUTOCOMPLETE DAS MATÉRIAS
+
+        function mostrarSugestoes() {
+            const busca = normalizar(campo.value);
+
+            sugestoes.innerHTML = "";
+
+            if (!busca) {
+                sugestoes.style.display = "none";
+                return;
+            }
+
+            const resultados = nomesDisciplinas.filter(nome => {
+                return (
+                    normalizar(nome).includes(busca) &&
+                    !materias.some(
+                        materia => normalizar(materia) === normalizar(nome)
+                    )
+                );
+            });
+
+            if (resultados.length === 0) {
+                sugestoes.style.display = "none";
+                return;
+            }
+
+            resultados.forEach(nome => {
+                const opcao = document.createElement("div");
+
+                opcao.className = "opcao-sugestao";
+                opcao.textContent = nome;
+
+                opcao.addEventListener("click", () => {
+                    adicionarMateria(nome);
+                });
+
+                sugestoes.appendChild(opcao);
+            });
+
+            sugestoes.style.display = "block";
+        }
+
+        campo.addEventListener("input", mostrarSugestoes);
+
+        campo.addEventListener("keydown", event => {
+            if (event.key === "Enter") {
+                event.preventDefault();
+
+                if (campo.value.trim()) {
+                    adicionarMateria(campo.value);
+                }
+            }
+        });
+
+
+        // FECHAR SUGESTÕES AO CLICAR FORA
+
+        document.addEventListener("click", event => {
+            if (!event.target.closest(".campo-autocomplete")) {
+                sugestoes.style.display = "none";
+                sugestoesCursos.style.display = "none";
+            }
+        });
+
+
+        // ENVIAR MATÉRIAS AO DJANGO
+
+        formulario.addEventListener("submit", () => {
+            if (campo.value.trim()) {
+                adicionarMateria(campo.value);
+            }
+        });
+    </script>
+
 </body>
 </html>
