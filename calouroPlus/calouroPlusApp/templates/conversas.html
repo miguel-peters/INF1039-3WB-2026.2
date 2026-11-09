@@ -29,9 +29,22 @@
     <div class="conteudo">
         <div class="chat-container">
             <div class="chat-header">
-                Professor Bicalho Jogos
+                {% with primeira=mensagem.0 %}
+                    {% if primeira.usuario_from == user %}
+                        {{ primeira.usuario_to }}
+                    {% else %}
+                        {{ primeira.usuario_from }}
+                    {% endif %}
+                {% endwith %}
             </div>
+
             <div class="chat-messages">
+                {% for msg in mensagem %}
+                    <div class="message {% if msg.usuario_from == user %}sent-message{% else %}received-message{% endif %}">
+                        <div class="message-text">{{ msg.mensagem }}</div>
+                        <div class="message-time">{{ msg.horario|date:"H:i" }}</div>
+                    </div>
+                {% endfor %}
                 <div class="message sent-message">
                     <p class="message-text">Eai. tem aula de bica's coding?</p>
                     <p class="message-time">12:30 PM</p>
@@ -49,6 +62,7 @@
                     <p class="message-time">12:33 PM</p>
                 </div>
             </div>
+
             <div class="message-input">
                 <input type="text" class="input-field" placeholder="Digite sua mensagem...">
                 <button type="button" class="send-button">Enviar</button>
