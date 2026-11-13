@@ -27,6 +27,16 @@
         <form method="POST" id="form-cadastro">
             {% csrf_token %}
 
+            {% if erros %}
+            <div role="alert">
+                <ul>
+                {% for erro in erros %}
+                    <li>{{ erro }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
             <label for="nome">Nome completo</label>
             <input
                 type="text"
