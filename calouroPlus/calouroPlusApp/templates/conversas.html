@@ -29,44 +29,25 @@
     <div class="conteudo">
         <div class="chat-container">
             <div class="chat-header">
-                {% with primeira=mensagem.0 %}
-                    {% if primeira.usuario_from == user %}
-                        {{ primeira.usuario_to }}
-                    {% else %}
-                        {{ primeira.usuario_from }}
-                    {% endif %}
-                {% endwith %}
+                {{ outro.nome|default:outro.username }}
             </div>
 
             <div class="chat-messages">
-                {% for msg in mensagem %}
+                {% for msg in mensagens %}
                     <div class="message {% if msg.usuario_from == user %}sent-message{% else %}received-message{% endif %}">
-                        <div class="message-text">{{ msg.mensagem }}</div>
-                        <div class="message-time">{{ msg.horario|date:"H:i" }}</div>
+                        <p class="message-text">{{ msg.mensagem }}</p>
+                        <p class="message-time">{{ msg.horario|date:"H:i" }}</p>
                     </div>
+                {% empty %}
+                    <p>Nenhuma mensagem ainda.</p>
                 {% endfor %}
-                <div class="message sent-message">
-                    <p class="message-text">Eai. tem aula de bica's coding?</p>
-                    <p class="message-time">12:30 PM</p>
-                </div>
-                <div class="message received-message">
-                    <p class="message-text">Sim magnata, temos aula para voce</p>
-                    <p class="message-time">12:31 PM</p>
-                </div>
-                <div class="message sent-message">
-                    <p class="message-text">Fechado irmao, ate amanha simone joisa ivan</p>
-                    <p class="message-time">12:32 PM</p>
-                </div>
-                <div class="message received-message">
-                    <p class="message-text">Sim simone joisa walkman bicalho kkkkk</p>
-                    <p class="message-time">12:33 PM</p>
-                </div>
             </div>
 
-            <div class="message-input">
-                <input type="text" class="input-field" placeholder="Digite sua mensagem...">
-                <button type="button" class="send-button">Enviar</button>
-            </div>
+            <form method="POST" class="message-input">
+                {% csrf_token %}
+                <input type="text" name="mensagem" class="input-field" placeholder="Digite sua mensagem..." required>
+                <button type="submit" class="send-button">Enviar</button>
+            </form>
         </div>
     </div>
 </body>

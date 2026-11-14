@@ -76,7 +76,7 @@ urlpatterns = [
     path('cadastro/', views.cadastro, name = 'cadastro'),
     path('chat/', views.chat, name = 'chat'),
     path('aula/<int:id>/inscrever/', views.inscrever, name='inscrever'),
-    path('conversas/', views.conversas, name='conversas'),
+    path('conversas/<int:aula_id>/<int:usuario_id>/', views.conversas, name='conversas'),
 
     # CADASTRO
     path('cadastro/', views.cadastro, name='cadastro'),

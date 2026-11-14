@@ -57,7 +57,7 @@
 
         <div class="lista-conversas" id="lista-conversas">
             {% for conversa in conversas %}
-                <div class="caixa-conversa">
+                <a class="caixa-conversa" href="{% url 'conversas' conversa.aula_id conversa.usuario.id %}">
                     <div class="avatar-conversa">
                         {{ conversa.usuario.nome|default:conversa.usuario.username|slice:":1"|upper }}
                     </div>
@@ -79,7 +79,7 @@
                     <span class="horario-conversa">
                         {{ conversa.horario|date:"d/m H:i" }}
                     </span>
-                </div>
+                </a>
             {% empty %}
                 <div class="vazio">
                     <span class="icone">📖</span>
