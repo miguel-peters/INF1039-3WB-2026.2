@@ -423,6 +423,7 @@ def chat(request):
             "disciplina": disciplina,
             "ultima_mensagem": mensagem.mensagem,
             "horario": mensagem.horario,
+            "aula_id": mensagem.aula_id,
         })
 
     return render(request, "chat.html", {
@@ -437,7 +438,30 @@ def criar_aula(request):
     return render(request, 'criar-aula.html')
 
 
-def conversas(request):
-    mensagem = Mensagem.objects.all()
-    
-    return render(request, 'conversas.html', context={'mensagem': mensagem})
+@login_required
+def conversas(request, aula_id, usuario_id):
+    eu = request.user
+    outro = get_object_or_404(Usuario, id=usuario_id)
+    aula = get_object_or_404(Aula, id=aula_id)
+
+    mensagens = Chat.objects.filter(aula=aula).filter(
+        Q(usuario_from=eu, usuario_to=outro) |
+        Q(usuario_from=outro, usuario_to=eu)
+    ).order_by('horario')
+
+    if request.method == 'POST':
+        texto = request.POST.get('mensagem', '').strip()
+
+        if texto:
+            Chat.objects.create(
+                aula=aula,
+                usuario_from=eu,
+                usuario_to=outro,
+                mensagem=texto,
+            )
+
+    return render(request, 'conversas.html', {
+        'mensagens': mensagens,
+        'outro': outro,
+        'aula': aula,
+    })
