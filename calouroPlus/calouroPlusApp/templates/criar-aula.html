@@ -27,82 +27,56 @@
     </header>
 
     <div class="conteudo">
-        <p class="amarelo">📅 NOVA ATIVIDADE ACADÊMICA</p>
-        <h1>Criar uma aula</h1>
-        <p class="cinza">Preencha as informações para publicar sua aula e ajudar outros alunos.</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <p class="amarelo">📅 NOVA ATIVIDADE ACADÊMICA</p>
+            <h1>Criar uma aula</h1>
+            <p class="cinza">Preencha as informações para publicar sua aula e ajudar outros alunos.</p>
 
-        <div class="caixa">
-            <div class="campo">
-                <label for="materia">Matéria <span class="vermelho">*</span></label>
-                <input type="text" id="materia" list="lista-materias" placeholder="Buscar matéria">
-
-                <datalist id="lista-materias">
-                    <option value="Álgebra Linear">
-                    <option value="Bioquímica">
-                    <option value="Cálculo 1">
-                    <option value="Cálculo 2">
-                    <option value="Estrutura de Dados">
-                    <option value="Física 1">
-                    <option value="Programação 1">
-                </datalist>
-            </div>
-
-            <div class="campo">
-                <div class="rotulo-linha">
-                    <label for="descricao">Descrição <span class="vermelho">*</span></label>
-                    <span class="limite">max 400 caracteres</span>
-                </div>
-                <textarea id="descricao" rows="6" maxlength="400" placeholder="Conte os tópicos que pretende cobrir e como a aula vai ajudar."></textarea>
-            </div>
-
-            <div class="campo">
-                <div class="rotulo-linha">
-                    <label for="horarios">Horários <span class="vermelho">*</span></label>
-                    <span class="limite">max 400 caracteres</span>
-                </div>
-                <textarea id="horarios" rows="6" maxlength="400" placeholder="Conte os horários disponíveis para a aula. Como 'Segunda 14:00 - 15:00' ou 'Dias da semana das 14:00 até as 19:00'"></textarea>
-            </div>
-
-            <div class="linha">
+            <div class="caixa">
                 <div class="campo">
-                    <label for="preco">Preço em R$</label>
-                    <input type="number" id="preco" placeholder="Ex.: 50,00" step="0.01" min="0">
+                    <label for="{{ form.disciplina.id_for_label }}">Matéria <span class="vermelho">*</span></label>
+                    {{ form.disciplina }}
+                    {{ form.disciplina.errors }}
                 </div>
 
                 <div class="campo">
-                    <label for="qtd">Qtd. máxima de alunos</label>
-                    <input type="number" id="qtd" placeholder="Ex.: 5" min="1">
-                </div>
-            </div>
-
-            <div class="linha">
-                <div class="campo">
-                    <label for="modalidade">Modalidade</label>
-                    <select id="modalidade">
-                        <option>Não informar</option>
-                        <option>Presencial</option>
-                        <option>Online</option>
-                    </select>
+                    <label for="{{ form.horario.id_for_label }}">Data e horário <span class="vermelho">*</span></label>
+                    {{ form.horario }}
+                    {{ form.horario.errors }}
                 </div>
 
                 <div class="campo">
-                    <label for="selo">Selo</label>
-                    <select id="selo">
-                        <option>Sem selo</option>
-                        <option>Monitor</option>
-                        <option>Destaque</option>
-                    </select>
+                    <label for="{{ form.preco.id_for_label }}">Preço em R$ <span class="vermelho">*</span></label>
+                    {{ form.preco }}
+                    {{ form.preco.errors }}
                 </div>
-            </div>
 
-            <div class="campo">
-                <label for="local">Local</label>
-                <input type="text" id="local" placeholder="Ex.: Biblioteca Central">
-            </div>
+                <div class="campo">
+                    <label for="{{ form.quantidade_alunos.id_for_label }}">Qtd. máxima de alunos <span class="vermelho">*</span></label>
+                    {{ form.quantidade_alunos }}
+                    {{ form.quantidade_alunos.errors }}
+                </div>
 
-            <button type="button" class="publicar">Publicar aula</button>
-            <p class="cancelar"><a href="{% url 'feed' %}">Cancelar e descartar</a></p>
-        </div>
+                <div class="linha">
+                    <div class="campo">
+                        <label for="{{ form.modo.id_for_label }}">Modo <span class="vermelho">*</span></label>
+                        {{ form.modo }}
+                        {{ form.modo.errors }}
+                    </div>
+                </div>
+
+                <div class="campo">
+                    <label for="{{ form.local.id_for_label }}">Local <span class="vermelho">*</span></label>
+                    {{ form.local }}
+                    {{ form.local.errors }}
+                </div>
+
+                <button type="submit" class="publicar">Publicar aula</button>
+                <p class="cancelar"><a href="{% url 'feed' %}">Cancelar e descartar</a></p>
+            </div>
+        </form>
     </div>
 </body>
 </html>

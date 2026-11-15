@@ -229,7 +229,17 @@ class FiltroAulaForm(forms.Form):
  
  
 class AulaForm(forms.ModelForm):
- 
+
+
+    disciplina = forms.CharField(
+        label='Matéria',
+        max_length=50,
+        widget=DatalistInput(
+            sugestoes=lambda: Disciplina.objects.values_list('nome', flat=True),
+            attrs={'placeholder': 'Digite a matéria'},
+        ),
+    )
+    
     class Meta:
         model = Aula
         fields = ['disciplina', 'horario', 'preco', 'local', 'quantidade_alunos', 'modo']
@@ -250,6 +260,14 @@ class AulaForm(forms.ModelForm):
             'preco': forms.NumberInput(attrs={'min': 0, 'step': '0.01'}),
             'quantidade_alunos': forms.NumberInput(attrs={'min': 1}),
         }
+
+
+    def clean_disciplina(self):
+        digitado = normalizar(self.cleaned_data['disciplina'])
+        for disciplina in Disciplina.objects.all():
+            if normalizar(disciplina.nome) == digitado:
+                return disciplina
+        raise forms.ValidationError('Matéria não encontrada. Escolha uma das sugestões.')
  
     def clean_horario(self):
         horario = self.cleaned_data['horario']
