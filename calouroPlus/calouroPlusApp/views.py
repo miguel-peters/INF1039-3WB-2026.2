@@ -1,4 +1,3 @@
-
 # BIBLIOTECAS DO PYTHON
 import unicodedata
 
@@ -14,7 +13,7 @@ from django.views.decorators.http import require_POST
 
 
 # ARQUIVOS DO PROJETO
-from .forms import LoginForm, FiltroAulaForm
+from .forms import LoginForm, FiltroAulaForm, AulaForm
 from .models import Aula, Usuario, Chat, Papel, Curso, Disciplina, Mensagem
 
 # LOGIN
@@ -432,9 +431,17 @@ def chat(request):
     })
 
 # CRIAR AULA
-
+@login_required
 def criar_aula(request):
-    return render(request, 'criar-aula.html')
+    form = AulaForm(request.POST or None)
+
+    if form.is_valid():
+        aula = form.save(commit=False)
+        aula.tutor = request.user
+        aula.save()
+        return redirect('feed')
+
+    return render(request, 'criar-aula.html', {'form': form})
 
 
 def conversas(request):
