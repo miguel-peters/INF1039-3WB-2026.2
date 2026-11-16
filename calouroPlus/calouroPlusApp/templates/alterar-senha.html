@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'CSS/alterar-senha.css' %}">
+
+    <title>Alterar senha | Calouro+</title>
+</head>
+<body>
+    <div class="logo">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1d2b4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
+            <path d="M22 10v6"/>
+            <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
+        </svg>
+        Calouro<span class="mais">+</span>
+    </div>
+
+    <div class="formulario">
+        <h2>Alterar senha</h2>
+        <p>Digite sua senha atual e depois a nova senha duas vezes.</p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="campo">
+                <label for="{{ form.old_password.id_for_label }}">Senha atual</label>
+                {{ form.old_password }}
+                {{ form.old_password.errors }}
+            </div>
+
+            <div class="campo">
+                <label for="{{ form.new_password1.id_for_label }}">Nova senha</label>
+                {{ form.new_password1 }}
+                {{ form.new_password1.errors }}
+                {{ form.new_password1.help_text }}
+            </div>
+
+            <div class="campo">
+                <label for="{{ form.new_password2.id_for_label }}">Confirmar nova senha</label>
+                {{ form.new_password2 }}
+                {{ form.new_password2.errors }}
+            </div>
+
+            <button type="submit">
+                Salvar nova senha <span class="seta">→</span>
+            </button>
+        </form>
+
+        <p class="voltar">
+            <a href="{% url 'perfil' %}">← Voltar para o perfil</a>
+        </p>
+    </div>
+</body>
+</html>

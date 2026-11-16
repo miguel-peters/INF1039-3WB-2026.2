@@ -52,6 +52,11 @@ urlpatterns = [
 
     # PERFIL
     path('perfil/', views.perfil, name='perfil'),
+    path('perfil/editar/', views.editar_perfil, name='editar_perfil'),
+    path('perfil/alterar-senha/', views.alterar_senha, name='alterar_senha'),
+
+    # SAIR
+    path('sair/', views.sair, name='sair'),
 
     # ESQUECI MINHA SENHA
     path(
@@ -73,9 +78,8 @@ urlpatterns = [
 
     # CRIAR AULA
     path('criar-aula/', views.criar_aula, name='criar_aula'),
-    path('cadastro/', views.cadastro, name = 'cadastro'),
-    path('chat/', views.chat, name = 'chat'),
-    path('aula/<int:id>/inscrever/', views.inscrever, name='inscrever'),
+
+    # CONVERSAS
     path('conversas/<int:aula_id>/<int:usuario_id>/', views.conversas, name='conversas'),
 
     # CADASTRO

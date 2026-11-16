@@ -3,9 +3,9 @@ import unicodedata
 
 
 # BIBLIOTECAS DO DJANGO
-from django.contrib.auth import authenticate, get_user_model, login
+from django.contrib.auth import authenticate, get_user_model, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.forms import PasswordResetForm, PasswordChangeForm
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
@@ -13,7 +13,7 @@ from django.views.decorators.http import require_POST
 
 
 # ARQUIVOS DO PROJETO
-from .forms import LoginForm, FiltroAulaForm, AulaForm
+from .forms import LoginForm, FiltroAulaForm, AulaForm, CompletarCadastroForm
 from .models import Aula, Usuario, Chat, Papel, Curso, Disciplina, Mensagem
 
 # LOGIN
@@ -263,6 +263,41 @@ def perfil(request):
     }
 
     return render(request, "perfil.html", contexto)
+
+
+# EDITAR PERFIL
+
+@login_required
+def editar_perfil(request):
+    form = CompletarCadastroForm(request.POST or None, usuario=request.user)
+
+    if form.is_valid():
+        form.save()
+        return redirect("perfil")
+
+    return render(request, "editar-perfil.html", {"form": form})
+
+
+# ALTERAR SENHA
+
+@login_required
+def alterar_senha(request):
+    form = PasswordChangeForm(request.user, request.POST or None)
+
+    if form.is_valid():
+        usuario = form.save()
+        # sem isso o Django desloga o usuário depois de trocar a senha
+        update_session_auth_hash(request, usuario)
+        return redirect("perfil")
+
+    return render(request, "alterar-senha.html", {"form": form})
+
+
+# SAIR
+
+def sair(request):
+    logout(request)
+    return redirect("login")
 
 # RECUPERAÇÃO DE SENHA
 
