@@ -346,3 +346,36 @@ p {
 .acoes-aula form {
     margin: 0;
 }
+
+.abas-aulas {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 16px;
+    padding: 4px;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.abas-aulas .aba-aulas {
+    padding: 10px 16px;
+    border-radius: 6px;
+    color: #1d2b4f;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.abas-aulas .aba-aulas:not(.aba-aulas--ativa):hover {
+    background-color: #f6f3eb;
+}
+
+.abas-aulas .aba-aulas--ativa {
+    background-color: #1d2b4f;
+    color: #fff;
+}
+
+.abas-aulas .aba-aulas:focus-visible {
+    outline: 2px solid #1d2b4f;
+    outline-offset: 2px;
+}

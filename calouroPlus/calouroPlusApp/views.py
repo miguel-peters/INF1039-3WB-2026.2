@@ -117,19 +117,21 @@ def inscrever(request, id):
 def minhas_aulas(request):
     agora = timezone.now()
 
-    aulas = Aula.objects.filter(
-        alunos=request.user
-    ).select_related(
+    papel = request.GET.get('papel', 'aluno')
+    if papel not in ('aluno', 'tutor'):
+        papel = 'aluno'
+
+    aulas = Aula.objects.select_related(
         'tutor', 'disciplina'
     ).order_by('horario')
 
-    total_proximas = aulas.filter(
-        horario__gte=agora
-    ).count()
+    if papel == 'tutor':
+        aulas = aulas.filter(tutor=request.user)
+    else:
+        aulas = aulas.filter(alunos=request.user)
 
-    total_passadas = aulas.filter(
-        horario__lt=agora
-    ).count()
+    total_proximas = aulas.filter(horario__gte=agora).count()
+    total_passadas = aulas.filter(horario__lt=agora).count()
 
     filtro = request.GET.get('filtro', 'todas')
 
@@ -145,8 +147,9 @@ def minhas_aulas(request):
     contexto = {
         'aulas': aulas,
         'filtro': filtro,
+        'papel_ativo': papel,
         'total_proximas': total_proximas,
-        'total_passadas': total_passadas
+        'total_passadas': total_passadas,
     }
 
     return render(request, 'minhas_aulas.html', contexto)
@@ -157,15 +160,15 @@ def minhas_aulas(request):
 @login_required
 def detalhes_aula(request, aula_id):
     aula = get_object_or_404(
-        Aula.objects.select_related(
-            'tutor', 'disciplina'
-        ),
+        Aula.objects.select_related('tutor', 'disciplina').filter(
+            Q(tutor=request.user) | Q(alunos=request.user)
+        ).distinct(),
         id=aula_id,
-        alunos=request.user
+
     )
 
     contexto = {
-        'aula': aula
+        'aula': aula,
     }
 
     return render(request, 'detalhes_aula.html', contexto)
@@ -191,65 +194,55 @@ def desinscrever_aula(request, aula_id):
 
 @login_required
 def completar_cadastro(request):
-    cursos = list(Curso.objects.values("nome"))
-    disciplinas = list(Disciplina.objects.values("nome"))
+    contexto = {
+        "cursos": list(Curso.objects.values("nome")),
+        "disciplinas": list(Disciplina.objects.values("nome")),
+    }
 
     if request.method == "POST":
         usuario = request.user
-
-        if not usuario.is_authenticated:
-            return redirect("login")
-
-        usuario.nome = request.POST.get("nome", "").strip()
-
+        nome = request.POST.get("nome", "").strip()
         nome_curso = request.POST.get("curso", "").strip()
-
-        if nome_curso:
-            curso = Curso.objects.filter(
-                nome__iexact=nome_curso
-            ).first()
-
-            if curso is None:
-                curso = Curso.objects.create(nome=nome_curso)
-
-            usuario.curso = curso
-
-        usuario.save()
-
         materias_texto = request.POST.get("materias", "")
 
-        nomes_materias = [
-            nome.strip()
-            for nome in materias_texto.split(",")
-            if nome.strip()
-        ]
+        erros = []
+        curso = None
+
+        if nome_curso:
+            curso = Curso.objects.filter(nome__iexact=nome_curso).first()
+            if curso is None:
+                erros.append(f'Curso não cadastrado: "{nome_curso}".')
 
         materias = []
 
-        for nome in nomes_materias:
+        for nome_materia in materias_texto.split(","):
+            nome_materia = nome_materia.strip()
+            if not nome_materia:
+                continue
+
             disciplina = Disciplina.objects.filter(
-                nome__iexact=nome
+                nome__iexact=nome_materia
             ).first()
 
             if disciplina is None:
-                disciplina = Disciplina.objects.create(nome=nome)
+                erros.append(f'Matéria não cadastrada: "{nome_materia}".')
+            else:
+                materias.append(disciplina)
 
-            materias.append(disciplina)
+        if erros:
+            contexto["erros"] = erros
+            return render(request, "completar_cadastro.html", contexto)
 
+        usuario.nome = nome
+        if curso is not None:
+            usuario.curso = curso
+
+        usuario.save()
         usuario.disciplinas.set(materias)
-
+        
         return redirect("feed")
 
-    contexto = {
-        "cursos": cursos,
-        "disciplinas": disciplinas
-    }
-
-    return render(
-        request,
-        "completar_cadastro.html",
-        contexto
-    )
+    return render(request, "completar_cadastro.html", contexto)
 
 
 # PERFIL

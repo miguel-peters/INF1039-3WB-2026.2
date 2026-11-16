@@ -41,6 +41,20 @@
 
         <!-- FILTRO DE AULAS -->
 
+        <div class="abas-aulas" role="group" aria-label="Meu vínculo com a aula">
+    <a href="{% url 'minhas_aulas' %}?papel=aluno&amp;filtro={{ filtro }}"
+       class="aba-aulas{% if papel_ativo == 'aluno' %} aba-aulas--ativa{% endif %}"
+       {% if papel_ativo == 'aluno' %}aria-current="true"{% endif %}>
+        Como aluno
+    </a>
+
+    <a href="{% url 'minhas_aulas' %}?papel=tutor&amp;filtro={{ filtro }}"
+       class="aba-aulas{% if papel_ativo == 'tutor' %} aba-aulas--ativa{% endif %}"
+       {% if papel_ativo == 'tutor' %}aria-current="true"{% endif %}>
+        Como tutor
+    </a>
+    </div>
+
         <form method="GET" action="{% url 'minhas_aulas' %}" class="filtro-aulas">
 
             <label for="filtro">Filtrar aulas:</label>
@@ -86,20 +100,6 @@
             </div>
 
             <span class="etiqueta">Minhas aulas</span>
-        </div>
-
-        <!-- MODO SINCRONIZADO -->
-
-        <div class="caixa modo-sincronizado">
-            <span class="icone">📅</span>
-
-            <div class="texto-modo">
-                <p class="titulo-modo">MODO SINCRONIZADO</p>
-                <p class="cinza">Wireframe de aulas</p>
-                <p class="cinza">Sessões individuais confirmadas</p>
-            </div>
-
-            <span class="icone">⚙️</span>
         </div>
 
         <!-- LISTA DE AULAS -->
