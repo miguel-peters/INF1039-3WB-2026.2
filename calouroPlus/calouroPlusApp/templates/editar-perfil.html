@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'CSS/editar-perfil.css' %}">
+
+    <title>Editar perfil | Calouro+</title>
+</head>
+<body>
+    <div class="logo">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1d2b4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
+            <path d="M22 10v6"/>
+            <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
+        </svg>
+        Calouro<span class="mais">+</span>
+    </div>
+
+    <div class="formulario">
+        <h2>Editar perfil</h2>
+        <p>Mude seu nome, seu curso e suas matérias de interesse.</p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="campo">
+                <label for="{{ form.nome.id_for_label }}">Nome completo</label>
+                {{ form.nome }}
+                {{ form.nome.errors }}
+            </div>
+
+            <div class="campo">
+                <label for="{{ form.curso.id_for_label }}">Curso</label>
+                {{ form.curso }}
+                {{ form.curso.errors }}
+            </div>
+
+            <div class="campo materias">
+                <label for="{{ form.materias.id_for_label }}">Matérias de interesse</label>
+                {{ form.materias }}
+                {{ form.materias.errors }}
+            </div>
+
+            <button type="submit">
+                Salvar alterações <span class="seta">→</span>
+            </button>
+        </form>
+
+        <p class="voltar">
+            <a href="{% url 'perfil' %}">← Voltar para o perfil</a>
+        </p>
+    </div>
+</body>
+</html>

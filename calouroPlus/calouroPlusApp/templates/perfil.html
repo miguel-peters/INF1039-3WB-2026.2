@@ -40,7 +40,7 @@
         <div class="caixa">
             <div class="titulo-caixa">
                 <h2>Informações pessoais</h2>
-                <button type="button" class="botao-claro">Editar perfil</button>
+                <a href="{% url 'editar_perfil' %}" class="botao-claro">Editar perfil</a>
             </div>
 
             <div class="dado">
@@ -66,7 +66,7 @@
             <div class="dado">
                 <p class="rotulo">Senha de acesso</p>
                 <p>••••••••••••</p>
-                <button type="button" class="botao-claro">Alterar senha</button>
+                <a href="{% url 'alterar_senha' %}" class="botao-claro">Alterar senha</a>
             </div>
         </div>
 
@@ -109,6 +109,7 @@
         </div>
 
         <button type="button" class="salvar">✓ Salvar alterações</button>
+        <a href="{% url 'sair' %}" class="sair">Sair da conta</a>
         <p class="voltar"><a href="{% url 'feed' %}">← Voltar ao início</a></p>
     </div>
 </body>
