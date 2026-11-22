@@ -31,7 +31,7 @@
             {% csrf_token %}
             {{ form.non_field_errors }}
             <p class="amarelo">📅 NOVA ATIVIDADE ACADÊMICA</p>
-            <h1>Criar uma aula</h1>
+            <h1>{% if editando %}Editar aula{% else %}Criar uma aula{% endif %}</h1>
             <p class="cinza">Preencha as informações para publicar sua aula e ajudar outros alunos.</p>
 
             <div class="caixa">
@@ -73,8 +73,8 @@
                     {{ form.local.errors }}
                 </div>
 
-                <button type="submit" class="publicar">Publicar aula</button>
-                <p class="cancelar"><a href="{% url 'feed' %}">Cancelar e descartar</a></p>
+                <button type="submit" class="publicar">{% if editando %}Salvar alterações{% else %}Publicar aula{% endif %}</button>
+                <p class="cancelar"><a href="{% if editando %}{% url 'detalhes_aula' aula.id %}{% else %}{% url 'feed' %}{% endif %}">Cancelar e descartar</a></p>
             </div>
         </form>
     </div>

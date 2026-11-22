@@ -79,6 +79,10 @@ urlpatterns = [
     # CRIAR AULA
     path('criar-aula/', views.criar_aula, name='criar_aula'),
 
+    #EDITAR/EXCLUIR AULA
+    path('aulas/<int:aula_id>/editar/', views.editar_aula, name='editar_aula'),
+    path('aulas/<int:aula_id>/excluir/', views.excluir_aula, name ='excluir_aula'),
+
     # CONVERSAS
     path('conversas/<int:aula_id>/<int:usuario_id>/', views.conversas, name='conversas'),
 
