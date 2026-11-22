@@ -36,6 +36,7 @@ class Usuario(AbstractUser):
     preferencias = models.TextField(blank=True)
     # Tabela de ligação Usuário/Disciplina: o Django cria a tabela intermediária sozinho
     disciplinas = models.ManyToManyField(Disciplina, blank=True, related_name='usuarios')
+    foto = models.ImageField(upload_to='fotos_perfil/', blank=True, null=True)
 
     def __str__(self):
         return self.nome or self.username
