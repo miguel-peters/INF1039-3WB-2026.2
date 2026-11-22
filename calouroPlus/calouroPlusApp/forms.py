@@ -285,6 +285,9 @@ class AulaForm(forms.ModelForm):
         vagas = self.cleaned_data['quantidade_alunos']
         if vagas < 1:
             raise forms.ValidationError('A aula precisa ter pelo menos 1 vaga.')
+        if self.instance.pk and vagas < self.instance.alunos.count():
+            raise forms.ValidationError(f'Já há {self.instance.alunos.count()} alunos inscritos nessa aula.')
+        
         return vagas
  
     def clean(self):

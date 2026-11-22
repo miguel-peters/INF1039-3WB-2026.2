@@ -10,6 +10,7 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.views.decorators.http import require_POST
+from django.urls import reverse
 
 
 # ARQUIVOS DO PROJETO
@@ -500,3 +501,27 @@ def conversas(request, aula_id, usuario_id):
         'outro': outro,
         'aula': aula,
     })
+
+@login_required
+def editar_aula(request, aula_id):
+    aula = get_object_or_404(Aula, id=aula_id, tutor=request.user)
+
+    form = AulaForm(
+        request.POST or None,
+        instance = aula,
+        initial = {'disciplina': aula.disciplina.nome}
+    )
+
+    if form.is_valid():
+        form.save()
+        return redirect(f"{reverse('minhas_aulas')}?papel=tutor")
+
+    return render(request, 'criar-aula.html', {'form':form, 'aula':aula, 'editando':True})
+
+@login_required
+@require_POST
+def excluir_aula(request, aula_id):
+    aula = get_object_or_404(Aula, id=aula_id, tutor=request.user)
+    aula.delete()
+    return redirect(f"{reverse('minhas_aulas')}?papel=tutor")
+

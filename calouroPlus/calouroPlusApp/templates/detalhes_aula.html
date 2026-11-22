@@ -119,7 +119,16 @@
             <!-- BOTÕES -->
 
             <div class="acoes-aula">
-                <a href="{% url 'minhas_aulas' %}" class="botao-claro">← Voltar para Minhas Aulas</a>
+                <a href="{% url 'minhas_aulas' %}{% if aula.tutor == user %}?papel=tutor{% endif %}" class="botao-claro">← Voltar para Minhas Aulas</a>
+                {% if aula.tutor == user %}
+                    <a href="{% url 'editar_aula' aula.id %}" class="botao-claro">Editar aula</a>
+                    <form method="POST" action="{% url 'excluir_aula' aula.id %}"
+                        onsubmit="return confirm('Excluir esta aula? Isso não pode ser desfeito.');">
+                        {% csrf_token %}
+                        <button type="submit" class="botao-desinscrever">Excluir aula</button>
+                    </form>
+                {% endif %}
+                
 
                 <form method="POST" action="{% url 'desinscrever_aula' aula.id %}">
                     {% csrf_token %}
