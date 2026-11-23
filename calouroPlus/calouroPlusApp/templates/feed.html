@@ -59,8 +59,17 @@
             </div>
         </form>
 
-        <button type="button" class="botao">Todas</button>
+        <div class="botoes-interesses">
+            <a href="{% url 'feed' %}"
+                class="botao {% if not form.so_preferencias.value %}selecionado{% endif %}">
+                Todas
+            </a>
 
+            <a href="{% url 'feed' %}?so_preferencias=on"
+                class="botao {% if form.so_preferencias.value %}selecionado{% endif %}">
+                Meus interesses
+            </a>
+        </div>
         {% for aula in aulas %}
         <div class="aula-card">
             <div class="aula-topo">

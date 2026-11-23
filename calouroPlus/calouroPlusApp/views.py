@@ -303,7 +303,11 @@ def editar_perfil(request):
         form.save()
         return redirect("perfil")
 
-    return render(request, "editar-perfil.html", {"form": form})
+    return render(request, "editar-perfil.html", {
+    "form": form,
+    "cursos": list(Curso.objects.values("nome")),
+    "disciplinas": list(Disciplina.objects.values("nome")),
+})
 
 
 # ALTERAR SENHA
