@@ -22,7 +22,7 @@
         <div class="acoes">
             <a href="{% url 'criar_aula' %}" class="criar-aula">+ Criar aula</a>
             <span>🔔</span>
-            <a href="{% url 'perfil' %}"><img src="{% static 'gabriel.jpg' %}" alt="Foto de perfil"></a>
+            <a href="{% url 'perfil' %}"><img src="{% if user.foto %}{{ user.foto.url }}{% else %}{% static 'perfil.png' %}{% endif %}" alt="Foto de perfil"></a>
         </div>
     </header>
 
@@ -31,10 +31,17 @@
         <p class="subtitulo">Gerencie suas informações acadêmicas e preferências de contato.</p>
 
         <div class="caixa foto-perfil">
-            <img src="{% static 'gabriel.jpg' %}" alt="Foto de perfil">
+            <img src="{% if usuario.foto %}{{ usuario.foto.url }}{% else %}{% static 'perfil.png' %}{% endif %}" alt="Foto de perfil">
             <p class="titulo-foto">Foto de perfil</p>
             <p class="cinza">Formatos aceitos: JPG, PNG até 5MB</p>
-            <button type="button" class="botao-claro">Alterar foto</button>
+
+            <form method="POST" action="{% url 'alterar_foto' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label class="botao-claro" style="cursor: pointer;">
+                    Alterar foto
+                    <input type="file" name="foto" accept="image/png, image/jpeg" hidden onchange="this.form.submit()">
+                </label>
+            </form>
         </div>
 
         <div class="caixa">

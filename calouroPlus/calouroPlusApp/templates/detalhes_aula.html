@@ -22,7 +22,7 @@
         <div class="acoes">
             <a href="{% url 'criar_aula' %}" class="criar-aula">+ Criar aula</a>
             <span>🔔</span>
-            <a href="{% url 'perfil' %}"><img src="{% static 'gabriel.jpg' %}" alt="Foto de perfil"></a>
+            <a href="{% url 'perfil' %}"><img src="{% if user.foto %}{{ user.foto.url }}{% else %}{% static 'perfil.png' %}{% endif %}" alt="Foto de perfil"></a>
         </div>
     </header>
 

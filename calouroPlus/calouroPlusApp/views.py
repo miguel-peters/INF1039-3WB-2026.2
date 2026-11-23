@@ -258,6 +258,18 @@ def perfil(request):
 
     return render(request, "perfil.html", contexto)
 
+# ALTERAR FOTO DE PERFIL
+
+@login_required
+@require_POST
+def alterar_foto(request):
+    foto = request.FILES.get('foto')
+
+    if foto and foto.content_type in ('image/jpeg', 'image/png') and foto.size <= 5 * 1024 * 1024:
+        request.user.foto = foto
+        request.user.save()
+
+    return redirect('perfil')
 
 # EDITAR PERFIL
 
@@ -385,80 +397,68 @@ def cadastro(request):
 @login_required
 def chat(request):
     usuario = request.user
+    busca = request.GET.get("busca", "").strip()
 
     papel = request.GET.get("papel", "aluno")
-
     if papel not in ("aluno", "tutor"):
         papel = "aluno"
 
-    busca = request.GET.get("busca", "").strip()
-
-    mensagens = Chat.objects.filter(
-        Q(usuario_from=usuario) | Q(usuario_to=usuario),
-        aula__isnull=False
-    ).select_related(
-        "usuario_from",
-        "usuario_to",
-        "aula__disciplina"
-    )
-
     if papel == "tutor":
-        mensagens = mensagens.filter(aula__tutor=usuario)
-
+        aulas = Aula.objects.filter(tutor=usuario).select_related("disciplina")
     else:
-        mensagens = mensagens.filter(aula__alunos=usuario)
-        
-
-    mensagens = mensagens.order_by("-horario")
+        aulas = Aula.objects.filter(alunos=usuario).select_related("disciplina", "tutor")
 
     conversas = []
-    conversas_vistas = set()
 
-    for mensagem in mensagens:
-        outro_usuario = (
-            mensagem.usuario_to
-            if mensagem.usuario_from_id == usuario.id
-            else mensagem.usuario_from
-        )
+    for aula in aulas:
 
-        chave = (mensagem.aula_id, outro_usuario.id)
+        if papel == "tutor":
+            pessoas = aula.alunos.all()
+        else:
+            pessoas = [aula.tutor]
 
-        if chave in conversas_vistas:
-            continue
-
-        conversas_vistas.add(chave)
-
-        nome_usuario = (
-            outro_usuario.nome or outro_usuario.username
-        )
-
-        disciplina = mensagem.aula.disciplina.nome
-
-        if busca:
-            termo = normalizar(busca)
-
-            corresponde = (
-                termo in normalizar(nome_usuario) or
-                termo in normalizar(outro_usuario.username) or
-                termo in normalizar(disciplina)
-            )
-
-            if not corresponde:
+        for outro in pessoas:
+            if outro == usuario:
                 continue
 
-        conversas.append({
-            "usuario": outro_usuario,
-            "disciplina": disciplina,
-            "ultima_mensagem": mensagem.mensagem,
-            "horario": mensagem.horario,
-            "aula_id": mensagem.aula_id,
-        })
+            nome = outro.nome or outro.username
+
+            if busca:
+                onde_procurar = normalizar(f"{nome} {outro.username} {aula.disciplina.nome}")
+                if normalizar(busca) not in onde_procurar:
+                    continue
+
+            ultima = Chat.objects.filter(aula=aula).filter(
+                Q(usuario_from=usuario, usuario_to=outro) |
+                Q(usuario_from=outro, usuario_to=usuario)
+            ).order_by("-horario").first()
+
+            if ultima:
+                texto = ultima.mensagem
+                horario = ultima.horario
+            else:
+                texto = "Nenhuma mensagem ainda"
+                horario = None
+
+            conversas.append({
+                "usuario": outro,
+                "disciplina": aula.disciplina.nome,
+                "ultima_mensagem": texto,
+                "horario": horario,
+                "aula_id": aula.id,
+            })
+
+    conversas.sort(
+        key=lambda c: c["horario"].timestamp() if c["horario"] else 0,
+        reverse=True
+    )
 
     return render(request, "chat.html", {
         "conversas": conversas,
         "papel_ativo": papel,
-        "busca": busca
+        "busca": busca,
     })
+
 
 # CRIAR AULA
 @login_required
@@ -473,12 +473,18 @@ def criar_aula(request):
 
     return render(request, 'criar-aula.html', {'form': form})
 
+def participa_da_aula(usuario, aula):
+    e_tutor = aula.tutor == usuario
+    e_aluno = aula.alunos.filter(id=usuario.id).exists()
+    return e_tutor or e_aluno
 
 @login_required
 def conversas(request, aula_id, usuario_id):
     eu = request.user
     outro = get_object_or_404(Usuario, id=usuario_id)
     aula = get_object_or_404(Aula, id=aula_id)
+    if outro == eu or not participa_da_aula(eu, aula) or not participa_da_aula(outro, aula):
+        return redirect('chat')
 
     mensagens = Chat.objects.filter(aula=aula).filter(
         Q(usuario_from=eu, usuario_to=outro) |
