@@ -59,6 +59,18 @@ nav a {
     object-fit: cover;
 }
 
+.inicial {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #1d2b4f;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .conteudo {
     max-width: 670px;
     margin: 30px auto;
@@ -114,6 +126,22 @@ p {
     border-radius: 50%;
     border: 2px solid #d4a72c;
     object-fit: cover;
+    margin-bottom: 12px;
+}
+
+.inicial-grande {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 2px solid #d4a72c;
+    background-color: #1d2b4f;
+    color: white;
+    font-family: Georgia, serif;
+    font-size: 44px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 12px;
 }
 
@@ -179,6 +207,18 @@ p {
     font-size: 14px;
 }
 
+.materias form {
+    display: inline-block;
+}
+
+.remover {
+    background: none;
+    border: none;
+    color: #a83f32;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .opcao {
     display: flex;
     justify-content: space-between;
@@ -242,4 +282,14 @@ p {
     font-weight: bold;
     color: #1d2b4f;
     text-decoration: none;
+}
+
+.sucesso {
+    background-color: white;
+    color: #2f6f62;
+    border: 1px solid #2f6f62;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 16px;
+    font-weight: bold;
 }
