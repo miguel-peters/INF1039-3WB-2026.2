@@ -59,10 +59,13 @@ def normalizar(texto):
 
 # FEED
 
+
 @login_required
 def feed(request):
     aulas = Aula.objects.select_related(
         'tutor', 'disciplina'
+    ).filter(
+        horario__gte=timezone.now()
     ).order_by('horario')
 
     form = FiltroAulaForm(request.GET or None)
