@@ -6,6 +6,7 @@ import unicodedata
 from django.contrib.auth import authenticate, get_user_model, login, logout, update_session_auth_hash
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.contrib.auth.forms import PasswordResetForm, PasswordChangeForm
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
@@ -59,10 +60,13 @@ def normalizar(texto):
 
 # FEED
 
+
 @login_required
 def feed(request):
     aulas = Aula.objects.select_related(
         'tutor', 'disciplina'
+    ).filter(
+        horario__gte=timezone.now()
     ).order_by('horario')
 
     form = FiltroAulaForm(request.GET or None)
@@ -157,6 +161,22 @@ def minhas_aulas(request):
 
     return render(request, 'minhas_aulas.html', contexto)
 
+#HISTORICO DO TUTOR
+
+@login_required
+def historico_tutor(request):
+    agora = timezone.now()
+
+    aulas_passadas = Aula.objects.filter(
+        tutor=request.user,
+        horario__lt=agora
+    ).select_related('disciplina').order_by('-horario')
+
+    contexto = {
+        'aulas_passadas': aulas_passadas,
+    }
+
+    return render(request, 'historico_tutor.html', contexto)
 
 # DETALHES DA AULA
 
@@ -170,11 +190,15 @@ def detalhes_aula(request, aula_id):
 
     )
 
+    aula_passada = aula.horario < timezone.now()
+
     contexto = {
         'aula': aula,
+        'aula_passada': aula_passada,
     }
 
     return render(request, 'detalhes_aula.html', contexto)
+
 
 
 # DESINSCREVER-SE DE UMA AULA
@@ -188,10 +212,20 @@ def desinscrever_aula(request, aula_id):
         alunos=request.user
     )
 
+    if aula.horario < timezone.now():
+        messages.error(
+            request,
+            "Não é possível cancelar a inscrição em uma aula passada."
+        )
+        return redirect(
+            f"{reverse('minhas_aulas')}?papel=aluno&filtro=passadas"
+        )
+
     aula.alunos.remove(request.user)
 
-    return redirect('minhas_aulas')
-
+    return redirect(
+        f"{reverse('minhas_aulas')}?papel=aluno"
+    )
 
 # COMPLETAR CADASTRO
 
@@ -524,24 +558,56 @@ def conversas(request, aula_id, usuario_id):
 
 @login_required
 def editar_aula(request, aula_id):
-    aula = get_object_or_404(Aula, id=aula_id, tutor=request.user)
+    aula = get_object_or_404(
+        Aula,
+        id=aula_id,
+        tutor=request.user
+    )
+
+    if aula.horario < timezone.now():
+        messages.error(
+            request,
+            "Não é possível editar uma aula que já aconteceu."
+        )
+        return redirect('historico_tutor')
 
     form = AulaForm(
         request.POST or None,
-        instance = aula,
-        initial = {'disciplina': aula.disciplina.nome}
+        instance=aula,
+        initial={'disciplina': aula.disciplina.nome}
     )
 
-    if form.is_valid():
+    if request.method == 'POST' and form.is_valid():
         form.save()
-        return redirect(f"{reverse('minhas_aulas')}?papel=tutor")
+        return redirect(
+            f"{reverse('minhas_aulas')}?papel=tutor"
+        )
 
-    return render(request, 'criar-aula.html', {'form':form, 'aula':aula, 'editando':True})
+    return render(
+        request,
+        'criar-aula.html',
+        {'form': form, 'aula': aula, 'editando': True}
+    )
 
 @login_required
 @require_POST
 def excluir_aula(request, aula_id):
-    aula = get_object_or_404(Aula, id=aula_id, tutor=request.user)
+    aula = get_object_or_404(
+        Aula,
+        id=aula_id,
+        tutor=request.user
+    )
+
+    if aula.horario < timezone.now():
+        messages.error(
+            request,
+            "Não é possível excluir uma aula que já aconteceu."
+        )
+        return redirect('historico_tutor')
+
     aula.delete()
-    return redirect(f"{reverse('minhas_aulas')}?papel=tutor")
+
+    return redirect(
+        f"{reverse('minhas_aulas')}?papel=tutor"
+    )
 

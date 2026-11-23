@@ -62,6 +62,7 @@
     </div>
 
         <form method="GET" action="{% url 'minhas_aulas' %}" class="filtro-aulas">
+            <input type="hidden" name="papel" value="{{ papel_ativo }}">
 
             <label for="filtro">Filtrar aulas:</label>
 
@@ -93,10 +94,20 @@
                 <span class="numero">{{ total_proximas|default:"0" }}</span>
             </div>
 
+            
+            {% if papel_ativo == 'tutor' %}
+                <a href="{% url 'historico_tutor' %}"
+                    class="caixa-resumo link-resumo">
+                        <p>Aulas passadas</p>
+                <span class="numero">{{ total_passadas|default:"0" }}</span>
+                </a>
+            {% else %}
             <div class="caixa-resumo">
                 <p>Aulas passadas</p>
-                <span class="numero">{{ total_passadas|default:"0" }}</span>
+                    <span class="numero">{{ total_passadas|default:"0" }}</span>
             </div>
+            {% endif %}
+
         </div>
 
         <div class="caixa resumo-agendadas">

@@ -122,26 +122,52 @@
                 </div>
             </div>
 
-            <!-- BOTÕES -->
+<!-- BOTÕES -->
+<div class="acoes-aula">
 
-            <div class="acoes-aula">
-                <a href="{% url 'minhas_aulas' %}{% if aula.tutor == user %}?papel=tutor{% endif %}" class="botao-claro">← Voltar para Minhas Aulas</a>
-                {% if aula.tutor == user %}
-                    <a href="{% url 'editar_aula' aula.id %}" class="botao-claro">Editar aula</a>
-                    <form method="POST" action="{% url 'excluir_aula' aula.id %}"
-                        onsubmit="return confirm('Excluir esta aula? Isso não pode ser desfeito.');">
-                        {% csrf_token %}
-                        <button type="submit" class="botao-desinscrever">Excluir aula</button>
-                    </form>
-                {% endif %}
-                
+    {% if aula_passada %}
+        {% if aula.tutor == user %}
+    <a href="{% url 'historico_tutor' %}" class="botao-claro">
+        ← Voltar ao histórico
+    </a>
+{% else %}
+    <a href="{% url 'minhas_aulas' %}?papel=aluno&amp;filtro=passadas"
+       class="botao-claro">
+        ← Voltar para minhas aulas
+    </a>
+{% endif %}
+    {% else %}
+        <a href="{% url 'minhas_aulas' %}{% if aula.tutor == user %}?papel=tutor{% endif %}"
+           class="botao-claro">
+            ← Voltar
+        </a>
 
-                <form method="POST" action="{% url 'desinscrever_aula' aula.id %}">
-                    {% csrf_token %}
+        {% if aula.tutor == user %}
+            <a href="{% url 'editar_aula' aula.id %}"
+               class="botao-claro">
+                Editar aula
+            </a>
 
-                    <button type="submit" class="botao-desinscrever">Desinscrever-se</button>
-                </form>
-            </div>
+            <form method="POST"
+                  action="{% url 'excluir_aula' aula.id %}"
+                  onsubmit="return confirm('Excluir esta aula? Isso não pode ser desfeito.');">
+                {% csrf_token %}
+                <button type="submit" class="botao-desinscrever">
+                    Excluir aula
+                </button>
+            </form>
+        {% else %}
+            <form method="POST"
+                  action="{% url 'desinscrever_aula' aula.id %}">
+                {% csrf_token %}
+                <button type="submit" class="botao-desinscrever">
+                    Desinscrever-se
+                </button>
+            </form>
+        {% endif %}
+    {% endif %}
+
+</div>
 
         </div>
 
