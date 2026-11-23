@@ -57,6 +57,7 @@ urlpatterns = [
     path('perfil/editar/', views.editar_perfil, name='editar_perfil'),
     path('perfil/alterar-senha/', views.alterar_senha, name='alterar_senha'),
     path('perfil/foto/', views.alterar_foto, name='alterar_foto'),
+    path('perfil/remover-materia/<int:disciplina_id>/', views.remover_materia, name='remover_materia'),
 
     # SAIR
     path('sair/', views.sair, name='sair'),

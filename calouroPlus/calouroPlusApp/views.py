@@ -4,6 +4,7 @@ import unicodedata
 
 # BIBLIOTECAS DO DJANGO
 from django.contrib.auth import authenticate, get_user_model, login, logout, update_session_auth_hash
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordResetForm, PasswordChangeForm
 from django.db.models import Q
@@ -108,6 +109,7 @@ def inscrever(request, id):
 
     if aula.tutor != request.user and aula.vagas_restantes > 0:
         aula.alunos.add(request.user)
+        messages.success(request, "Inscrição feita com sucesso!")
 
     return redirect('feed')
 
@@ -271,6 +273,16 @@ def alterar_foto(request):
 
     return redirect('perfil')
 
+# REMOVER MATÉRIA DO PERFIL
+
+@login_required
+@require_POST
+def remover_materia(request, disciplina_id):
+    disciplina = get_object_or_404(Disciplina, id=disciplina_id)
+    request.user.disciplinas.remove(disciplina)
+
+    return redirect('perfil')
+
 # EDITAR PERFIL
 
 @login_required
@@ -279,6 +291,7 @@ def editar_perfil(request):
 
     if form.is_valid():
         form.save()
+        messages.success(request, "Perfil atualizado com sucesso!")
         return redirect("perfil")
 
     return render(request, "editar-perfil.html", {"form": form})
@@ -469,6 +482,7 @@ def criar_aula(request):
         aula = form.save(commit=False)
         aula.tutor = request.user
         aula.save()
+        messages.success(request, "Aula criada com sucesso!")
         return redirect('feed')
 
     return render(request, 'criar-aula.html', {'form': form})
