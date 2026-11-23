@@ -22,6 +22,9 @@ urlpatterns = [
     # MINHAS AULAS
     path('minhas-aulas/', views.minhas_aulas, name='minhas_aulas'),
 
+    # HISTÓRICO DE AULAS DO TUTOR
+    path('historico-tutor/', views.historico_tutor, name='historico_tutor'),
+
     # DETALHES DA AULA
     path(
         'aulas/<int:aula_id>/detalhes/',
