@@ -59,6 +59,18 @@ nav a {
     object-fit: cover;
 }
 
+.inicial {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #1d2b4f;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .conteudo {
     max-width: 670px;
     margin: 30px auto;
@@ -280,4 +292,13 @@ h1 {
 .botoes-interesses .botao.selecionado {
     background-color: #1d2b4f;
     color: #ffffff;
+}
+.sucesso {
+    background-color: white;
+    color: #2f6f62;
+    border: 1px solid #2f6f62;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 16px;
+    font-weight: bold;
 }

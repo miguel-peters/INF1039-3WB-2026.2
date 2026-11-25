@@ -6,6 +6,8 @@ URL configuration for calouroPlus project.
 from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 from calouroPlusApp import views
 
@@ -57,6 +59,8 @@ urlpatterns = [
     path('perfil/', views.perfil, name='perfil'),
     path('perfil/editar/', views.editar_perfil, name='editar_perfil'),
     path('perfil/alterar-senha/', views.alterar_senha, name='alterar_senha'),
+    path('perfil/foto/', views.alterar_foto, name='alterar_foto'),
+    path('perfil/remover-materia/<int:disciplina_id>/', views.remover_materia, name='remover_materia'),
 
     # SAIR
     path('sair/', views.sair, name='sair'),
@@ -95,3 +99,4 @@ urlpatterns = [
     # CHAT
     path('chat/', views.chat, name='chat'),
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
