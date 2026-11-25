@@ -275,6 +275,24 @@ h1 {
     margin-bottom: 25px;
 }
 
+.botoes-interesses {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.botoes-interesses .botao {
+    text-decoration: none;
+    background-color: #ffffff;
+    color: #1d2b4f;
+    border: 1px solid #1d2b4f;
+}
+
+.botoes-interesses .botao.selecionado {
+    background-color: #1d2b4f;
+    color: #ffffff;
+}
 .sucesso {
     background-color: white;
     color: #2f6f62;

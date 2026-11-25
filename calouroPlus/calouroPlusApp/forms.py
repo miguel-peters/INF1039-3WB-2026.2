@@ -49,7 +49,11 @@ class VariosDatalistInput(DatalistInput):
         self.quantidade = quantidade
  
     def value_from_datadict(self, data, files, name):
-        return data.getlist(name) if hasattr(data, 'getlist') else data.get(name, [])
+        if hasattr(data, 'getlist'):
+            return data.getlist(name)
+
+        valor = data.get(name, [])
+        return valor if isinstance(valor, list) else [valor]
  
     def render(self, name, value, attrs=None, renderer=None):
         valores = [v for v in (value or []) if v]
@@ -68,20 +72,25 @@ class VariosDatalistInput(DatalistInput):
             lista_id,
             self._opcoes(),
         )
- 
- 
+
 class ListaDeTextosField(forms.Field):
 
     def to_python(self, value):
         itens, vistos = [], set()
+
+        if isinstance(value, str):
+            value = [value]
+
         for texto in value or []:
             for parte in str(texto).split(','):
                 parte = ' '.join(parte.split())
+
                 if parte and normalizar(parte) not in vistos:
                     vistos.add(normalizar(parte))
                     itens.append(parte)
+
         return itens
- 
+
 
 class LoginForm(forms.Form):
 
